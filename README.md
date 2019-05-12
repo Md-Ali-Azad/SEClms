@@ -1,1 +1,1 @@
-# SEClms
+# Library Management System, SEC
