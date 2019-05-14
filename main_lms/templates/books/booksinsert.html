@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block body%} 
+    <form method="POST" class="post-form" action="/books/binsert/">  
+            {% csrf_token %}  
+        <div class="container">  
+    <br>  
+        <div class="form-group row">  
+        <label class="col-sm-1 col-form-label"></label>  
+        <div class="col-sm-4">  
+        <h3>Enter Details</h3>  
+        </div>  
+      </div>  
+        <div class="form-group row">  
+        <label class="col-sm-2 col-form-label">Book Id:</label>  
+        <div class="col-sm-4">  
+          {{ form.bid }}  
+        </div>  
+      </div>  
+      <div class="form-group row">  
+        <label class="col-sm-2 col-form-label">Book Name:</label>  
+        <div class="col-sm-4">  
+          {{ form.bname }}  
+        </div>  
+      </div>  
+        <div class="form-group row">  
+        <label class="col-sm-2 col-form-label">Book Type:</label>  
+        <div class="col-sm-4">  
+          {{ form.btype }}  
+        </div>  
+      </div>  
+        <div class="form-group row">  
+        <label class="col-sm-2 col-form-label">Book Writer</label>  
+        <div class="col-sm-4">  
+          {{ form.bwriter }}  
+        </div>  
+      </div> 
+      <div class="form-group row">  
+        <label class="col-sm-2 col-form-label">Quantity</label>  
+        <div class="col-sm-4">  
+          {{ form.bquantity }}  
+        </div>  
+      </div>
+      <div class="form-group row">  
+        <label class="col-sm-2 col-form-label">Shelf Position</label>  
+        <div class="col-sm-4">  
+          {{ form.bshelf }}  
+        </div>  
+      </div> 
+        <div class="form-group row">  
+        <label class="col-sm-1 col-form-label"></label>  
+        <div class="col-sm-4">  
+        <button type="submit" class="btn btn-primary">Submit</button>  
+        </div>  
+      </div>  
+        </div>  
+    </form>  
+    {% endblock%} 

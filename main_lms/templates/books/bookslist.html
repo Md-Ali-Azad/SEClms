@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block body%} 
+<select class="browser-default custom-select">
+    <option selected>Filtering</option>
+    <option value="1">Descending</option>
+    <option value="2">Two</option>
+    <option value="3">Three</option>
+</select>
+<table class="table table-hover table-bordered">  
+    <thead>  
+    <tr>  
+        <th scope="col">Book ID</th>  
+        <th scope="col">Book Name</th>  
+        <th scope="col">Book Type</th>  
+        <th scope="col">Book Writer</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Edit</th>  
+        <th scope="col">Delete</th>  
+        <th scope="col">Shelf Position</th>
+        <th scope="col">Created</th>
+    </tr>  
+    </thead>  
+    <tbody>  
+{% for blist in blist %} 
+ 
+    <tr>  
+        <td>{{ blist.bid }}</td>  
+        <td>{{ blist.bname }}</td>  
+        <td>{{ blist.btype }}</td>  
+        <td>{{ blist.bwriter }}</td>
+        <td>{{ blist.bquantity }}</td>  
+        <td>  
+            <a href="/edit/{{ blist.id }}/" class="btn btn-primary"><i class='fas fa-pencil-alt'></i> Edit</a>  
+        </td>
+            <td>
+            <a href="/delete/{{ blist.id }}/"class="btn btn-danger"><i class='fas fa-trash-alt'></i> Delete</a>  
+        </td>
+        <td>{{ blist.bshelf }}</td>
+        <td>{{ blist.bcreated_at }}( {{ blist.bcreated_at|timesince }} ago )</td>
+        <!--<td>{{ employee.created_at|timesince|add:"2" }}</td>-->
+        <!--<td>{{ employee.created_at|timeuntil }}</td>--> 
+    </tr>  
+{% endfor %}  
+    </tbody>  
+</table>  
+<br>   
+<center><a href="/books/binsert" class="btn btn-primary">Add New Record</a></center>  
+{% endblock%}
