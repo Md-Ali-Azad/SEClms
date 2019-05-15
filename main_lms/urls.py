@@ -9,7 +9,10 @@ urlpatterns = [
     path('accounts/reg_form/',views.register, name="register"),
     path('accounts/profile/',views.profile, name="profile"),
     path('books/binsert/', views.binsert, name="binsert"),  
-    path('books/blist/',views.blist, name="blist"),  
+    path('books/blist/',views.blist, name="blist"), 
+    path('books/bedit/<int:id>/', views.bedit, name="bedit"),  
+    path('books/bupdate/<int:id>/', views.bupdate, name="bupdate"),
+    path('books/bdelete/<int:id>/', views.bdelete, name="bdelete"), 
 
 
    # path('emp/', views.emp, name="emp"),  

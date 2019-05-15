@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block body%} 
+<form method="POST" class="post-form" action="/books/bupdate/{{blist.id}}/">  
+        {% csrf_token %}  
+    <div class="container">  
+<br>  
+    <div class="form-group row">  
+    <label class="col-sm-1 col-form-label"></label>  
+    <div class="col-sm-4">  
+    <h3>Update Details</h3>  
+    </div>  
+  </div>  
+    <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Book Id:</label>  
+    <div class="col-sm-4">  
+        <input class="form-control" type="text" name="bid" id="id_eid" required maxlength="400" value="{{ blist.bid }}"/>  
+    </div>  
+  </div>  
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Book Name:</label>  
+    <div class="col-sm-4">  
+        <input class="form-control" type="text" name="bname" id="id_ename" required maxlength="400" value="{{ blist.bname }}" />  
+    </div>  
+  </div>  
+    <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Book Type:</label>  
+    <div class="col-sm-4">  
+        <input class="form-control" type="text" name="btype" id="id_etype" required maxlength="400" value="{{ blist.btype }}" />  
+    </div>  
+  </div>  
+    <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Book Writer:</label>  
+    <div class="col-sm-4">  
+        <input class="form-control" type="text" name="bwriter" id="id_econtact" required maxlength="400" value="{{ blist.bwriter }}" />  
+    </div>  
+  </div> 
+  
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Book Quantity:</label>  
+    <div class="col-sm-4">  
+      {{ form.bquantity }}  
+    </div>  
+  </div>
+
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Shelf Position:</label>  
+    <div class="col-sm-4">  
+        <input class="form-control" type="text" name="bshelf" id="id_econtact" required maxlength="400" value="{{ blist.bshelf }}" />  
+    </div>  
+  </div> 
+
+    <div class="form-group row">  
+    <label class="col-sm-1 col-form-label"></label>  
+    <div class="col-sm-4">  
+    <button type="submit" class="btn btn-success">Update</button>  
+    </div>  
+  </div>  
+    </div>  
+</form>  
+{% endblock%}

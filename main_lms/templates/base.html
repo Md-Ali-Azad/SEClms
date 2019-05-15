@@ -65,10 +65,13 @@
     <a class="navbar-brand" href="#">Admin Panel</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-    <li class="nav-item">
-      <a class="nav-link" >Hello, {{user}}</a>
-    </li>
-    </ul>
+          <li class="nav-item">
+              <a class="nav-link" href="/admin"><i class='fas fa-chalkboard-teacher'></i> Django Administration</a>
+            </li>
+          <li class="nav-item">
+              <a class="nav-link" >Hello, {{user}}</a>
+            </li>
+      </ul>
     </div>
   </nav>
   {% endif %}
@@ -81,14 +84,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="/"><i class="fa fa-home"></i>Home</a>
+              <a class="nav-link" href="/"><i class="fa fa-home"></i> Home</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="/"><i class='fas fa-marker'></i>Notes</a>
+              <a class="nav-link" href="/"><i class='fas fa-marker'></i> Notes</a>
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="/accounts/logout"><i class='fas fa-power-off'></i>Logout</a>
+              <a class="nav-link" href="/accounts/logout"><i class='fas fa-power-off'></i> Logout</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/accounts/reg_form">Register</a>
@@ -100,12 +103,12 @@
             {% endif %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Books
+                <i class='fas fa-book-reader'></i> Books
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="/books/binsert">New Insertion</a>
                 <a class="dropdown-item" href="/books/blist">Books List</a>
-                <a class="dropdown-item" href="">Manage Category</a>
+                <a class="dropdown-item" href="">Manage Category(Books)</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Help</a>
               </div>
@@ -113,18 +116,15 @@
 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Students
+                <i class='fas fa-male'></i> Students
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="">New Student</a>
-                <a class="dropdown-item" href="">Manage Dept.</a>
+                <a class="dropdown-item" href="">Student List</a>
+                <a class="dropdown-item" href="">Manage Category(Students)</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Help</a>
               </div>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="/admin">Admin</a>
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0" action="/search/" method="POST">
@@ -134,8 +134,8 @@
           </form>
         </div>
       </nav>
-      <div class="sar">search</div>
-      <div style="margin-bottom:50px;"></div>
+      <!--<div class="sar">search</div>
+      <div style="margin-bottom:50px;"></div>-->
       {% block body%}
 
       {% endblock%}

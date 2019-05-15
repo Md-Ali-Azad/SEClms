@@ -1,9 +1,11 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.db.models import Q 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.http import *
 from django.core.exceptions import ObjectDoesNotExist
 import datetime
@@ -16,6 +18,8 @@ from main_lms.forms import *
 # adminpanel(CRUD)
 def viewslogin(request):
     return render(request,"accounts/login.html")
+
+@login_required(login_url="/accounts/login/")
 def register(request):
     if request.method =='POST':
         form = UserCreationForm(request.POST)
@@ -33,6 +37,11 @@ def profile(request):
     args={'user':request.user}
     return render(request, 'accounts/profile.html', args)
 
+
+
+
+
+
 #books
 def binsert(request):  
     if request.method == "POST":  
@@ -40,7 +49,7 @@ def binsert(request):
         if form.is_valid():  
             try:
                 form.save()
-                return redirect('/books/booklist')
+                return redirect('/books/blist')
             except:
                 pass  
     else:
@@ -53,6 +62,35 @@ def blist(request):
         'blist':blist,
     }
     return render(request,"books/bookslist.html",context)
+def bedit(request, id):  
+    blist = BooksInsert.objects.get(id=id) 
+    form = BookInsertForm()
+    context={
+        'form': form,
+        'blist':blist
+    } 
+    return render(request,'books/booksedit.html', context)
+
+def bupdate(request, id):  
+    blist = BooksInsert.objects.get(id=id)  
+    form = BookInsertForm(request.POST, instance = blist)
+    context={
+        'blist':blist
+    }
+    if form.is_valid():  
+        form.save()  
+        return redirect("/books/blist")  
+    return render(request, 'books/booksedit.html',context)
+def bdelete(request, id):  
+    blist = BooksInsert.objects.get(id=id)  
+    blist.delete()  
+    return redirect("/books/blist")
+
+
+
+
+
+
 
 
 
