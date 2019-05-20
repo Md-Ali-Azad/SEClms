@@ -4,7 +4,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [  
     #path('admin/', admin.site.urls),
     path('', views.viewshome, name="index"), 
-    path('accounts/login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name="login"), 
+    path('accounts/login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name="login"),
     path('accounts/logout/', auth_views.LogoutView.as_view(template_name='accounts/logout.html'), name="logout"),  
     path('accounts/reg_form/',views.register, name="register"),
     path('accounts/profile/',views.profile, name="profile"),
@@ -13,6 +13,12 @@ urlpatterns = [
     path('books/bedit/<int:id>/', views.bedit, name="bedit"),  
     path('books/bupdate/<int:id>/', views.bupdate, name="bupdate"),
     path('books/bdelete/<int:id>/', views.bdelete, name="bdelete"), 
+    path('cbooks/cbtype/', views.cbtype, name="cbtype"), 
+    path('cbooks/cbdelete/<int:id>/', views.cbdelete, name="cbdelete"),
+    path('cbooks/cbshelf/', views.cbshelf, name="cbshelf"), 
+    path('cbooks/cbsdelete/<int:id>/', views.cbsdelete, name="cbsdelete"),
+    path('setting/headercolor/', views.headercolor, name="headercolor"),
+    path('setting/chcolor/', views.chcolor, name="chcolor"),
 
 
    # path('emp/', views.emp, name="emp"),  

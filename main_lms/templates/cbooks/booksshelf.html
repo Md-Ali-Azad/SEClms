@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block body%} 
+    <form method="POST" class="post-form" action="/cbooks/cbshelf/">  
+            {% csrf_token %}  
+        <div class="container" id="form">  
+    <br>  
+    <div class="form-group col">    
+            <div class="col-sm-4">  
+            <h3>Enter a Shelf</h3>  
+            </div>  
+          </div>  
+          
+          <div class="form-row align-items-center">
+          <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Book Shelf</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">Book Shelf</div>
+                  </div>
+                  {{ form.cbshelf }}
+                </div>
+              </div>
+          </div> 
+    
+            <div class="form-group col">  
+            <label class="col-sm-1 col-form-label"></label>  
+            <div class="col-sm-4">  
+            <button type="submit" class="btn btn-primary">Submit</button>  
+            </div>  
+          </div>  
+        </div>  
+    </form> 
+    
+    
+    <br>
+    <br>
+    <table class="table table-hover table-bordered">  
+        <thead>  
+        <tr>
+            <th scope="col">No.</th>  
+            <th scope="col">Book Shelf</th>  
+            <!--<th scope="col">Edit</th>-->  
+            <th scope="col">Delete</th>  
+            <th scope="col">Created</th>
+        </tr>  
+        </thead>  
+        <tbody>
+    {% for cbtlist in cbtlist %} 
+        <tr>
+            <td>{{ forloop.counter }}</td>    
+            <td>{{ cbtlist.cbshelf }}</td>  
+            <!--<td>  
+                <a href="/books/bedit/{{ cbtlist.id }}/" class="btn btn-primary"><i class='fas fa-pencil-alt'></i> Edit</a>  
+            </td>-->
+                <td>
+                <a href="/cbooks/cbsdelete/{{ cbtlist.id }}/"class="btn btn-danger"><i class='fas fa-trash-alt'></i> Delete</a>  
+            </td>
+            <td style="font-size:8px;">{{ cbtlist.cbcreated_at }} <br>( {{ cbtlist.cbcreated_at|timesince }} ago )</td>
+            <!--<td>{{ employee.created_at|timesince|add:"2" }}</td>-->
+            <!--<td>{{ employee.created_at|timeuntil }}</td>--> 
+        </tr>  
+    {% endfor %}  
+        </tbody>  
+    </table> 
+    {% endblock%} 

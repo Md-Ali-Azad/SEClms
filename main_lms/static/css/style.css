@@ -50,24 +50,28 @@ table
 	box-shadow: 10px 10px 15px gray;
 }
 @media screen and (max-width: 600px) {
-	#thh, #tdd
-{
-	
-	padding: 2px;
-}
+	#form
+	{
+		margin-left: 10%;
+	}
 }
 body{
 background: #fff;
 }
-#sel
+#form
+{
+	margin-left: 30%;
+}
+.sel
 {
 	width: 100%;
+	height: 50px;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 .snps-inline-select {
     width: auto;
@@ -90,3 +94,25 @@ background: #fff;
 	position: fixed;
 	margin-top: 50px;
 }
+.btn-circle.btn-xl {
+	width: 70px;
+	height: 70px;
+	padding: 10px 16px;
+	border-radius: 35px;
+	font-size: 24px;
+	line-height: 1.33;
+}
+
+.btn-circle {
+	width: 30px;
+	height: 30px;
+	padding: 6px 0px;
+	border-radius: 15px;
+	border: 2px solid white;
+	text-align: center;
+	font-size: 12px;
+	line-height: 1.42857;
+}
+#footer { height: 100px; }
+
+

@@ -25,8 +25,9 @@
     <div class="form-group row">  
     <label class="col-sm-2 col-form-label">Book Type:</label>  
     <div class="col-sm-4">  
-        <input class="form-control" type="text" name="btype" id="id_etype" required maxlength="400" value="{{ blist.btype }}" />  
-    </div>  
+        {{ form.btype }}  
+    </div>
+    <label class="col-sm-0 col-form-label">Previous value was : {{ blist.btype }}</label>  
   </div>  
     <div class="form-group row">  
     <label class="col-sm-2 col-form-label">Book Writer:</label>  
@@ -38,15 +39,16 @@
   <div class="form-group row">  
     <label class="col-sm-2 col-form-label">Book Quantity:</label>  
     <div class="col-sm-4">  
-      {{ form.bquantity }}  
+      <input class="form-control" type="number" name="bquantity" id="id_econtact" required maxlength="400" value="{{ blist.bquantity }}" />  
     </div>  
   </div>
 
   <div class="form-group row">  
     <label class="col-sm-2 col-form-label">Shelf Position:</label>  
     <div class="col-sm-4">  
-        <input class="form-control" type="text" name="bshelf" id="id_econtact" required maxlength="400" value="{{ blist.bshelf }}" />  
-    </div>  
+        {{ form.bshelf }}  
+    </div>
+    <label class="col-sm-0 col-form-label">Previous value was: {{ blist.bshelf }}</label>  
   </div> 
 
     <div class="form-group row">  
