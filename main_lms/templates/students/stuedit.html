@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block body%} 
+<form method="POST" class="post-form" action="/students/supdate/{{slist.id}}/">  
+        {% csrf_token %}  
+    <div class="container">  
+<br>  
+    <div class="form-group row">  
+    <label class="col-sm-1 col-form-label"></label>  
+    <div class="col-sm-4">  
+    <h3>Update Details</h3>  
+    </div>  
+  </div>
+  
+  <div class="form-row align-items-center">
+    <div class="col-auto">
+      <label class="sr-only" for="inlineFormInputGroup">Stu. Reg</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Student Reg.&nbsp;&nbsp;&nbsp;</div>
+        </div>
+        <input class="form-control" type="text" name="sid" id="id_eid" required maxlength="400" value="{{ slist.sid }}"/>  
+      </div>
+    </div>
+    </div>
+
+
+    <div class="form-row align-items-center">
+        <div class="col-auto">
+          <label class="sr-only" for="inlineFormInputGroup">Stu. Name</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Student Name&nbsp;</div>
+            </div>
+        <input class="form-control" type="text" name="sname" id="id_ename" required maxlength="400" value="{{ slist.sname }}" />  
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-row align-items-center">
+        <div class="col-auto">
+          <label class="sr-only" for="inlineFormInputGroup">Dept. </label>
+          <div class="input-group mb-2">
+
+            <div class="input-group-prepend">
+                <div style="float:left; margin-top: 09px;">
+              <div class="input-group-text" style="height: 50px;">Department&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            </div>
+            {{ form.sdept }}
+    <label class="col-sm-0 col-form-label" style="width: 110%;"><button type="button" class="btn btn-{{hcolor}} btn-circle"><i class="fa fa-redo-alt"></i>
+    </button><button type="button" class="btn btn-{{hcolor}}">{{ slist.sdept }}</button> </label>  
+      </div>
+      </div>
+      </div>
+    </div>
+
+
+    <div class="form-row align-items-center">
+        <div class="col-auto">
+          <label class="sr-only" for="inlineFormInputGroup">Stu. Session</label>
+          <div class="input-group mb-2">
+
+            <div class="input-group-prepend">
+                <div style="float:left; margin-top: 09px;">
+              <div class="input-group-text" style="height: 50px;">Session&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            </div>
+            {{ form.ssession }}
+    <label class="col-sm-0 col-form-label" style="width: 130%;"><button type="button" class="btn btn-{{hcolor}} btn-circle"><i class="fa fa-redo-alt"></i>
+    </button><button type="button" class="btn btn-{{hcolor}}">{{ slist.ssession }}</button> </label>  
+      </div>
+      </div>
+      </div>
+    </div>
+    
+
+      <div class="form-row align-items-center">
+        <div class="col-auto">
+          <label class="sr-only" for="inlineFormInputGroup">Address</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            </div>
+        <input class="form-control" type="text" name="saddress" id="id_econtact" required maxlength="400" value="{{ slist.saddress }}" />                        
+          </div>
+        </div>
+        </div>
+
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+              <label class="sr-only" for="inlineFormInputGroup">Contact</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Contact&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                </div>
+                    <input class="form-control" type="text" name="scontact" id="id_econtact" required maxlength="400" value="{{ slist.scontact }}" />                            
+              </div>
+            </div>
+            </div>
+
+        <div class="form-row align-items-center">
+          <div class="col-auto">
+            <label class="sr-only" for="inlineFormInputGroup">Email</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+              </div>
+              <input class="form-control" type="email" name="semail" id="id_econtact" required maxlength="400" value="{{ slist.semail }}" />                                          
+            </div>
+          </div>
+          </div>
+
+          <div class="form-row align-items-center">
+            <div class="col-auto">
+              <label class="sr-only" for="inlineFormInputGroup">Gender</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text" style="height: 50px;margin-top: 8px;">Gender&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                
+                {{ form.sgender }}
+                <label class="col-sm-0 col-form-label" style="width: 50%;"><button type="button" class="btn btn-{{hcolor}} btn-circle"><i class="fa fa-redo-alt"></i>
+                </button><button type="button" class="btn btn-{{hcolor}}">{{ slist.sgender }}</button> </label>
+            </div>  
+            </div>
+            </div>
+            </div>
+
+    <div class="form-group row">  
+    <label class="col-sm-1 col-form-label"></label>  
+    <div class="col-sm-4">  
+    <button type="submit" class="btn btn-success">Update</button>  
+    </div>  
+  </div>  
+    </div>  
+</form>  
+{% endblock%}

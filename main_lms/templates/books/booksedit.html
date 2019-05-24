@@ -9,47 +9,97 @@
     <div class="col-sm-4">  
     <h3>Update Details</h3>  
     </div>  
-  </div>  
-    <div class="form-group row">  
-    <label class="col-sm-2 col-form-label">Book Id:</label>  
-    <div class="col-sm-4">  
-        <input class="form-control" type="text" name="bid" id="id_eid" required maxlength="400" value="{{ blist.bid }}"/>  
-    </div>  
-  </div>  
-  <div class="form-group row">  
-    <label class="col-sm-2 col-form-label">Book Name:</label>  
-    <div class="col-sm-4">  
-        <input class="form-control" type="text" name="bname" id="id_ename" required maxlength="400" value="{{ blist.bname }}" />  
-    </div>  
-  </div>  
-    <div class="form-group row">  
-    <label class="col-sm-2 col-form-label">Book Type:</label>  
-    <div class="col-sm-4">  
-        {{ form.btype }}  
-    </div>
-    <label class="col-sm-0 col-form-label">Previous value was : {{ blist.btype }}</label>  
-  </div>  
-    <div class="form-group row">  
-    <label class="col-sm-2 col-form-label">Book Writer:</label>  
-    <div class="col-sm-4">  
-        <input class="form-control" type="text" name="bwriter" id="id_econtact" required maxlength="400" value="{{ blist.bwriter }}" />  
-    </div>  
-  </div> 
-  
-  <div class="form-group row">  
-    <label class="col-sm-2 col-form-label">Book Quantity:</label>  
-    <div class="col-sm-4">  
-      <input class="form-control" type="number" name="bquantity" id="id_econtact" required maxlength="400" value="{{ blist.bquantity }}" />  
-    </div>  
   </div>
-
-  <div class="form-group row">  
-    <label class="col-sm-2 col-form-label">Shelf Position:</label>  
-    <div class="col-sm-4">  
-        {{ form.bshelf }}  
+  
+  <div class="form-row align-items-center">
+    <div class="col-auto">
+      <label class="sr-only" for="inlineFormInputGroup">Book Id</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Book Id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        </div>
+        <input class="form-control" type="text" name="bid" id="id_eid" required maxlength="400" value="{{ blist.bid }}"/>  
+      </div>
     </div>
-    <label class="col-sm-0 col-form-label">Previous value was: {{ blist.bshelf }}</label>  
-  </div> 
+    </div>
+
+
+    <div class="form-row align-items-center">
+      <div class="col-auto">
+        <label class="sr-only" for="inlineFormInputGroup">Book Name</label>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Book Name&nbsp;&nbsp;&nbsp;&nbsp;</div>
+          </div>
+        <input class="form-control" type="text" name="bname" id="id_ename" required maxlength="400" value="{{ blist.bname }}" />  
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-row align-items-center">
+      <div class="col-auto">
+        <label class="sr-only" for="inlineFormInputGroup">Book Type</label>
+        <div class="input-group mb-2">
+
+          <div class="input-group-prepend">
+              <div style="float:left; margin-top: 09px;">
+            <div class="input-group-text" style="height: 50px;">Book Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+          </div>
+          {{ form.btype }}
+    <label class="col-sm-0 col-form-label" style="width: 110%;"><button type="button" class="btn btn-{{hcolor}} btn-circle"><i class="fa fa-redo-alt"></i>
+    </button><button type="button" class="btn btn-{{hcolor}}">{{ blist.btype }}</button> </label>  
+      </div>
+      </div>
+      </div>
+    </div>
+
+
+    <div class="form-row align-items-center">
+      <div class="col-auto">
+        <label class="sr-only" for="inlineFormInputGroup">Book Writer</label>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Book Writer&nbsp;&nbsp;&nbsp;&nbsp;</div>
+          </div>
+        <input class="form-control" type="text" name="bwriter" id="id_econtact" required maxlength="400" value="{{ blist.bwriter }}" />            
+        </div>
+      </div>
+      </div>
+    
+
+      <div class="form-row align-items-center">
+        <div class="col-auto">
+          <label class="sr-only" for="inlineFormInputGroup">Book Quantity</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Book Quantity</div>
+            </div>
+      <input class="form-control" type="number" name="bquantity" id="id_econtact" required maxlength="400" value="{{ blist.bquantity }}" />              
+          </div>
+        </div>
+        </div>
+  
+
+        <div class="form-row align-items-center">
+          <div class="col-auto">
+            <label class="sr-only" for="inlineFormInputGroup">Book Shelf</label>
+            <div class="input-group mb-2">
+  
+              <div class="input-group-prepend">
+                  <div style="float:left; margin-top: 09px;">
+                <div class="input-group-text" style="height: 50px;">Book Shelf&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+              </div>
+              {{ form.bshelf }}
+              <label class="col-sm-0 col-form-label" style="width: 110%;"><button type="button" class="btn btn-{{hcolor}} btn-circle"><i class="fa fa-redo-alt"></i>
+              </button><button type="button" class="btn btn-{{hcolor}}">{{ blist.bshelf }}</button> </label>  
+          </div>
+          
+          </div>
+          </div>
+        </div>
+
+
 
     <div class="form-group row">  
     <label class="col-sm-1 col-form-label"></label>  

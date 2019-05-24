@@ -23,9 +23,6 @@ class BooksType(models.Model):
         db_table = "bookstype"  
     def __str__(self):
         return self.cbtype
-
-
-
 class BooksShelf(models.Model):
     cbshelf = models.CharField(max_length=400)
     cbcreated_at= models.DateTimeField(auto_now_add=True)
@@ -33,6 +30,37 @@ class BooksShelf(models.Model):
         db_table = "booksshelf"  
     def __str__(self):
         return self.cbshelf
+
+class StuInsert(models.Model):  
+    sid = models.CharField(max_length=100)  
+    sname = models.CharField(max_length=500)    
+    sdept = models.CharField(max_length=200)
+    ssession = models.CharField(max_length=400)
+    saddress=models.CharField(max_length=400)
+    scontact=models.CharField(max_length=400)
+    semail=models.EmailField(max_length=400)
+    sgender=models.CharField(max_length=50)
+    screated_at= models.DateTimeField(auto_now_add=True) 
+    class Meta:  
+        db_table = "stuinsert"  
+    def __str__(self):
+        return self.sname
+
+class StuDept(models.Model):
+    cdept = models.CharField(max_length=400)
+    cscreated_at= models.DateTimeField(auto_now_add=True)
+    class Meta:  
+        db_table = "studept"  
+    def __str__(self):
+        return self.cdept
+class StuSession(models.Model):
+    csession = models.CharField(max_length=400)
+    cscreated_at= models.DateTimeField(auto_now_add=True)
+    class Meta:  
+        db_table = "stusession"  
+    def __str__(self):
+        return self.csession
+
 
 class HeaderColor(models.Model):
     hcolor = models.CharField(max_length=500)

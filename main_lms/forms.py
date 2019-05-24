@@ -20,6 +20,25 @@ class BookInsertForm(forms.ModelForm):
         model = BooksInsert  
         fields = "__all__"
 
+class StuInsertForm(forms.ModelForm):
+    gender = (
+        ('M', 'Male',),
+        ('F', 'Female',),
+        ('T', 'Transgender',),
+    )
+    sid=  forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','id':'inlineFormInputGroup', 'placeholder':'Reg. id'}),required=True,max_length=400)    
+    sname= forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Student name'}),required=True,max_length=400)
+    sdept = forms.ModelChoiceField(widget=forms.Select(attrs={'data-style':'btn-primary','class':'sel','id':'inlineFormInputGroup'}, choices=StuDept.objects.order_by('cdept')),queryset=StuDept.objects.order_by('cdept'))
+    ssession = forms.ModelChoiceField(widget=forms.Select(attrs={'data-style':'btn-primary','class':'sel','id':'inlineFormInputGroup'}, choices=StuSession.objects.order_by('csession')),queryset=StuSession.objects.order_by('csession'))    
+    saddress=  forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Address'}),required=True,max_length=400)
+    scontact=  forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Contact'}),required=True,max_length=400)    
+    semail=  forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control', 'placeholder':'Email'}),required=True,max_length=400)    
+    sgender=  forms.CharField(widget=forms.Select(attrs={'data-style':'btn-primary','class':'sel2','id':'inlineFormInputGroup'}, choices=gender))        
+    
+    class Meta:  
+        model = StuInsert  
+        fields = "__all__"
+
 class BooksTypeForm(forms.ModelForm):
     cbtype = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','id':'inlineFormInputGroup', 'placeholder':'book type'}),required=True,max_length=400)
     class Meta:  
@@ -32,6 +51,18 @@ class BooksShelfForm(forms.ModelForm):
         model = BooksShelf  
         fields = "__all__"
 
+
+class StuDeptForm(forms.ModelForm):
+    cdept = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','id':'inlineFormInputGroup', 'placeholder':'Dept.'}),required=True,max_length=400)
+    class Meta:  
+        model = StuDept  
+        fields = "__all__"
+
+class StuSessionForm(forms.ModelForm):
+    csession = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'session', 'value':'2015-16'}),required=True,max_length=400)
+    class Meta:  
+        model = StuSession  
+        fields = "__all__"
 #class HeaderColor(forms.ModelForm):
 #    hcolor = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'book shelf', 'value':'A-00 (Room-300)'}),required=True,max_length=400)
 #    class Meta:  

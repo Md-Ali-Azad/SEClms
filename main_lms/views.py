@@ -18,12 +18,24 @@ from datetime import timedelta
 from django import template
 from main_lms.models import *
 from main_lms.forms import *
+from django.contrib.admin.models import LogEntry, ADDITION, CHANGE
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import User
 
 # adminpanel(CRUD)
 def viewslogin(request):
     return render(request,"accounts/login.html")
 def viewslogout(request):
     return render(request,"accounts/logout.html")
+
+
+@login_required(login_url="/accounts/login/")
+def activitylog(request):
+    logs = LogEntry.objects.exclude(change_message="No fields changed.").order_by('-action_time')[:20]
+    args = {'logs': logs}
+    return render(request, 'setting/activitylog.html', args)
+
+
 
 @login_required(login_url="/accounts/login/")
 def register(request):
@@ -101,6 +113,103 @@ def bdelete(request, id):
     blist = BooksInsert.objects.get(id=id)  
     blist.delete()  
     return redirect("/books/blist")
+
+
+
+#students
+def sinsert(request):  
+    if request.method == "POST":  
+        form = StuInsertForm(request.POST)  
+        if form.is_valid():  
+            try:
+                form.save()
+                return redirect('/students/slist')
+            except:
+                pass  
+    else:
+        form =StuInsertForm() 
+    args = {'form': form} 
+    return render(request,'students/stuinsert.html',args)
+def sedit(request, id):  
+    slist = StuInsert.objects.get(id=id) 
+    form = StuInsertForm()
+    context={
+        'form': form,
+        'slist':slist,
+    } 
+    return render(request,'students/stuedit.html', context)
+
+def supdate(request, id): 
+    slist = StuInsert.objects.get(id=id)  
+    form = StuInsertForm(request.POST, instance = slist)
+    context={
+        'slist':slist,
+    }
+    if form.is_valid():  
+        form.save()  
+        return redirect("/students/slist")  
+    return render(request, 'students/stuedit.html',context)
+
+def slist(request):
+    slist = StuInsert.objects.order_by('screated_at').reverse()   #created_at desc order  #reverse() for implied the Asc
+    context={
+        'slist':slist
+    }
+    return render(request,"students/stulist.html",context)
+
+def sdelete(request, id):  
+    slist = StuInsert.objects.get(id=id)  
+    slist.delete()  
+    return redirect("/students/slist")
+
+
+#studentscategory
+def cdepttype(request):
+    if request.method == "POST":  
+        form = StuDeptForm(request.POST)  
+        if form.is_valid():  
+            try:
+                form.save()
+                return redirect('/cstudents/cdepttype')
+            except:
+                pass  
+    else:
+        form = StuDeptForm()  
+    cdeptlist = StuDept.objects.order_by('cscreated_at').reverse()   #created_at desc order  #reverse() for implied the Asc
+    context={
+        'cdeptlist':cdeptlist,
+        'form':form,
+    }
+    return render(request,"cstudents/studept.html",context)
+def cdeptdelete(request, id):  
+    cdeptlist = StuDept.objects.get(id=id)  
+    cdeptlist.delete()  
+    return redirect("/cstudents/cdepttype")
+
+def csession(request):
+    if request.method == "POST":  
+        form = StuSessionForm(request.POST)  
+        if form.is_valid():  
+            try:
+                form.save()
+                return redirect('/cstudents/csession')
+            except:
+                pass  
+    else:
+        form = StuSessionForm()  
+    csession = StuSession.objects.order_by('cscreated_at').reverse()   #created_at desc order  #reverse() for implied the Asc
+    context={
+        'csession':csession,
+        'form':form,
+    }
+    return render(request,"cstudents/stusession.html",context)
+def csessiondelete(request, id):  
+    csession = StuSession.objects.get(id=id)  
+    csession.delete()  
+    return redirect("/cstudents/csession")
+
+
+
 
 #bookscategory
 def cbtype(request):
