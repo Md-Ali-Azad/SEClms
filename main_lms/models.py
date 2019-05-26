@@ -61,6 +61,16 @@ class StuSession(models.Model):
     def __str__(self):
         return self.csession
 
+class BorrowInsert(models.Model):  
+    brsid = models.CharField(max_length=100)  
+    brsname = models.CharField(max_length=500)    
+    brbname = models.CharField(max_length=500)
+    brdate= models.DateField(auto_now_add=True)
+    brreturn= models.DateField() 
+    class Meta:  
+        db_table = "borrowinsert"  
+    def __str__(self):
+        return self.brsname
 
 class HeaderColor(models.Model):
     hcolor = models.CharField(max_length=500)

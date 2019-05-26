@@ -10,6 +10,7 @@ def numbercount(request):
     logCount = LogEntry.objects.exclude(change_message="No fields changed.").order_by('-action_time')[:20].count()
     bcount = BooksInsert.objects.count()
     scount = StuInsert.objects.count()
+    brcount = BorrowInsert.objects.count()
     #b=BooksInsert.objects.only('btype')
     #row=StuInsert.objects.raw('SELECT id FROM BooksInsert')
     cursor = connection.cursor()    
@@ -25,7 +26,7 @@ def numbercount(request):
             d[x[i][0]] = r[i]
             i = i+1
         resultsList.append(d)
-    args = {'logCount':logCount, 'bcount': bcount, 'scount': scount, "results":resultsList}
+    args = {'logCount':logCount, 'bcount': bcount, 'scount': scount, 'brcount': brcount, "results":resultsList}
     return args
 
 

@@ -20,6 +20,9 @@ urlpatterns = [
     path('cbooks/cbshelf/', views.cbshelf, name="cbshelf"), 
     path('cbooks/cbsdelete/<int:id>/', views.cbsdelete, name="cbsdelete"),
 
+    path('borrow/brinsert/', views.brinsert, name="brinsert"),  
+    path('borrow/brlist/',views.brlist, name="brlist"),
+
     path('students/sinsert/', views.sinsert, name="sinsert"),  
     path('students/slist/',views.slist, name="slist"),
     path('students/sdelete/<int:id>/', views.sdelete, name="sdelete"),
@@ -35,6 +38,8 @@ urlpatterns = [
     path('setting/headercolor/', views.headercolor, name="headercolor"),
     path('setting/chcolor/', views.chcolor, name="chcolor"),
     path('setting/activitylog/', views.activitylog, name="activitylog"),
+
+    path('bsearch/', views.bsearch, name="bsearch"),
 
 
    # path('emp/', views.emp, name="emp"),  
