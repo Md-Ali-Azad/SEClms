@@ -1,4 +1,98 @@
 {% extends 'base.html' %}
 {% block body%} 
-  <h2>Home</h2>
+<div id="hcontainer">
+
+    <div id="return" style="margin-top: 8%;">
+    <h2>Today Returns ({{tcount}})</h2>
+    {% if tcount > 0 %}
+    <table class="table table-hover table-bordered">  
+        <thead>  
+        <tr>  
+            <th scope="col">Student ID</th>  
+            <th scope="col">Student Name</th>  
+            <th scope="col">Book Name</th>  
+            <th scope="col">Borrow Date</th>
+            <th scope="col">Return date</th>
+        </tr>  
+        </thead>
+        <tbody>  
+    {% for t in tt %} 
+    
+        <tr>  
+            <td>{{ t.brsid }}</td>  
+            <td>
+                    {% for slist in slist %}
+                        {% if slist.sname in t.brsname %}
+                <a href="/viewsforall/studetails/{{ slist.id }}/">{{ t.brsname }}</a>
+                        {% endif %}
+                    {% endfor%}
+            </td>  
+            <td>
+                    {% for blist in blist %}
+                        {% if blist.bname in t.brbname %}
+                <a href="/viewsforall/booksdetails/{{ blist.id }}/">{{ t.brbname }}</a>
+                        {% endif %}
+                    {% endfor%}
+            </td>   
+            <td>{{ t.brdate }}</td>
+            <td>{{ t.brreturn }}</td> 
+            <!--<td>{{ employee.created_at|timesince|add:"2" }}</td>-->
+            <!--<td>{{ employee.created_at|timeuntil }}</td>--> 
+        </tr>  
+    {% endfor %}  
+        </tbody>  
+    </table>
+    {% else %}
+    <p>No result to show ...</p>
+    {% endif %}
+    </div>
+
+    <div id="delay">
+    <h2>Delay List ({{dcount}}) </h2>
+    {% if dcount > 0 %}
+    <table class="table table-hover table-bordered">  
+        <thead>  
+        <tr>  
+            <th scope="col">Student ID</th>  
+            <th scope="col">Student Name</th>  
+            <th scope="col">Book Name</th>  
+            <th scope="col">Borrow Date</th>
+            <th scope="col">Return date</th>
+            <th scope="col">Fine</th>
+        </tr>  
+        </thead>  
+        <tbody>  
+    {% for f in to %} 
+    
+        <tr>  
+            <td>{{ f.brsid }}</td>
+            <td>  
+            {% for slist in slist %}
+                {% if slist.sname in f.brsname %}
+                <a href="/viewsforall/studetails/{{ slist.id }}/">{{ f.brsname }}</a>
+                {% endif %}
+            {% endfor%}
+            </td>  
+            <td>
+                    {% for blist in blist %}
+                        {% if blist.bname in f.brbname %}
+                <a href="/viewsforall/booksdetails/{{ blist.id }}/">{{ f.brbname }}</a>
+                        {% endif %}
+                    {% endfor%}
+            </td>   
+            <td>{{ f.brdate }}</td>
+            <td>{{ f.brreturn }}</td>  
+            <td class="btn btn-danger">{{ f.df}} <a>tk</a></td>
+            <!--<td>{{ employee.created_at|timesince|add:"2" }}</td>-->
+            <!--<td>{{ employee.created_at|timeuntil }}</td>--> 
+        </tr>  
+    {% endfor %}  
+        </tbody>  
+    </table>
+    {% else %}
+    <p>No result to show</p>
+    {% endif %}
+    </div>
+
+</div> 
 {% endblock%} 

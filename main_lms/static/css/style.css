@@ -1,10 +1,7 @@
-
-table
-{
-
-	margin-top: 2%;
-	/*box-shadow: 10px 10px 100px blue;*/
+html {
+  scroll-behavior: smooth;
 }
+
 #thh
 {
 
@@ -163,6 +160,28 @@ background: #fff;
 	position: fixed;
 	margin-top: 50px;
 }
+#navbar {
+	position: fixed;
+  top: 0; /* Stay on top */
+  width: 100%; /* Full width */
+	transition: top 0.3s; /* Transition effect when sliding down (and up) */
+	z-index: 1;
+}
+#hcontainer
+{
+	height: 100%;
+	width: 100%;
+	scroll-behavior: smooth;
+}
+#hcontainer div
+{
+	position: relative;
+	height: 110%;
+	width: 100%;
+}
+
+
+
 .btn-circle.btn-xl {
 	width: 70px;
 	height: 70px;

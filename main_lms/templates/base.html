@@ -90,11 +90,25 @@ function openSearch() {
 function closeSearch() {
   document.getElementById("myOverlay").style.display = "none";
 } 
+
+
+//hide down top bar
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+var currentScrollPos = window.pageYOffset;
+  if (prevScrollpos > currentScrollPos) {
+    document.getElementById("navbar").style.top = "0";
+  } else {
+    document.getElementById("navbar").style.top = "-550px";
+  }
+  prevScrollpos = currentScrollPos;
+}
         </script>   
       </head> 
 <body onload="onload()">
+  <div id="navbar">
   {% if user.is_authenticated %}
-  <nav class="navbar navbar-expand-lg navbar-dark bg-{{hcolor}}" style="display:none; top:0; position:sticky;z-index: 1;" id="paneladmin">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-{{hcolor}}" style="display:none;z-index: 1;" id="paneladmin">
     <a class="navbar-brand" href="#">Admin Panel</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
@@ -108,7 +122,7 @@ function closeSearch() {
     </div>
   </nav>
   {% endif %}
-      <nav class="navbar navbar-expand-lg navbar-dark bg-{{hcolor}}" style="top:0; position:sticky;z-index: 1;">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-{{hcolor}}" >
         <a class="navbar-brand" href="#">SEC LMS </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -116,9 +130,24 @@ function closeSearch() {
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/"><i class="fa fa-home"></i> Home</a>
-            </li>
+
+              <li class="nav-item dropdown active">
+                  <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class='fas fa-home'></i> Home
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/">Home</a>
+                    <a class="dropdown-item" href="#return">Today Return List 
+                      <button type="button" class="btn btn-{{hcolor}} btn-circle">{{tcount}}</button></a>
+                      <a class="dropdown-item" href="#delay">Delay List 
+                          <button type="button" class="btn btn-{{hcolor}} btn-circle">{{dcount}}</button></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item">Manage Category(Books)</a>
+                    <div class="dropdown-divider"></div>
+                    
+                  </div>
+                </li>
+
             <li class="nav-item ">
               <a class="nav-link" href="/"><i class='fas fa-marker'></i> Notes</a>
             </li>
@@ -158,11 +187,7 @@ function closeSearch() {
                   <a class="dropdown-item" href="/borrow/brinsert">New Insertion</a>
                   <a class="dropdown-item" href="/borrow/brlist">Borrowing List
                   <button type="button" class="btn btn-{{hcolor}} btn-circle">{{brcount}}</button></a>
-                  <div class="dropdown-divider"></div>
-                <a class="dropdown-item">Manage Category(Books)</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="">New Dept.</a>
-                <a class="dropdown-item" href="">New Session</a>
+            
                 </div>
               </li>
 
@@ -205,10 +230,12 @@ function closeSearch() {
       </nav>
 
 
-      <nav class="navbar navbar-expand-lg navbar-dark bg-{{hcolor}}" style="display: none; top:0; position:sticky;z-index: 0;" id="panel">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-{{hcolor}}" style="display: none;" id="panel">
         <a class="navbar-brand" href="#">Search</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
+
+             
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class='fas fa-book-reader'></i> Books
@@ -222,11 +249,12 @@ function closeSearch() {
                     <a class="dropdown-item" >All</a>
                   </div>
                 </li>
+
           </ul>
         </div>
       </nav>
 
-
+</div>
       <div id="myOverlay" class="overlay">
         <span class="closebtn" onclick="closeSearch()" title="Close Overlay">x</span>
         <div class="overlay-content">

@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
 {% block body%} 
-<table class="table table-hover table-bordered">  
+<table class="table table-hover table-bordered" style="margin-top: 8%;">  
     <thead>  
     <tr>  
-        <th scope="col">Book ID</th>  
+        <th scope="col">Student ID</th>  
+        <th scope="col">Student Name</th>  
         <th scope="col">Book Name</th>  
-        <th scope="col">Book Type</th>  
-        <th scope="col">Book Writer</th>
-        <th scope="col">Quantity</th>
+        <th scope="col">Borrow Date</th>
+        <th scope="col">Return date</th>
         <th scope="col">Edit</th>  
         <th scope="col">Delete</th>  
-        <th scope="col">Shelf Position</th>
-        <th scope="col">Created</th>
+        <th scope="col">Remaining</th>
     </tr>  
     </thead>  
     <tbody>  
@@ -24,12 +23,12 @@
         <td>{{ brlist.brdate }}</td>
         <td>{{ brlist.brreturn }}</td>  
         <td>  
-            <a href="/books/bedit/{{ blist.id }}/" class="btn btn-primary"><i class='fas fa-pencil-alt'></i> Edit</a>  
+            <a href="/borrow/bredit/{{ brlist.id }}/" class="btn btn-primary"><i class='fas fa-pencil-alt'></i> Edit</a>  
         </td>
             <td>
-            <a href="/books/bdelete/{{ blist.id }}/"class="btn btn-danger"><i class='fas fa-trash-alt'></i> Delete</a>  
+            <a href="/borrow/brdelete/{{ brlist.id }}/"class="btn btn-danger"><i class='fas fa-trash-alt'></i> Delete</a>  
         </td>
-        <td style="font-size:8px;">{{ brlist.brdate }} <br>( {{ brlist.brdate|timesince }} ago )</td>
+        <td style="font-size:8px;">{{ brlist.brreturn|timeuntil }} left </td>
         <!--<td>{{ employee.created_at|timesince|add:"2" }}</td>-->
         <!--<td>{{ employee.created_at|timeuntil }}</td>--> 
     </tr>  

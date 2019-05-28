@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
-{% block body%} 
+{% block body%}
+<div style="margin-top: 8%;"> 
 <ul class="">
-        <h3><span class="bold">{{ logCount }}</span> Notification(s) </h3>
+        <h3><span class="bold" >({{ logCount }})</span> Notifications </h3>
         <a href="{% url 'index' %}"> View All </a>
         {% if logs %}
             <ul style="height: 250px;">
@@ -32,6 +33,6 @@
         {% else %}
         {% endif %}
 </ul>
-
+</div>
 
 {% endblock%} 

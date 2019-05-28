@@ -3,7 +3,10 @@ from .import views
 from django.contrib.auth import views as auth_views
 urlpatterns = [  
     #path('admin/', admin.site.urls),
-    path('', views.viewshome, name="index"), 
+    path('', views.brdetails, name="index"),
+    path('viewsforall/studetails/<int:id>/', views.studetails, name="studetails"),
+    path('viewsforall/booksdetails/<int:id>/', views.booksdetails, name="booksdetails"), 
+
     path('accounts/login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name="login"),
     path('accounts/logout/', auth_views.LogoutView.as_view(template_name='accounts/logout.html'), name="logout"),  
     path('accounts/reg_form/',views.register, name="register"),
@@ -22,6 +25,9 @@ urlpatterns = [
 
     path('borrow/brinsert/', views.brinsert, name="brinsert"),  
     path('borrow/brlist/',views.brlist, name="brlist"),
+    path('borrow/bredit/<int:id>/', views.bredit, name="bredit"),  
+    path('borrow/brupdate/<int:id>/', views.brupdate, name="brupdate"),
+    path('borrow/brdelete/<int:id>/', views.brdelete, name="brdelete"),
 
     path('students/sinsert/', views.sinsert, name="sinsert"),  
     path('students/slist/',views.slist, name="slist"),

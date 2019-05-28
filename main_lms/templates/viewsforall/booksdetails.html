@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block body%} 
+<div id="hcontainer" style="margin-top:8%;">
+        <tr>  
+            <td>{{ blist.bid }}</td>  
+            <td>{{ blist.bname }}</td>
+            <td>{{ blist.bwriter }}</td>
+            <td>{{ blist.btype }}</td>
+            <td>{{ blist.bshelf }}</td>
+            <td>{{ blist.bquantity }}</td>    
+
+
+
+            <!--<td>{{ employee.created_at|timesince|add:"2" }}</td>-->
+            <!--<td>{{ employee.created_at|timeuntil }}</td>--> 
+        </tr>
+        
+
+</div> 
+{% endblock%} 

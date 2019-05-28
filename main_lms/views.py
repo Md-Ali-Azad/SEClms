@@ -21,6 +21,7 @@ from main_lms.forms import *
 from django.contrib.admin.models import LogEntry, ADDITION, CHANGE
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import User
+from django.db import connection
 
 # adminpanel(CRUD)
 def viewslogin(request):
@@ -115,6 +116,10 @@ def bdelete(request, id):
 	return redirect("/books/blist")
 
 def bsearch(request):
+	if request.user.is_authenticated:
+		tem=['search/bookssearch.html']
+	else:
+		tem=['viewsforall/bookssearch.html']
 	if request.method == "GET":
 		search_text = request.GET['search_text']
 		if search_text is not None and search_text != u"":
@@ -122,7 +127,7 @@ def bsearch(request):
 			blist = BooksInsert.objects.filter(bname__contains = search_text)
 		else:
 			blist = []
-	return render_to_response('search/bookssearch.html',{'blist' : blist})
+	return render_to_response(tem,{'blist' : blist})
 #it worked ... editor problem -> sapce in to tab
 
 #borrow
@@ -141,12 +146,34 @@ def brinsert(request):
 	return render(request,'borrow/borrowinsert.html',args)
 
 def brlist(request):
-	brlist = BorrowInsert.objects.order_by('brdate').reverse()   #created_at desc order  #reverse() for implied the Asc
+	brlist = BorrowInsert.objects.order_by('brreturn')   #created_at desc order  #reverse() for implied the Asc
 	context={
 		'brlist':brlist,
 	}
 	return render(request,"borrow/borrowlist.html",context)
+def bredit(request, id):  
+	brlist = BorrowInsert.objects.get(id=id) 
+	form = BorrowInsertForm()
+	context={
+		'form': form,
+		'brlist':brlist,
+	} 
+	return render(request,'borrow/borrowedit.html', context)
 
+def brupdate(request, id): 
+	brlist = BorrowInsert.objects.get(id=id)  
+	form = BorrowInsertForm(request.POST, instance = brlist)
+	context={
+		'brlist':brlist,
+	}
+	if form.is_valid():  
+		form.save()  
+		return redirect("/borrow/brlist")  
+	return render(request, 'borrow/borrowedit.html',context)
+def brdelete(request, id):  
+	brlist = BorrowInsert.objects.get(id=id)  
+	brlist.delete()  
+	return redirect("/borrow/brlist")
 
 
 #students
@@ -299,12 +326,63 @@ def cbsdelete(request, id):
 
 # viewsforall (CRUD)
 def viewshome(request):
-	hcolor=HeaderColor.objects.all()[:1].get()
+	today = BorrowInsert.objects.filter(brreturn=datetime.date.today())
+	flist = BorrowInsert.objects.filter(brreturn__lte=datetime.date.today())    
 	context={
-		'hcolor':hcolor,
+		'today':today, 'flist':flist,
 	}
 	return render(request,"viewsforall/index.html", context)
+def brdetails(request):
+	slist = StuInsert.objects.all()
+	blist = BooksInsert.objects.all()
+	cursor = connection.cursor()    
+	cursor.execute("select * , cast((julianday('now') - julianday(brreturn)) as int)*10 as df from BorrowInsert where brreturn < current_date order by brreturn")
+	results = cursor.fetchall()
 
+	x = cursor.description
+	resultsList = []   
+	for r in results:
+		i = 0
+		d = {}
+		while i < len(x):
+			d[x[i][0]] = r[i]
+			i = i+1
+		resultsList.append(d)
+	
+	cursor = connection.cursor()    
+	cursor.execute("select *  from BorrowInsert where brreturn = current_date")
+	
+	results = cursor.fetchall()
+
+	x = cursor.description
+	resultsList1 = []   
+	for r in results:
+		i = 0
+		d = {}
+		while i < len(x):
+			d[x[i][0]] = r[i]
+			i = i+1
+		resultsList1.append(d)
+	context={
+		"to":resultsList,
+		'tt':resultsList1,
+		'slist': slist,
+		'blist': blist
+	} 
+	return render(request,"viewsforall/index.html", context)
+def studetails(request, id):  
+	slist = StuInsert.objects.get(id=id) 
+	context={
+		'slist':slist,
+	} 
+	return render(request,'viewsforall/studetails.html', context)
+
+def booksdetails(request, id):  
+	blist = BooksInsert.objects.get(id=id) 
+	context={
+		'blist':blist,
+	} 
+	return render(request,'viewsforall/booksdetails.html', context)
 
 #setting
 def headercolor(request):

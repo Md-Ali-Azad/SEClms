@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block body%} 
+<div id="hcontainer" style="margin-top:8%;">
+        <tr>  
+            <td>{{ slist.sid }}</td>  
+            <td>{{ slist.sname }}</td>
+            <td>{{ slist.sdept }}</td>    
+            <td>{{ slist.ssession }}</td>    
+            <td>{{ slist.saddress }}</td>    
+
+            <!--<td>{{ employee.created_at|timesince|add:"2" }}</td>-->
+            <!--<td>{{ employee.created_at|timeuntil }}</td>--> 
+        </tr>
+        
+
+</div> 
+{% endblock%} 

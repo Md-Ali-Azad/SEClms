@@ -71,6 +71,12 @@ class BorrowInsert(models.Model):
         db_table = "borrowinsert"  
     def __str__(self):
         return self.brsname
+    @property
+    def finecal(self):
+        return -(self.brreturn - datetime.date.today()).days*10
+    #How to calculate number of days, when two DateFields are given? Django
+    #that works for me
+    #In template, write : {{datetest.date_diff}}
 
 class HeaderColor(models.Model):
     hcolor = models.CharField(max_length=500)
