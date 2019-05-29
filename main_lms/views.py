@@ -327,9 +327,13 @@ def cbsdelete(request, id):
 # viewsforall (CRUD)
 def viewshome(request):
 	today = BorrowInsert.objects.filter(brreturn=datetime.date.today())
-	flist = BorrowInsert.objects.filter(brreturn__lte=datetime.date.today())    
+	flist = BorrowInsert.objects.filter(brreturn__lt=datetime.date.today()).order_by('brreturn')
+	upcoming = BorrowInsert.objects.filter(brreturn__range=(datetime.date.today()+timedelta(days=1) ,datetime.date.today()+timedelta(days=7))).order_by('brreturn') 
+	slist = StuInsert.objects.all()
+	blist = BooksInsert.objects.all()  
 	context={
-		'today':today, 'flist':flist,
+		'today':today, 'flist':flist,'slist': slist,
+		'blist': blist, 'upcoming':upcoming
 	}
 	return render(request,"viewsforall/index.html", context)
 def brdetails(request):
@@ -370,6 +374,28 @@ def brdetails(request):
 		'blist': blist
 	} 
 	return render(request,"viewsforall/index.html", context)
+def isearch(request):
+	slist = StuInsert.objects.all()
+	blist = BooksInsert.objects.all()  
+	if request.method == "GET":
+		search_texti = request.GET['search_texti']
+		if search_texti is not None and search_texti != u"":
+			search_texti = request.GET['search_texti']
+			today = BorrowInsert.objects.filter(brsname__contains = search_texti, brreturn=datetime.date.today())
+			flist = BorrowInsert.objects.filter(brsname__contains = search_texti , brreturn__lt=datetime.date.today())
+			upcoming = BorrowInsert.objects.filter(brsname__contains = search_texti, brreturn__range=(datetime.date.today()+timedelta(days=1) ,datetime.date.today()+timedelta(days=7))).order_by('brreturn') 
+	
+		else:
+			today = []
+			flist = []
+			upcoming = []
+	context={
+		'flist':flist, 'slist':slist, 'blist':blist,'upcoming':upcoming, 'today':today
+	}
+	return render_to_response('viewsforall/indexsearch.html',context)
+
+
+
 def studetails(request, id):  
 	slist = StuInsert.objects.get(id=id) 
 	context={

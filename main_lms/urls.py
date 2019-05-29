@@ -3,7 +3,7 @@ from .import views
 from django.contrib.auth import views as auth_views
 urlpatterns = [  
     #path('admin/', admin.site.urls),
-    path('', views.brdetails, name="index"),
+    path('', views.viewshome, name="index"),
     path('viewsforall/studetails/<int:id>/', views.studetails, name="studetails"),
     path('viewsforall/booksdetails/<int:id>/', views.booksdetails, name="booksdetails"), 
 
@@ -46,6 +46,7 @@ urlpatterns = [
     path('setting/activitylog/', views.activitylog, name="activitylog"),
 
     path('bsearch/', views.bsearch, name="bsearch"),
+    path('isearch/', views.isearch, name="isearch"),
 
 
    # path('emp/', views.emp, name="emp"),  

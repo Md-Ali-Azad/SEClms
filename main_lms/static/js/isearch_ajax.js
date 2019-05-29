@@ -1,15 +1,16 @@
+
 $(function(){
 
-    $('#bsearch').keyup(function() {
+    $('#isearch').keyup(function() {
     
         $.ajax({
             type: "GET",
-            url: "/bsearch/",
+            url: "/isearch/",
             data: { 
-                'search_text' : $('#bsearch').val(),
+                'search_texti' : $('#isearch').val(),
                 'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
             },
-            success: searchSuccess,
+            success: searchSuccessi,
             dataType: 'html'
         });
         
@@ -17,9 +18,7 @@ $(function(){
 
 });
 
-function searchSuccess(data, textStatus, jqXHR)
+function searchSuccessi(data, textStatus, jqXHR)
 {
-    $('#search-results').html(data);
+    $('#isearch-results').html(data);
 }
-
-

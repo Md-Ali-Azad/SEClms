@@ -1,6 +1,9 @@
 from main_lms.models import *
 from django.contrib.admin.models import LogEntry
 from django.db import connection
+import datetime
+from datetime import date
+from datetime import timedelta
 
 def hcolor(request):
 	hcolor=HeaderColor.objects.all()[:1].get()
@@ -14,6 +17,7 @@ def numbercount(request):
 	brcount = BorrowInsert.objects.count()
 	tcount = BorrowInsert.objects.filter(brreturn=datetime.date.today()).count()
 	dcount = BorrowInsert.objects.filter(brreturn__lt=datetime.date.today()).count()
+	ucount= BorrowInsert.objects.filter(brreturn__range=(datetime.date.today()+timedelta(days=1) ,datetime.date.today()+timedelta(days=7))).order_by('brreturn').count() 
 	#b=BooksInsert.objects.only('btype')
 	#row=StuInsert.objects.raw('SELECT id FROM BooksInsert')
 	cursor = connection.cursor()    
@@ -29,7 +33,8 @@ def numbercount(request):
 			d[x[i][0]] = r[i]
 			i = i+1
 		resultsList.append(d)
-	args = {'logCount':logCount, 'bcount': bcount, 'scount': scount,'tcount':tcount, 'dcount':dcount, 'brcount': brcount, "results":resultsList}
+	args = {'logCount':logCount, 'bcount': bcount, 'scount': scount,'tcount':tcount,
+	 		'dcount':dcount, 'brcount': brcount, "results":resultsList, 'ucount':ucount}
 	return args
 
 
