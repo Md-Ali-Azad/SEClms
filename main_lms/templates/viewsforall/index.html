@@ -1,27 +1,8 @@
 {% extends 'base.html' %}
 {% block body%} 
-<div id="myOverlayi" class="overlay">
-    <span class="closebtn" onclick="closeSearchi()" title="Close Overlay" style="z-index: 1;">x</span>
-    <div class="overlay-content">
-        <form class="form-inline my-2 my-lg-0">
-            {% csrf_token %}
-            <div class="inner-addon left-addon">
-              <i class="fas fa-search"></i>
-            <input class="form-control" id="isearch" name="isrh" placeholder="  By Name">
-            <!--<button  class="btn btn-secondary" type="submit"> Search</button>-->
-          </div>
-          </form>
-      <div id="isearch-results" >
-
-      </div>
-    </div>
-  </div> 
 <div id="hcontainer">
-    <div id="shere" style="margin-top: 100px;">
-    <a class="dropdown-item" onclick="openSearchi()" style="cursor: pointer;" >By your name</a>
-    </div>
 
-    <div id="return">
+    <div id="return" style="margin-top: 100px;">
     <h2>Today Returns ({{tcount}})</h2>
     {% if tcount > 0 %}
     <table class="table table-hover table-bordered">  

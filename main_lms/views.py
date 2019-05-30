@@ -128,6 +128,32 @@ def bsearch(request):
 		else:
 			blist = []
 	return render_to_response(tem,{'blist' : blist})
+def btsearch(request):
+	if request.user.is_authenticated:
+		tem=['search/bookssearchbt.html']
+	else:
+		tem=['viewsforall/bookssearchbt.html']
+	if request.method == "GET":
+		search_textbt = request.GET['search_textbt']
+		if search_textbt is not None and search_textbt != u"":
+			search_textbt = request.GET['search_textbt']
+			blist = BooksInsert.objects.filter(btype__contains = search_textbt)
+		else:
+			blist = []
+	return render_to_response(tem,{'blist' : blist})
+def ballsearch(request):
+	if request.user.is_authenticated:
+		tem=['search/bookssearchall.html']
+	else:
+		tem=['viewsforall/bookssearchall.html']
+	if request.method == "GET":
+		search_textball = request.GET['search_textball']
+		if search_textball is not None and search_textball != u"":
+			search_textball = request.GET['search_textball']
+			blist = BooksInsert.objects.filter(Q(bname__icontains = search_textball) | Q(btype__icontains = search_textball) |Q(bwriter__icontains = search_textball) | Q(bshelf__icontains = search_textball) | Q(bcreated_at__icontains = search_textball)| Q(bquantity__icontains = search_textball) | Q(bid__icontains = search_textball) )
+		else:
+			blist = []
+	return render_to_response(tem,{'blist' : blist})
 #it worked ... editor problem -> sapce in to tab
 
 #borrow

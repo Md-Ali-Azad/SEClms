@@ -1,0 +1,35 @@
+{% if blist.count > 0 %}
+<p>Showing {{blist.count}} results....</p>
+<table class="table table-hover table-bordered table-dark" style="margin: 0%;">  
+    <thead>  
+    <tr>  
+        <th scope="col">Book ID</th>  
+        <th scope="col">Book Name</th>  
+        <th scope="col">Book Type</th>  
+        <th scope="col">Book Writer</th>
+        <th scope="col">Quantity</th> 
+        <th scope="col">Shelf Position</th>
+        <th scope="col">Created</th>
+    </tr>  
+    </thead>  
+    <tbody>  
+{% for blist in blist %} 
+ 
+    <tr>  
+        <td>{{ blist.bid }}</td>  
+        <td>{{ blist.bname }}</td>  
+        <td>{{ blist.btype }}</td>  
+        <td>{{ blist.bwriter }}</td>
+        <td>{{ blist.bquantity }}</td>  
+        <td>{{ blist.bshelf }}</td>
+        <td style="font-size:8px;">{{ blist.bcreated_at }} <br>( {{ blist.bcreated_at|timesince }} ago )</td>
+        <!--<td>{{ employee.created_at|timesince|add:"2" }}</td>-->
+        <!--<td>{{ employee.created_at|timeuntil }}</td>--> 
+    </tr>  
+{% endfor %}  
+    </tbody>  
+</table>  
+{% else %}
+<p>Nothing to show!</p>
+{% endif %}
+

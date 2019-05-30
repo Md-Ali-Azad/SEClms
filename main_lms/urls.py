@@ -46,6 +46,8 @@ urlpatterns = [
     path('setting/activitylog/', views.activitylog, name="activitylog"),
 
     path('bsearch/', views.bsearch, name="bsearch"),
+    path('btsearch/', views.btsearch, name="btsearch"),
+    path('ballsearch/', views.ballsearch, name="ballsearch"),
     path('isearch/', views.isearch, name="isearch"),
 
 

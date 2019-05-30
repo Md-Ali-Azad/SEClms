@@ -85,7 +85,7 @@
 
 
 
-
+//books
 // Open the full screen search box
 function openSearch() {
   document.getElementById("myOverlay").style.display = "block";
@@ -95,8 +95,28 @@ function openSearch() {
 function closeSearch() {
   document.getElementById("myOverlay").style.display = "none";
 } 
+//book type
+function openSearchbt() {
+  document.getElementById("myOverlaybt").style.display = "block";
+}
+function closeSearchbt() {
+  document.getElementById("myOverlaybt").style.display = "none";
+}
 
-//index
+//book type
+function openSearchball() {
+  document.getElementById("myOverlayball").style.display = "block";
+}
+function closeSearchball() {
+  document.getElementById("myOverlayball").style.display = "none";
+}
+
+
+
+
+
+
+//index in all 
 function openSearchi() {
   document.getElementById("myOverlayi").style.display = "block";
 }
@@ -158,9 +178,10 @@ var currentScrollPos = window.pageYOffset;
                        <a class="dropdown-item" href="#upcoming">Upcoming Week List 
                           <button type="button" class="btn btn-{{hcolor}} btn-circle">{{ucount}}</button></a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item">Manage Category(Books)</a>
+                    <a class="dropdown-item">Search</a>
                     <div class="dropdown-divider"></div>
-                    
+                    <a class="dropdown-item" onclick="openSearchi()" style="cursor: pointer;" >
+                        <i class='fas fa-reply-all'></i> Return list(Today, Delay, Upcoming)</a>
                   </div>
                 </li>
 
@@ -261,9 +282,13 @@ var currentScrollPos = window.pageYOffset;
                       <a class="dropdown-item">Search Books By: </a>
                       <div class="dropdown-divider"></div>
                     <a class="dropdown-item" onclick="openSearch()" style="cursor: pointer;" >Name</a>
-                    <a class="dropdown-item" >Type</a>
-                    <a class="dropdown-item" >All</a>
+                    <a class="dropdown-item" onclick="openSearchbt()" style="cursor: pointer;" >Type</a>
+                    <a class="dropdown-item" onclick="openSearchball()" style="cursor: pointer;">All</a>
                   </div>
+                </li>
+                <li class="nav-item ">
+                <a class="nav-link" onclick="openSearchi()" style="cursor: pointer;" >
+                    <i class='fas fa-reply-all'></i> Return list</a>
                 </li>
 
           </ul>
@@ -271,6 +296,10 @@ var currentScrollPos = window.pageYOffset;
       </nav>
 
 </div>
+
+
+<!--Books -->
+    <!--By name-->
       <div id="myOverlay" class="overlay">
         <span class="closebtn" onclick="closeSearch()" title="Close Overlay" style="z-index: 1;">x</span>
         <div class="overlay-content">
@@ -286,6 +315,56 @@ var currentScrollPos = window.pageYOffset;
           </div>
         </div>
       </div> 
+    <!--By type-->
+    <div id="myOverlaybt" class="overlay">
+        <span class="closebtn" onclick="closeSearchbt()" title="Close Overlay" style="z-index: 1;">x</span>
+        <div class="overlay-content">
+            <form class="form-inline my-2 my-lg-0">
+                {% csrf_token %}
+                <div class="inner-addon left-addon">
+                  <i class="fas fa-search"></i>
+                <input class="form-control" id="btsearch" name="btsrh" placeholder="  By Type">
+              </div>
+              </form>
+          <div id="btsearch-results" >
+    
+          </div>
+        </div>
+      </div> 
+ <!--By all-->
+    <div id="myOverlayball" class="overlay">
+        <span class="closebtn" onclick="closeSearchball()" title="Close Overlay" style="z-index: 1;">x</span>
+        <div class="overlay-content">
+            <form class="form-inline my-2 my-lg-0">
+                {% csrf_token %}
+                <div class="inner-addon left-addon">
+                  <i class="fas fa-search"></i>
+                <input class="form-control" id="ballsearch" name="ballsrh" placeholder="  Any Input">
+              </div>
+              </form>
+          <div id="ballsearch-results" >
+    
+          </div>
+        </div>
+      </div> 
+
+
+      <!--return list search-->
+      <div id="myOverlayi" class="overlay">
+          <span class="closebtn" onclick="closeSearchi()" title="Close Overlay" style="z-index: 1;">x</span>
+          <div class="overlay-content">
+              <form class="form-inline my-2 my-lg-0">
+                  {% csrf_token %}
+                  <div class="inner-addon left-addon">
+                    <i class="fas fa-search"></i>
+                  <input class="form-control" id="isearch" name="isrh" placeholder="  By Name">
+                </div>
+                </form>
+            <div id="isearch-results" >
+      
+            </div>
+          </div>
+        </div> 
 
       
       
@@ -307,6 +386,8 @@ var currentScrollPos = window.pageYOffset;
 </body>
 <script  type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
 <script  type="text/javascript" src="{% static 'js/books_search_ajax.js' %}"></script>
+<script  type="text/javascript" src="{% static 'js/books_search_bt_ajax.js' %}"></script>
+<script  type="text/javascript" src="{% static 'js/books_search_all_ajax.js' %}"></script>
 <script  type="text/javascript" src="{% static 'js/isearch_ajax.js' %}"></script>
 
 
