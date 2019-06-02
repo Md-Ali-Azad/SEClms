@@ -73,7 +73,7 @@ class BorrowInsert(models.Model):
         return self.brsname
     @property
     def finecal(self):
-        return -(self.brreturn - datetime.date.today()).days*10
+        return -(self.brreturn - datetime.date.today()).days*5
     #How to calculate number of days, when two DateFields are given? Django
     #that works for me
     #In template, write : {{datetest.date_diff}}

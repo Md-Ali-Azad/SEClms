@@ -5,7 +5,7 @@ $(function(){
     
         $.ajax({
             type: "GET",
-            url: "/ballsearch/",
+            url: "/btsearch/",
             data: { 
                 'search_textbt' : $('#btsearch').val(),
                 'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()

@@ -48,6 +48,13 @@ urlpatterns = [
     path('bsearch/', views.bsearch, name="bsearch"),
     path('btsearch/', views.btsearch, name="btsearch"),
     path('ballsearch/', views.ballsearch, name="ballsearch"),
+
+    path('brnsearch/', views.brnsearch, name="brnsearch"),
+    path('brbdsearch/', views.brbdsearch, name="brbdsearch"),
+    
+    path('snsearch/', views.snsearch, name="snsearch"),
+    path('sdsearch/', views.sdsearch, name="sdsearch"),
+    path('sallsearch/', views.sallsearch, name="sallsearch"),
     path('isearch/', views.isearch, name="isearch"),
 
 

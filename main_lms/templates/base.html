@@ -111,7 +111,42 @@ function closeSearchball() {
   document.getElementById("myOverlayball").style.display = "none";
 }
 
+//Student Name
+function openSearchsn() {
+  document.getElementById("myOverlaysn").style.display = "block";
+}
+function closeSearchsn() {
+  document.getElementById("myOverlaysn").style.display = "none";
+}
+//Student Dept.
+function openSearchsd() {
+  document.getElementById("myOverlaysd").style.display = "block";
+}
+function closeSearchsd() {
+  document.getElementById("myOverlaysd").style.display = "none";
+}
+//Student all.
+function openSearchsall() {
+  document.getElementById("myOverlaysall").style.display = "block";
+}
+function closeSearchsall() {
+  document.getElementById("myOverlaysall").style.display = "none";
+}
 
+//Borrowing Name or Reg. ID
+function openSearchbrn() {
+  document.getElementById("myOverlaybrn").style.display = "block";
+}
+function closeSearchbrn() {
+  document.getElementById("myOverlaybrn").style.display = "none";
+}
+//Borrowing Book Name or Date
+function openSearchbrbd() {
+  document.getElementById("myOverlaybrbd").style.display = "block";
+}
+function closeSearchbrbd() {
+  document.getElementById("myOverlaybrbd").style.display = "none";
+}
 
 
 
@@ -157,7 +192,8 @@ var currentScrollPos = window.pageYOffset;
   </nav>
   {% endif %}
       <nav class="navbar navbar-expand-lg navbar-dark bg-{{hcolor}}" >
-        <a class="navbar-brand" href="#">SEC LMS </a>
+        <a class="navbar-brand" href="#"><i id="lds-dual-ring"></i><i class="fa fa-book fa-1x" aria-hidden="true"></i>
+          &nbsp; SEC LMS </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -267,7 +303,7 @@ var currentScrollPos = window.pageYOffset;
       </nav>
 
 
-      <nav class="navbar navbar-expand-lg navbar-dark bg-{{hcolor}}" style="display: none;" id="panel">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-{{hcolor}}" style="display:none" id="panel">
         <a class="navbar-brand" href="#">Search</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
@@ -286,6 +322,36 @@ var currentScrollPos = window.pageYOffset;
                     <a class="dropdown-item" onclick="openSearchball()" style="cursor: pointer;">All</a>
                   </div>
                 </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class='fas fa-book-reader'></i> Students
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item">Search Students By: </a>
+                        <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" onclick="openSearchsn()" style="cursor: pointer;" >Name or Reg. ID</a>
+                      <a class="dropdown-item" onclick="openSearchsd()" style="cursor: pointer;" >Dept. or Session</a>
+                      <a class="dropdown-item" onclick="openSearchsall()" style="cursor: pointer;">All</a>
+                    </div>
+                  </li>
+
+
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class='fas fa-book-reader'></i> Borrowing
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item">Search Borrowing By: </a>
+                        <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" onclick="openSearchbrn()" style="cursor: pointer;" >Name or Reg. ID</a>
+                      <a class="dropdown-item" onclick="openSearchbrbd()" style="cursor: pointer;">Books Name or Date</a>
+                    </div>
+                  </li>
+
+
                 <li class="nav-item ">
                 <a class="nav-link" onclick="openSearchi()" style="cursor: pointer;" >
                     <i class='fas fa-reply-all'></i> Return list</a>
@@ -299,7 +365,7 @@ var currentScrollPos = window.pageYOffset;
 
 
 <!--Books -->
-    <!--By name-->
+    <!--Books By name-->
       <div id="myOverlay" class="overlay">
         <span class="closebtn" onclick="closeSearch()" title="Close Overlay" style="z-index: 1;">x</span>
         <div class="overlay-content">
@@ -315,7 +381,7 @@ var currentScrollPos = window.pageYOffset;
           </div>
         </div>
       </div> 
-    <!--By type-->
+    <!--Books By type-->
     <div id="myOverlaybt" class="overlay">
         <span class="closebtn" onclick="closeSearchbt()" title="Close Overlay" style="z-index: 1;">x</span>
         <div class="overlay-content">
@@ -331,7 +397,7 @@ var currentScrollPos = window.pageYOffset;
           </div>
         </div>
       </div> 
- <!--By all-->
+ <!--Books By all-->
     <div id="myOverlayball" class="overlay">
         <span class="closebtn" onclick="closeSearchball()" title="Close Overlay" style="z-index: 1;">x</span>
         <div class="overlay-content">
@@ -346,7 +412,93 @@ var currentScrollPos = window.pageYOffset;
     
           </div>
         </div>
-      </div> 
+      </div>
+<!--Students--> 
+  <!--By name and Reg. id Students-->
+  <div id="myOverlaysn" class="overlay">
+      <span class="closebtn" onclick="closeSearchsn()" title="Close Overlay" style="z-index: 1;">x</span>
+      <div class="overlay-content">
+          <form class="form-inline my-2 my-lg-0">
+              {% csrf_token %}
+              <div class="inner-addon left-addon">
+                <i class="fas fa-search"></i>
+              <input class="form-control" id="snsearch" name="snsrh" placeholder=" By Name or Reg. ID">
+            </div>
+            </form>
+        <div id="snsearch-results" >
+
+        </div>
+      </div>
+    </div>
+    <!--By Dept. Students-->
+  <div id="myOverlaysd" class="overlay">
+      <span class="closebtn" onclick="closeSearchsd()" title="Close Overlay" style="z-index: 1;">x</span>
+      <div class="overlay-content">
+          <form class="form-inline my-2 my-lg-0">
+              {% csrf_token %}
+              <div class="inner-addon left-addon">
+                <i class="fas fa-search"></i>
+              <input class="form-control" id="sdsearch" name="sdsrh" placeholder=" By Dept. or Session">
+            </div>
+            </form>
+        <div id="sdsearch-results" >
+
+        </div>
+      </div>
+    </div>  
+   <!--By All Students-->
+   <div id="myOverlaysall" class="overlay">
+    <span class="closebtn" onclick="closeSearchsall()" title="Close Overlay" style="z-index: 1;">x</span>
+    <div class="overlay-content">
+        <form class="form-inline my-2 my-lg-0">
+            {% csrf_token %}
+            <div class="inner-addon left-addon">
+              <i class="fas fa-search"></i>
+            <input class="form-control" id="sallsearch" name="sallsrh" placeholder=" Any Input">
+          </div>
+          </form>
+      <div id="sallsearch-results" >
+
+      </div>
+    </div>
+  </div>  
+
+<!--Borrowing--> 
+  <!--By name and Reg. id Borrowing-->
+  <div id="myOverlaybrn" class="overlay">
+    <span class="closebtn" onclick="closeSearchbrn()" title="Close Overlay" style="z-index: 1;">x</span>
+    <div class="overlay-content">
+        <form class="form-inline my-2 my-lg-0">
+            {% csrf_token %}
+            <div class="inner-addon left-addon">
+              <i class="fas fa-search"></i>
+            <input class="form-control" id="brnsearch" name="brnsrh" placeholder=" By Name or Reg. ID">
+          </div>
+          </form>
+      <div id="brnsearch-results" >
+
+      </div>
+    </div>
+  </div>
+  <!--By Book name and Date Borrowing-->
+  <div id="myOverlaybrbd" class="overlay">
+    <span class="closebtn" onclick="closeSearchbrbd()" title="Close Overlay" style="z-index: 1;">x</span>
+    <div class="overlay-content">
+        <form class="form-inline my-2 my-lg-0">
+            {% csrf_token %}
+            <div class="inner-addon left-addon">
+              <i class="fas fa-search"></i>
+            <input class="form-control" id="brbdsearch" name="brbdsrh" placeholder=" Book Name or Date">
+          </div>
+          </form>
+      <div id="brbdsearch-results" >
+
+      </div>
+    </div>
+  </div>
+
+
+
 
 
       <!--return list search-->
@@ -357,7 +509,7 @@ var currentScrollPos = window.pageYOffset;
                   {% csrf_token %}
                   <div class="inner-addon left-addon">
                     <i class="fas fa-search"></i>
-                  <input class="form-control" id="isearch" name="isrh" placeholder="  By Name">
+                  <input class="form-control" id="isearch" name="isrh" placeholder="  By Name or Reg. ID">
                 </div>
                 </form>
             <div id="isearch-results" >
@@ -388,6 +540,13 @@ var currentScrollPos = window.pageYOffset;
 <script  type="text/javascript" src="{% static 'js/books_search_ajax.js' %}"></script>
 <script  type="text/javascript" src="{% static 'js/books_search_bt_ajax.js' %}"></script>
 <script  type="text/javascript" src="{% static 'js/books_search_all_ajax.js' %}"></script>
+
+<script  type="text/javascript" src="{% static 'js/br_search_brn_ajax.js' %}"></script>
+<script  type="text/javascript" src="{% static 'js/br_search_brbd_ajax.js' %}"></script>
+
+<script  type="text/javascript" src="{% static 'js/students_search_sn_ajax.js' %}"></script>
+<script  type="text/javascript" src="{% static 'js/students_search_sd_ajax.js' %}"></script>
+<script  type="text/javascript" src="{% static 'js/students_search_sall_ajax.js' %}"></script>
 <script  type="text/javascript" src="{% static 'js/isearch_ajax.js' %}"></script>
 
 

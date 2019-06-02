@@ -19,14 +19,14 @@
     {% for t in today %} 
     
         <tr>  
-            <td>{{ t.brsid }}</td>  
             <td>
-                    {% for slist in slist %}
-                        {% if slist.sname in t.brsname %}
-                <a href="/viewsforall/studetails/{{ slist.id }}/">{{ t.brsname }}</a>
+                {% for slist in slist %}
+                        {% if slist.sid in t.brsid %}
+                <a href="/viewsforall/studetails/{{ slist.id }}/">{{ t.brsid }}</a>
                         {% endif %}
                     {% endfor%}
             </td>  
+            <td>{{ t.brsname }}</td>  
             <td>
                     {% for blist in blist %}
                         {% if blist.bname in t.brbname %}
@@ -65,14 +65,14 @@
     {% for f in flist %} 
     
         <tr>  
-            <td>{{ f.brsid }}</td>
-            <td>  
-            {% for slist in slist %}
-                {% if slist.sname in f.brsname %}
-                <a href="/viewsforall/studetails/{{ slist.id }}/">{{ f.brsname }}</a>
-                {% endif %}
-            {% endfor%}
+            <td>
+                {% for slist in slist %}
+                        {% if slist.sid in f.brsid %}
+                <a href="/viewsforall/studetails/{{ slist.id }}/">{{ f.brsid }}</a>
+                        {% endif %}
+                    {% endfor%}
             </td>  
+            <td>{{ f.brsname }}</td>   
             <td>
                     {% for blist in blist %}
                         {% if blist.bname in f.brbname %}
@@ -111,14 +111,14 @@
         {% for u in upcoming %} 
         
             <tr>  
-                <td>{{ u.brsid }}</td>
-                <td>  
-                {% for slist in slist %}
-                    {% if slist.sname in u.brsname %}
-                    <a href="/viewsforall/studetails/{{ slist.id }}/">{{ u.brsname }}</a>
-                    {% endif %}
-                {% endfor%}
+                <td>
+                    {% for slist in slist %}
+                            {% if slist.sid in u.brsid %}
+                    <a href="/viewsforall/studetails/{{ slist.id }}/">{{ u.brsid }}</a>
+                            {% endif %}
+                        {% endfor%}
                 </td>  
+                <td>{{ u.brsname }}</td> 
                 <td>
                         {% for blist in blist %}
                             {% if blist.bname in u.brbname %}

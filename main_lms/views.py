@@ -172,9 +172,11 @@ def brinsert(request):
 	return render(request,'borrow/borrowinsert.html',args)
 
 def brlist(request):
+	slist = StuInsert.objects.all()
+	blist = BooksInsert.objects.all()
 	brlist = BorrowInsert.objects.order_by('brreturn')   #created_at desc order  #reverse() for implied the Asc
 	context={
-		'brlist':brlist,
+		'brlist':brlist,'slist':slist, 'blist':blist
 	}
 	return render(request,"borrow/borrowlist.html",context)
 def bredit(request, id):  
@@ -200,7 +202,46 @@ def brdelete(request, id):
 	brlist = BorrowInsert.objects.get(id=id)  
 	brlist.delete()  
 	return redirect("/borrow/brlist")
-
+def brnsearch(request):
+	slist = StuInsert.objects.all()
+	blist = BooksInsert.objects.all()
+	if request.user.is_authenticated:
+		tem=['search/brsearchbrn.html']
+	#else:
+		#tem=['viewsforall/bookssearch.html']
+	if request.method == "GET":
+		search_textbrn = request.GET['search_textbrn']
+		if search_textbrn is not None and search_textbrn != u"":
+			search_textbrn = request.GET['search_textbrn']
+			brlist = BorrowInsert.objects.filter(Q(brsname__icontains = search_textbrn) | Q(brsid__icontains = search_textbrn))
+		else:
+			brlist = []
+	context={
+		'brlist':brlist,
+		'slist': slist,
+		'blist': blist
+	} 
+	return render_to_response(tem,context)
+def brbdsearch(request):
+	slist = StuInsert.objects.all()
+	blist = BooksInsert.objects.all()
+	if request.user.is_authenticated:
+		tem=['search/brsearchbrbd.html']
+	#else:
+		#tem=['viewsforall/bookssearch.html']
+	if request.method == "GET":
+		search_textbrbd = request.GET['search_textbrbd']
+		if search_textbrbd is not None and search_textbrbd != u"":
+			search_textbrbd = request.GET['search_textbrbd']
+			brlist = BorrowInsert.objects.filter(Q(brbname__contains = search_textbrbd) | Q(brreturn__contains = search_textbrbd) | Q(brdate__contains = search_textbrbd))
+		else:
+			brlist = []
+	context={
+		'brlist':brlist,
+		'slist': slist,
+		'blist': blist
+	} 
+	return render_to_response(tem,context)
 
 #students
 def sinsert(request):  
@@ -248,6 +289,39 @@ def sdelete(request, id):
 	slist.delete()  
 	return redirect("/students/slist")
 
+def snsearch(request):
+	if request.user.is_authenticated:
+		tem=['search/studentssearchsn.html']
+	if request.method == "GET":
+		search_textsn = request.GET['search_textsn']
+		if search_textsn is not None and search_textsn != u"":
+			search_textsn = request.GET['search_textsn']
+			slist = StuInsert.objects.filter(Q(sname__icontains = search_textsn) | Q(sid__icontains = search_textsn))
+		else:
+			slist = []
+	return render_to_response(tem,{'slist' : slist})
+def sdsearch(request):
+	if request.user.is_authenticated:
+		tem=['search/studentssearchsd.html']
+	if request.method == "GET":
+		search_textsd = request.GET['search_textsd']
+		if search_textsd is not None and search_textsd != u"":
+			search_textsd = request.GET['search_textsd']
+			slist = StuInsert.objects.filter(Q(sdept__icontains = search_textsd) | Q(ssession__icontains = search_textsd))
+		else:
+			slist = []
+	return render_to_response(tem,{'slist' : slist})
+def sallsearch(request):
+	if request.user.is_authenticated:
+		tem=['search/studentssearchsall.html']
+	if request.method == "GET":
+		search_textsall = request.GET['search_textsall']
+		if search_textsall is not None and search_textsall != u"":
+			search_textsall = request.GET['search_textsall']
+			slist = StuInsert.objects.filter(Q(sname__icontains = search_textsall) | Q(sdept__icontains = search_textsall) |Q(ssession__icontains = search_textsall) | Q(scontact__icontains = search_textsall) | Q(screated_at__icontains = search_textsall)| Q(saddress__icontains = search_textsall) | Q(sid__icontains = search_textsall) | Q(semail__icontains = search_textsall) | Q(sgender__icontains = search_textsall))
+		else:
+			slist = []
+	return render_to_response(tem,{'slist' : slist})
 
 #studentscategory
 def cdepttype(request):
@@ -407,9 +481,9 @@ def isearch(request):
 		search_texti = request.GET['search_texti']
 		if search_texti is not None and search_texti != u"":
 			search_texti = request.GET['search_texti']
-			today = BorrowInsert.objects.filter(brsname__contains = search_texti, brreturn=datetime.date.today())
-			flist = BorrowInsert.objects.filter(brsname__contains = search_texti , brreturn__lt=datetime.date.today())
-			upcoming = BorrowInsert.objects.filter(brsname__contains = search_texti, brreturn__range=(datetime.date.today()+timedelta(days=1) ,datetime.date.today()+timedelta(days=7))).order_by('brreturn') 
+			today = BorrowInsert.objects.filter( Q(brsname__icontains = search_texti) | Q(brsid__icontains = search_texti), brreturn=datetime.date.today())
+			flist = BorrowInsert.objects.filter(Q(brsname__icontains = search_texti) | Q(brsid__icontains = search_texti) , brreturn__lt=datetime.date.today())
+			upcoming = BorrowInsert.objects.filter(Q(brsname__icontains = search_texti) | Q(brsid__icontains = search_texti), brreturn__range=(datetime.date.today()+timedelta(days=1) ,datetime.date.today()+timedelta(days=7))).order_by('brreturn') 
 	
 		else:
 			today = []
