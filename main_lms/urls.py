@@ -57,6 +57,8 @@ urlpatterns = [
     path('sallsearch/', views.sallsearch, name="sallsearch"),
     path('isearch/', views.isearch, name="isearch"),
 
+    path('rtbooks/', views.rtbooks, name="rtbooks"),
+
 
    # path('emp/', views.emp, name="emp"),  
 ]  

@@ -64,6 +64,7 @@ def profile(request):
 
 
 #books
+@login_required(login_url="/accounts/login/")
 def binsert(request):  
 	hcolor=HeaderColor.objects.all()[:1].get()
 	if request.method == "POST":  
@@ -79,6 +80,7 @@ def binsert(request):
 	args = {'form': form,'hcolor':hcolor,} 
 	return render(request,'books/booksinsert.html',args)
 
+@login_required(login_url="/accounts/login/")
 def blist(request):
 	hcolor=HeaderColor.objects.all()[:1].get()  
 	blist = BooksInsert.objects.order_by('bcreated_at').reverse()   #created_at desc order  #reverse() for implied the Asc
@@ -87,6 +89,8 @@ def blist(request):
 		'hcolor':hcolor
 	}
 	return render(request,"books/bookslist.html",context)
+
+@login_required(login_url="/accounts/login/")
 def bedit(request, id):  
 	blist = BooksInsert.objects.get(id=id) 
 	hcolor=HeaderColor.objects.all()[:1].get()
@@ -98,6 +102,7 @@ def bedit(request, id):
 	} 
 	return render(request,'books/booksedit.html', context)
 
+@login_required(login_url="/accounts/login/")
 def bupdate(request, id): 
 	hcolor=HeaderColor.objects.all()[:1].get() 
 	blist = BooksInsert.objects.get(id=id)  
@@ -110,6 +115,8 @@ def bupdate(request, id):
 		form.save()  
 		return redirect("/books/blist")  
 	return render(request, 'books/booksedit.html',context)
+
+@login_required(login_url="/accounts/login/")
 def bdelete(request, id):  
 	blist = BooksInsert.objects.get(id=id)  
 	blist.delete()  
@@ -157,6 +164,7 @@ def ballsearch(request):
 #it worked ... editor problem -> sapce in to tab
 
 #borrow
+@login_required(login_url="/accounts/login/")
 def brinsert(request):  
 	if request.method == "POST":  
 		form = BorrowInsertForm(request.POST)  
@@ -171,14 +179,17 @@ def brinsert(request):
 	args = {'form': form} 
 	return render(request,'borrow/borrowinsert.html',args)
 
+@login_required(login_url="/accounts/login/")
 def brlist(request):
 	slist = StuInsert.objects.all()
 	blist = BooksInsert.objects.all()
-	brlist = BorrowInsert.objects.order_by('brreturn')   #created_at desc order  #reverse() for implied the Asc
+	brlist = BorrowInsert.objects.order_by('brdate').reverse()   #created_at desc order  #reverse() for implied the Asc
 	context={
 		'brlist':brlist,'slist':slist, 'blist':blist
 	}
 	return render(request,"borrow/borrowlist.html",context)
+
+@login_required(login_url="/accounts/login/")
 def bredit(request, id):  
 	brlist = BorrowInsert.objects.get(id=id) 
 	form = BorrowInsertForm()
@@ -188,6 +199,8 @@ def bredit(request, id):
 	} 
 	return render(request,'borrow/borrowedit.html', context)
 
+
+@login_required(login_url="/accounts/login/")
 def brupdate(request, id): 
 	brlist = BorrowInsert.objects.get(id=id)  
 	form = BorrowInsertForm(request.POST, instance = brlist)
@@ -198,6 +211,8 @@ def brupdate(request, id):
 		form.save()  
 		return redirect("/borrow/brlist")  
 	return render(request, 'borrow/borrowedit.html',context)
+
+@login_required(login_url="/accounts/login/")
 def brdelete(request, id):  
 	brlist = BorrowInsert.objects.get(id=id)  
 	brlist.delete()  
@@ -207,8 +222,8 @@ def brnsearch(request):
 	blist = BooksInsert.objects.all()
 	if request.user.is_authenticated:
 		tem=['search/brsearchbrn.html']
-	#else:
-		#tem=['viewsforall/bookssearch.html']
+	else:
+		tem=['viewsforall/brsearchbrn.html']
 	if request.method == "GET":
 		search_textbrn = request.GET['search_textbrn']
 		if search_textbrn is not None and search_textbrn != u"":
@@ -227,8 +242,8 @@ def brbdsearch(request):
 	blist = BooksInsert.objects.all()
 	if request.user.is_authenticated:
 		tem=['search/brsearchbrbd.html']
-	#else:
-		#tem=['viewsforall/bookssearch.html']
+	else:
+		tem=['viewsforall/brsearchbrbd.html']
 	if request.method == "GET":
 		search_textbrbd = request.GET['search_textbrbd']
 		if search_textbrbd is not None and search_textbrbd != u"":
@@ -244,6 +259,7 @@ def brbdsearch(request):
 	return render_to_response(tem,context)
 
 #students
+@login_required(login_url="/accounts/login/")
 def sinsert(request):  
 	if request.method == "POST":  
 		form = StuInsertForm(request.POST)  
@@ -257,6 +273,8 @@ def sinsert(request):
 		form =StuInsertForm() 
 	args = {'form': form} 
 	return render(request,'students/stuinsert.html',args)
+
+@login_required(login_url="/accounts/login/")
 def sedit(request, id):  
 	slist = StuInsert.objects.get(id=id) 
 	form = StuInsertForm()
@@ -266,6 +284,8 @@ def sedit(request, id):
 	} 
 	return render(request,'students/stuedit.html', context)
 
+
+@login_required(login_url="/accounts/login/")
 def supdate(request, id): 
 	slist = StuInsert.objects.get(id=id)  
 	form = StuInsertForm(request.POST, instance = slist)
@@ -277,6 +297,8 @@ def supdate(request, id):
 		return redirect("/students/slist")  
 	return render(request, 'students/stuedit.html',context)
 
+
+@login_required(login_url="/accounts/login/")
 def slist(request):
 	slist = StuInsert.objects.order_by('screated_at').reverse()   #created_at desc order  #reverse() for implied the Asc
 	context={
@@ -284,6 +306,8 @@ def slist(request):
 	}
 	return render(request,"students/stulist.html",context)
 
+
+@login_required(login_url="/accounts/login/")
 def sdelete(request, id):  
 	slist = StuInsert.objects.get(id=id)  
 	slist.delete()  
@@ -292,6 +316,8 @@ def sdelete(request, id):
 def snsearch(request):
 	if request.user.is_authenticated:
 		tem=['search/studentssearchsn.html']
+	else:
+		tem=['viewsforall/studentssearchsn.html']
 	if request.method == "GET":
 		search_textsn = request.GET['search_textsn']
 		if search_textsn is not None and search_textsn != u"":
@@ -303,6 +329,8 @@ def snsearch(request):
 def sdsearch(request):
 	if request.user.is_authenticated:
 		tem=['search/studentssearchsd.html']
+	else:
+		tem=['viewsforall/studentssearchsd.html']
 	if request.method == "GET":
 		search_textsd = request.GET['search_textsd']
 		if search_textsd is not None and search_textsd != u"":
@@ -314,6 +342,8 @@ def sdsearch(request):
 def sallsearch(request):
 	if request.user.is_authenticated:
 		tem=['search/studentssearchsall.html']
+	else:
+		tem=['viewsforall/studentssearchsall.html']
 	if request.method == "GET":
 		search_textsall = request.GET['search_textsall']
 		if search_textsall is not None and search_textsall != u"":
@@ -324,6 +354,7 @@ def sallsearch(request):
 	return render_to_response(tem,{'slist' : slist})
 
 #studentscategory
+@login_required(login_url="/accounts/login/")
 def cdepttype(request):
 	if request.method == "POST":  
 		form = StuDeptForm(request.POST)  
@@ -341,11 +372,15 @@ def cdepttype(request):
 		'form':form,
 	}
 	return render(request,"cstudents/studept.html",context)
+
+@login_required(login_url="/accounts/login/")
 def cdeptdelete(request, id):  
 	cdeptlist = StuDept.objects.get(id=id)  
 	cdeptlist.delete()  
 	return redirect("/cstudents/cdepttype")
 
+
+@login_required(login_url="/accounts/login/")
 def csession(request):
 	if request.method == "POST":  
 		form = StuSessionForm(request.POST)  
@@ -363,6 +398,8 @@ def csession(request):
 		'form':form,
 	}
 	return render(request,"cstudents/stusession.html",context)
+
+@login_required(login_url="/accounts/login/")
 def csessiondelete(request, id):  
 	csession = StuSession.objects.get(id=id)  
 	csession.delete()  
@@ -372,6 +409,7 @@ def csessiondelete(request, id):
 
 
 #bookscategory
+@login_required(login_url="/accounts/login/")
 def cbtype(request):
 	hcolor=HeaderColor.objects.all()[:1].get()  
 	if request.method == "POST":  
@@ -391,11 +429,15 @@ def cbtype(request):
 		'hcolor':hcolor,
 	}
 	return render(request,"cbooks/bookstype.html",context)
+
+@login_required(login_url="/accounts/login/")
 def cbdelete(request, id):  
 	cbtlist = BooksType.objects.get(id=id)  
 	cbtlist.delete()  
 	return redirect("/cbooks/cbtype")
 
+
+@login_required(login_url="/accounts/login/")
 def cbshelf(request):
 	hcolor=HeaderColor.objects.all()[:1].get()
 	if request.method == "POST":  
@@ -415,6 +457,8 @@ def cbshelf(request):
 		'hcolor':hcolor,
 	}
 	return render(request,"cbooks/booksshelf.html",context)
+
+@login_required(login_url="/accounts/login/")
 def cbsdelete(request, id):  
 	cbtlist = BooksShelf.objects.get(id=id)  
 	cbtlist.delete()  
@@ -436,6 +480,28 @@ def viewshome(request):
 		'blist': blist, 'upcoming':upcoming
 	}
 	return render(request,"viewsforall/index.html", context)
+# Retrun a bookl ()
+def rtbooks(request):
+	slist = StuInsert.objects.all()
+	blist = BooksInsert.objects.all()  
+	if request.method == "GET":
+		search_textrt = request.GET['search_textrt']
+		if search_textrt is not None and search_textrt != u"":
+			search_textrt = request.GET['search_textrt']
+			today = BorrowInsert.objects.filter( Q(brsname__icontains = search_textrt) | Q(brsid__icontains = search_textrt), brreturn=datetime.date.today())
+			flist = BorrowInsert.objects.filter(Q(brsname__icontains = search_textrt) | Q(brsid__icontains = search_textrt) , brreturn__lt=datetime.date.today())
+			upcoming = BorrowInsert.objects.filter(Q(brsname__icontains = search_textrt) | Q(brsid__icontains = search_textrt), brreturn__range=(datetime.date.today()+timedelta(days=1) ,datetime.date.today()+timedelta(days=7))).order_by('brreturn') 
+			brlist = BorrowInsert.objects.filter(Q(brsname__icontains = search_textrt) | Q(brsid__icontains = search_textrt)).order_by('brreturn')
+		else:
+			today = []
+			flist = []
+			upcoming = []
+			brlist = []
+	context={
+		'flist':flist, 'slist':slist, 'blist':blist,'upcoming':upcoming, 'today':today, 'brlist':brlist
+	}
+	return render_to_response('search/booksreturn.html',context)
+##sql query practice
 def brdetails(request):
 	slist = StuInsert.objects.all()
 	blist = BooksInsert.objects.all()

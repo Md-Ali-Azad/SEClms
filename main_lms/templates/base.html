@@ -18,8 +18,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>--> 
         <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
-        <script  type="text/javascript" src="{% static 'js/books_search_ajax.js' %}"></script>
-        <script  type="text/javascript" src="{% static 'js/isearch_ajax.js' %}"></script>
 
         <!--<link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap-material-design.min.css' %}" />--> 
         <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" /> 
@@ -148,7 +146,13 @@ function closeSearchbrbd() {
   document.getElementById("myOverlaybrbd").style.display = "none";
 }
 
-
+//Books Returns 
+function openSearchrt() {
+  document.getElementById("myOverlayrt").style.display = "block";
+}
+function closeSearchrt() {
+  document.getElementById("myOverlayrt").style.display = "none";
+}
 
 
 //index in all 
@@ -220,22 +224,10 @@ var currentScrollPos = window.pageYOffset;
                         <i class='fas fa-reply-all'></i> Return list(Today, Delay, Upcoming)</a>
                   </div>
                 </li>
-
-            <li class="nav-item ">
-              <a class="nav-link" href="/"><i class='fas fa-marker'></i> Notes</a>
-            </li>
             {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="/accounts/logout"><i class='fas fa-power-off'></i> Logout</a>
+            <li class="nav-item ">
+              <a class="nav-link" onclick="openSearchrt()" style="cursor: pointer;"><i class='fas fa-download'></i> Books Returns</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/accounts/reg_form">Register</a>
-            </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="/accounts/login"><i class='fas fa-key'></i>Login</a>
-            </li>
-            {% endif %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class='fas fa-book-reader'></i> Books
@@ -293,12 +285,25 @@ var currentScrollPos = window.pageYOffset;
               </div>
 
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/accounts/reg_form"><i class='fas fa-user'></i> Make Admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/accounts/logout"><i class='fas fa-power-off'></i> Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="/accounts/login"><i class='fas fa-key'></i> Login</a>
+            </li>
+            {% endif %}
 
           </ul>
           <button type="button" class="btn btn-{{hcolor}} btn-circle" id="flip"><i class="fas fa-search"></i>
           </button>&nbsp;
+          {% if user.is_authenticated %}
           <button type="button" class="btn btn-{{hcolor}} btn-circle" id="flipadmin"><i class="fas fa-chalkboard-teacher"></i>
           </button>
+          {% endif %}
         </div>
       </nav>
 
@@ -517,6 +522,22 @@ var currentScrollPos = window.pageYOffset;
             </div>
           </div>
         </div> 
+<!--return Books-->
+<div id="myOverlayrt" class="overlay">
+  <span class="closebtn" onclick="closeSearchrt()" title="Close Overlay" style="z-index: 1;">x</span>
+  <div class="overlay-content">
+      <form class="form-inline my-2 my-lg-0">
+          {% csrf_token %}
+          <div class="inner-addon left-addon">
+            <i class="fas fa-search"></i>
+          <input class="form-control" id="rtsearch" name="rtsrh" placeholder="  By Name or Reg. ID">
+        </div>
+        </form>
+    <div id="rtsearch-results" >
+
+    </div>
+  </div>
+</div> 
 
       
       
@@ -539,7 +560,8 @@ var currentScrollPos = window.pageYOffset;
 <script  type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
 <script  type="text/javascript" src="{% static 'js/books_search_ajax.js' %}"></script>
 <script  type="text/javascript" src="{% static 'js/books_search_bt_ajax.js' %}"></script>
-<script  type="text/javascript" src="{% static 'js/books_search_all_ajax.js' %}"></script>
+<script  type="text/javascript" src="{% static 'js/books_search_ajax.js' %}"></script>
+<script  type="text/javascript" src="{% static 'js/books_return_ajax.js' %}"></script>
 
 <script  type="text/javascript" src="{% static 'js/br_search_brn_ajax.js' %}"></script>
 <script  type="text/javascript" src="{% static 'js/br_search_brbd_ajax.js' %}"></script>

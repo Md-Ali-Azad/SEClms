@@ -1,0 +1,32 @@
+{% if slist.count > 0 %}
+<p>Showing {{slist.count}} results....</p>
+<table class="table table-hover table-bordered table-dark" style="margin-top:100px;">  
+    <thead>  
+    <tr>  
+        <th scope="col">Stu. ID</th>  
+        <th scope="col">Stu. Name</th>  
+        <th scope="col">Dept.</th>  
+        <th scope="col">Session</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Joined at</th>
+    </tr>  
+    </thead>  
+    <tbody>  
+{% for slist in slist %} 
+ 
+    <tr>  
+        <td>{{ slist.sid }}</td>  
+        <td>{{ slist.sname }}</td>  
+        <td>{{ slist.sdept }}</td>  
+        <td>{{ slist.ssession }}</td> 
+        <td>{{ slist.sgender }}</td>
+        <td style="font-size:8px;">{{ slist.screated_at }} <br>( {{ slist.screated_at|timesince }} ago )</td>
+        <!--<td>{{ employee.created_at|timesince|add:"2" }}</td>-->
+        <!--<td>{{ employee.created_at|timeuntil }}</td>--> 
+    </tr>  
+{% endfor %}  
+    </tbody>  
+</table>
+{% else %}
+<p>Nothing to show!</p>
+{% endif %}

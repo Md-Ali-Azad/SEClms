@@ -179,7 +179,18 @@ background: #fff;
 	height: 110%;
 	width: 100%;
 }
-
+#returns
+{
+	height: 100%;
+	width: 100%;
+	scroll-behavior: smooth;
+}
+#returns div
+{
+	position: relative;
+	height: 110%;
+	width: 100%;
+}
 
 
 .btn-circle.btn-xl {

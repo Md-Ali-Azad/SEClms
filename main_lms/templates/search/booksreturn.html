@@ -1,0 +1,205 @@
+<div id="returns">
+{% if flist.count > 0 %}
+<p style="color: red; cursor: pointer;"><a href="#delayrt">The Person is in <b>Fine list....</b></a></p>
+{% else %}
+<p style="color: green">No Fine for the Person!</p>
+{% endif %}
+
+
+
+<div>
+{% if brlist.count > 0 %}
+<p>Showing {{brlist.count}} results in Borrowing list....</p>
+<table class="table table-hover table-bordered table-dark">  
+    <thead>  
+    <tr>  
+        <th scope="col">Student ID</th>  
+        <th scope="col">Student Name</th>  
+        <th scope="col">Book Name</th>  
+        <th scope="col">Borrow Date</th>
+        <th scope="col">Return date</th>
+        <th scope="col">Edit</th>  
+        <th scope="col">Return</th>  
+        <th scope="col">Remaining</th>
+    </tr>  
+    </thead>  
+    <tbody>  
+{% for brlist in brlist %} 
+ 
+    <tr>  
+        <td>
+            {% for slist in slist %}
+                    {% if slist.sid in brlist.brsid %}
+            <a href="/viewsforall/studetails/{{ slist.id }}/">{{ brlist.brsid }}</a>
+                    {% endif %}
+                {% endfor%}
+        </td>  
+        <td>{{ brlist.brsname }}</td>  
+        <td>
+            {% for blist in blist %}
+                {% if blist.bname in brlist.brbname %}
+        <a href="/viewsforall/booksdetails/{{ blist.id }}/">{{ brlist.brbname }}</a>
+                {% endif %}
+            {% endfor%}
+    </td>   
+        <td>{{ brlist.brdate }}</td>
+        <td>{{ brlist.brreturn }}</td>  
+        <td>  
+            <a href="/borrow/bredit/{{ brlist.id }}/" class="btn btn-primary"><i class='fas fa-pencil-alt'></i> Edit</a>  
+        </td>
+            <td>
+            <a href="/borrow/brdelete/{{ brlist.id }}/"class="btn btn-danger"><i class='fas fa-trash-alt'></i> Return</a>  
+        </td>
+        <td style="font-size:8px;">{{ brlist.brreturn|timeuntil }} left </td>
+        <!--<td>{{ employee.created_at|timesince|add:"2" }}</td>-->
+        <!--<td>{{ employee.created_at|timeuntil }}</td>--> 
+    </tr>  
+{% endfor %}  
+    </tbody>  
+</table> 
+{% else %}
+<p>Nothing to show in Borrowing list!</p>
+{% endif %}
+</div>
+
+
+<div>
+{% if today.count > 0 %}
+<p>Showing {{today.count}} results in Today list....</p>
+<table class="table table-hover table-bordered table-dark">  
+        <thead>  
+        <tr>  
+            <th scope="col">Student ID</th>  
+            <th scope="col">Student Name</th>  
+            <th scope="col">Book Name</th>  
+            <th scope="col">Borrow Date</th>
+            <th scope="col">Return date</th>
+        </tr>  
+        </thead>  
+        <tbody>  
+    {% for f in today %} 
+    
+        <tr>  
+            <td>
+                {% for slist in slist %}
+                        {% if slist.sid in f.brsid %}
+                <a href="/viewsforall/studetails/{{ slist.id }}/">{{ f.brsid }}</a>
+                        {% endif %}
+                    {% endfor%}
+            </td>  
+            <td>{{ f.brsname }}</td>  
+            <td>
+                    {% for blist in blist %}
+                        {% if blist.bname in f.brbname %}
+                <a href="/viewsforall/booksdetails/{{ blist.id }}/">{{ f.brbname }}</a>
+                        {% endif %}
+                    {% endfor%}
+            </td>   
+            <td>{{ f.brdate }}</td>
+            <td>{{ f.brreturn }}</td>  
+            <!--<td>{{ employee.created_at|timesince|add:"2" }}</td>-->
+            <!--<td>{{ employee.created_at|timeuntil }}</td>--> 
+        </tr>  
+    {% endfor %}  
+        </tbody>  
+    </table>
+{% else %}
+<p>Nothing to show in Today list!</p>
+{% endif %}
+</div>
+
+<div id="delayrt">
+{% if flist.count > 0 %}
+<p>Showing {{flist.count}} results in Delay list....</p>
+<table class="table table-hover table-bordered table-dark">  
+        <thead>  
+        <tr>  
+            <th scope="col">Student ID</th>  
+            <th scope="col">Student Name</th>  
+            <th scope="col">Book Name</th>  
+            <th scope="col">Borrow Date</th>
+            <th scope="col">Return date</th>
+            <th scope="col">Fine</th>
+        </tr>  
+        </thead>  
+        <tbody>  
+    {% for f in flist %} 
+    
+        <tr>  
+            <td>
+                {% for slist in slist %}
+                        {% if slist.sid in f.brsid %}
+                <a href="/viewsforall/studetails/{{ slist.id }}/">{{ f.brsid }}</a>
+                        {% endif %}
+                    {% endfor%}
+            </td>  
+            <td>{{ f.brsname }}</td>  
+            <td>
+                    {% for blist in blist %}
+                        {% if blist.bname in f.brbname %}
+                <a href="/viewsforall/booksdetails/{{ blist.id }}/">{{ f.brbname }}</a>
+                        {% endif %}
+                    {% endfor%}
+            </td>   
+            <td>{{ f.brdate }}</td>
+            <td>{{ f.brreturn }}</td>  
+            <td class="btn btn-danger">{{ f.finecal}} <a>tk</a></td>
+            <!--<td>{{ employee.created_at|timesince|add:"2" }}</td>-->
+            <!--<td>{{ employee.created_at|timeuntil }}</td>--> 
+        </tr>  
+    {% endfor %}  
+        </tbody>  
+    </table>
+{% else %}
+<p>Nothing to show in Delay list!</p>
+{% endif %}
+</div>
+
+
+
+<div>
+{% if upcoming.count > 0 %}
+<p>Showing {{upcoming.count}} results in Upcoming 7 days List....</p>
+<table class="table table-hover table-bordered table-dark">  
+        <thead>  
+        <tr>  
+            <th scope="col">Student ID</th>  
+            <th scope="col">Student Name</th>  
+            <th scope="col">Book Name</th>  
+            <th scope="col">Borrow Date</th>
+            <th scope="col">Return date</th>
+        </tr>  
+        </thead>  
+        <tbody>  
+    {% for f in upcoming %} 
+    
+        <tr>  
+            <td>
+                {% for slist in slist %}
+                        {% if slist.sid in f.brsid %}
+                <a href="/viewsforall/studetails/{{ slist.id }}/">{{ f.brsid }}</a>
+                        {% endif %}
+                    {% endfor%}
+            </td>  
+            <td>{{ f.brsname }}</td>  
+            <td>
+                    {% for blist in blist %}
+                        {% if blist.bname in f.brbname %}
+                <a href="/viewsforall/booksdetails/{{ blist.id }}/">{{ f.brbname }}</a>
+                        {% endif %}
+                    {% endfor%}
+            </td>   
+            <td>{{ f.brdate }}</td>
+            <td>{{ f.brreturn }}</td>  
+        </tr>  
+    {% endfor %}  
+        </tbody>  
+    </table>
+{% else %}
+<p>Nothing to show in Upcoming 7 days list!</p>
+{% endif %}
+</div>
+
+
+</div>
+
