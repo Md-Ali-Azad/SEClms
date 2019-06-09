@@ -1,20 +1,14 @@
 {% extends 'base.html' %}
 {% block body%} 
-<div id="hcontainer" style="margin-top:100px;">
-        <tr>  
-            <td>{{ blist.bid }}</td>  
-            <td>{{ blist.bname }}</td>
-            <td>{{ blist.bwriter }}</td>
-            <td>{{ blist.btype }}</td>
-            <td>{{ blist.bshelf }}</td>
-            <td>{{ blist.bquantity }}</td>    
-
-
-
-            <!--<td>{{ employee.created_at|timesince|add:"2" }}</td>-->
-            <!--<td>{{ employee.created_at|timeuntil }}</td>--> 
-        </tr>
-        
+<div id="container" style="margin-top:100px;">
+        <div class="card" style="margin-right: 25%; margin-left: 25%;">
+            <div class="card-header bg-{{hcolor}} text-white"><b>{{ blist.bname }}</b></div>  
+            <div class="card-text" style="margin-top: 10px;"><i>Book Id:</i> <b>{{ blist.bid }}</b></div>
+            <div class="card-text" style="margin-top: 8px;"><i>Book Writer:</i> <b>{{ blist.bwriter }}</b></div>
+            <div class="card-text" style="margin-top: 8px;"><i>Book Type:</i> <b>{{ blist.btype }}</b></div>
+            <div class="card-text" style="margin-top: 8px;"><i>Shelf Position:</i> <b>{{ blist.bshelf }}</b></div>
+            <div class="card-text" style="margin-top: 8px;"><i>Quantity:</i> <b>{{ blist.bquantity }}</b></div>
+          </div>
 
 </div> 
 {% endblock%} 
