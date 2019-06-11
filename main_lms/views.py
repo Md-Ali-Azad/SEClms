@@ -25,7 +25,8 @@ from django.db import connection
 
 # adminpanel(CRUD)
 def viewslogin(request):
-	return render(request,"accounts/login.html")
+	args={'log': 'active', 'hello':'e'}
+	return render(request,"accounts/login.html", args)
 def viewslogout(request):
 	return render(request,"accounts/logout.html")
 
@@ -33,7 +34,7 @@ def viewslogout(request):
 @login_required(login_url="/accounts/login/")
 def activitylog(request):
 	logs = LogEntry.objects.exclude(change_message="No fields changed.").order_by('-action_time')[:20]
-	args = {'logs': logs}
+	args = {'logs': logs, 'setlog':'active', 'set':'active'}
 	return render(request, 'setting/activitylog.html', args)
 
 
@@ -51,11 +52,11 @@ def register(request):
 	else:
 		form = UserCreationForm()
 
-		args = {'form': form,'hcolor':hcolor,}
+		args = {'form': form,'hcolor':hcolor, 'reg':'active'}
 		return render(request, 'accounts/reg_form.html', args)
 def profile(request):
 	hcolor=HeaderColor.objects.all()[:1].get()
-	args={'user':request.user,'hcolor':hcolor,}
+	args={'user':request.user,'hcolor':hcolor, 'setpro':'active', 'set':'active'}
 	return render(request, 'accounts/profile.html', args)
 
 
@@ -77,7 +78,7 @@ def binsert(request):
 				pass  
 	else:
 		form = BookInsertForm() 
-	args = {'form': form,'hcolor':hcolor,} 
+	args = {'form': form,'hcolor':hcolor, 'b':'active', 'bin':'active'} 
 	return render(request,'books/booksinsert.html',args)
 
 @login_required(login_url="/accounts/login/")
@@ -86,7 +87,8 @@ def blist(request):
 	blist = BooksInsert.objects.order_by('bcreated_at').reverse()   #created_at desc order  #reverse() for implied the Asc
 	context={
 		'blist':blist,
-		'hcolor':hcolor
+		'hcolor':hcolor,
+		'b':'active', 'bli':'active'
 	}
 	return render(request,"books/bookslist.html",context)
 
@@ -99,6 +101,7 @@ def bedit(request, id):
 		'form': form,
 		'blist':blist,
 		'hcolor':hcolor,
+		'b':'active'
 	} 
 	return render(request,'books/booksedit.html', context)
 
@@ -110,6 +113,7 @@ def bupdate(request, id):
 	context={
 		'blist':blist,
 		'hcolor':hcolor,
+		'b':'active'
 	}
 	if form.is_valid():  
 		form.save()  
@@ -176,7 +180,7 @@ def brinsert(request):
 				pass  
 	else:
 		form = BorrowInsertForm() 
-	args = {'form': form} 
+	args = {'form': form, 'br':'active', 'brin':'active'} 
 	return render(request,'borrow/borrowinsert.html',args)
 
 @login_required(login_url="/accounts/login/")
@@ -185,7 +189,7 @@ def brlist(request):
 	blist = BooksInsert.objects.all()
 	brlist = BorrowInsert.objects.order_by('brdate').reverse()   #created_at desc order  #reverse() for implied the Asc
 	context={
-		'brlist':brlist,'slist':slist, 'blist':blist
+		'brlist':brlist,'slist':slist, 'blist':blist, 'br':'active', 'brli':'active'
 	}
 	return render(request,"borrow/borrowlist.html",context)
 
@@ -196,6 +200,7 @@ def bredit(request, id):
 	context={
 		'form': form,
 		'brlist':brlist,
+		'br':'active'
 	} 
 	return render(request,'borrow/borrowedit.html', context)
 
@@ -271,7 +276,7 @@ def sinsert(request):
 				pass  
 	else:
 		form =StuInsertForm() 
-	args = {'form': form} 
+	args = {'form': form, 's':'active', 'sin':'active'} 
 	return render(request,'students/stuinsert.html',args)
 
 @login_required(login_url="/accounts/login/")
@@ -281,6 +286,7 @@ def sedit(request, id):
 	context={
 		'form': form,
 		'slist':slist,
+		's':'active',
 	} 
 	return render(request,'students/stuedit.html', context)
 
@@ -302,7 +308,7 @@ def supdate(request, id):
 def slist(request):
 	slist = StuInsert.objects.order_by('screated_at').reverse()   #created_at desc order  #reverse() for implied the Asc
 	context={
-		'slist':slist
+		'slist':slist, 's':'active', 'sli':'active'
 	}
 	return render(request,"students/stulist.html",context)
 
@@ -370,6 +376,7 @@ def cdepttype(request):
 	context={
 		'cdeptlist':cdeptlist,
 		'form':form,
+		's':'active', 'sd':'active'
 	}
 	return render(request,"cstudents/studept.html",context)
 
@@ -396,6 +403,7 @@ def csession(request):
 	context={
 		'csession':csession,
 		'form':form,
+		's':'active', 'ss':'active'
 	}
 	return render(request,"cstudents/stusession.html",context)
 
@@ -427,6 +435,7 @@ def cbtype(request):
 		'cbtlist':cbtlist,
 		'form':form,
 		'hcolor':hcolor,
+		'b':'active', 'bt':'active'
 	}
 	return render(request,"cbooks/bookstype.html",context)
 
@@ -455,6 +464,7 @@ def cbshelf(request):
 		'cbtlist':cbtlist,
 		'form':form,
 		'hcolor':hcolor,
+		'b':'active', 'bs':'active'
 	}
 	return render(request,"cbooks/booksshelf.html",context)
 
@@ -477,7 +487,7 @@ def viewshome(request):
 	blist = BooksInsert.objects.all()  
 	context={
 		'today':today, 'flist':flist,'slist': slist,
-		'blist': blist, 'upcoming':upcoming
+		'blist': blist, 'upcoming':upcoming, 'h':'active', 'hh':'active'
 	}
 	return render(request,"viewsforall/index.html", context)
 # Retrun a bookl ()
@@ -580,7 +590,7 @@ def booksdetails(request, id):
 def headercolor(request):
 	hcolor=HeaderColor.objects.all()[:1].get()
 	context={
-		'hcolor':hcolor,
+		'hcolor':hcolor,'setcolor':'active', 'set':'active'
 	}
 	return render(request,"setting/headercolor.html", context)
 def chcolor(request):
@@ -588,7 +598,7 @@ def chcolor(request):
 	hcolor.hcolor=request.POST['hcolor']
 	hcolor.save()
 	context={
-		'hcolor':hcolor,
+		'hcolor':hcolor,'setcolor':'active', 'set':'active'
 	}
 	return redirect('/setting/headercolor')
 	return render(request,context)
