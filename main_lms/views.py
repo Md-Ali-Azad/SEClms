@@ -22,6 +22,9 @@ from django.contrib.admin.models import LogEntry, ADDITION, CHANGE
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import User
 from django.db import connection
+from django.db.models import F
+from django.db import transaction
+from django.db.models import Sum
 
 # adminpanel(CRUD)
 def viewslogin(request):
@@ -83,11 +86,11 @@ def binsert(request):
 
 @login_required(login_url="/accounts/login/")
 def blist(request):
-	hcolor=HeaderColor.objects.all()[:1].get()  
 	blist = BooksInsert.objects.order_by('bcreated_at').reverse()   #created_at desc order  #reverse() for implied the Asc
+	totalb= BooksInsert.objects.aggregate(Sum('bquantity'))
 	context={
 		'blist':blist,
-		'hcolor':hcolor,
+		'totalb':totalb,
 		'b':'active', 'bli':'active'
 	}
 	return render(request,"books/bookslist.html",context)
@@ -181,6 +184,9 @@ def brinsert(request):
 	else:
 		form = BorrowInsertForm() 
 	args = {'form': form, 'br':'active', 'brin':'active'} 
+	#if request.GET.get('brsub'):        #not working
+		#with transaction.atomic():
+			#BooksInsert.objects.filter(id=18).update(bquantity=F('bquantity') - x)
 	return render(request,'borrow/borrowinsert.html',args)
 
 @login_required(login_url="/accounts/login/")
@@ -571,13 +577,17 @@ def isearch(request):
 	return render_to_response('viewsforall/indexsearch.html',context)
 
 
-
-def studetails(request, id):  
+#books and sutdent details
+def studetails(request, id):
+	if request.user.is_authenticated:
+		tem=['students/studetails.html']
+	else:
+		tem=['viewsforall/studetails.html']  
 	slist = StuInsert.objects.get(id=id) 
 	context={
 		'slist':slist,
 	} 
-	return render(request,'viewsforall/studetails.html', context)
+	return render(request,tem, context)
 
 def booksdetails(request, id):  
 	blist = BooksInsert.objects.get(id=id) 

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block body%} 
+<div id="container" style="margin-top:100px;">
+    <div class="card" style="margin-right: 25%; margin-left: 25%;">
+        <div class="card-header bg-{{hcolor}} text-white"><b>{{ slist.sname }}</b></div>  
+        <div class="card-text" style="margin-top: 10px;"><i>Student Id:</i> <b>{{ slist.sid }}</b></div>
+        <div class="card-text" style="margin-top: 8px;"><i>Student Dept.:</i> <b>{{ slist.sdept }}</b></div>
+        <div class="card-text" style="margin-top: 8px;"><i>Student Session:</i> <b>{{ slist.ssession }}</b></div>
+        <div class="card-text" style="margin-top: 8px;"><i>Gender:</i> <b>{{ slist.sgender }}</b></div>
+        <div class="card-text" style="margin-top: 8px;"><i>Address:</i> <b>{{ slist.saddress }}</b></div>
+        <div class="card-text" style="margin-top: 8px;"><i>Contact:</i> <b>{{ slist.scontact }}</b></div>
+        <div class="card-text" style="margin-top: 8px;"><i>Gender:</i> <b>{{ slist.sgender }}</b></div>
+        <div class="card-text" style="margin-top: 8px;"><i>Joined at:</i> <b>{{ slist.screated_at }}</b></div>
+      </div>
+
+</div> 
+
+{% endblock%} 

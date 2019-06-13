@@ -47,7 +47,7 @@ class BorrowInsertForm(forms.ModelForm):
         }
     sid=StuInsert.objects.values_list('sid', flat=True)
     locality_choices = [(e, e) for e in sid]
-    brsid = forms.ChoiceField(choices=locality_choices,widget=Select(attrs=attrs),)
+    brsid = forms.ChoiceField(choices=[(e, e) for e in sid],widget=Select(attrs=attrs),)
     #brsid = forms.ChoiceField(widget=forms.Select(attrs={'data-style':'btn-primary','class':'sel2','id':'inlineFormInputGroup'}, choices=locality_choices))
     brsname=  forms.ModelChoiceField(widget=forms.Select(attrs={'class':'sel5'}, choices=StuInsert.objects.order_by('sname')),queryset=StuInsert.objects.order_by('sname'))
     brbname=  forms.ModelChoiceField(widget=forms.Select(attrs={'class':'sel6'}, choices=BooksInsert.objects.order_by('bname')),queryset=BooksInsert.objects.order_by('bname'))
