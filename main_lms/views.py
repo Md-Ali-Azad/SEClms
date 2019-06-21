@@ -490,7 +490,7 @@ def viewshome(request):
 	flist = BorrowInsert.objects.filter(brreturn__lt=datetime.date.today()).order_by('brreturn')
 	upcoming = BorrowInsert.objects.filter(brreturn__range=(datetime.date.today()+timedelta(days=1) ,datetime.date.today()+timedelta(days=7))).order_by('brreturn') 
 	slist = StuInsert.objects.all()
-	blist = BooksInsert.objects.all()  
+	blist = BooksInsert.objects.all()
 	context={
 		'today':today, 'flist':flist,'slist': slist,
 		'blist': blist, 'upcoming':upcoming, 'h':'active', 'hh':'active'
