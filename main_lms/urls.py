@@ -7,6 +7,8 @@ urlpatterns = [
     path('viewsforall/studetails/<int:id>/', views.studetails, name="studetails"),
     path('viewsforall/booksdetails/<int:id>/', views.booksdetails, name="booksdetails"), 
 
+    path('news/news/', views.news, name="news"),
+
     path('accounts/login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name="login"),
     path('accounts/logout/', auth_views.LogoutView.as_view(template_name='accounts/logout.html'), name="logout"),  
     path('accounts/reg_form/',views.register, name="register"),

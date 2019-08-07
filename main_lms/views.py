@@ -26,6 +26,12 @@ from django.db.models import F
 from django.db import transaction
 from django.db.models import Sum
 
+#newspanel
+@login_required(login_url="/accounts/login/")
+def news(request):
+	args={'news': 'active'}
+	return render(request, "news/news.html", args)
+
 # adminpanel(CRUD)
 def viewslogin(request):
 	args={'log': 'active', 'hello':'e'}
@@ -55,7 +61,7 @@ def register(request):
 	else:
 		form = UserCreationForm()
 
-		args = {'form': form,'hcolor':hcolor, 'reg':'active'}
+		args = {'form': form,'hcolor':hcolor, 'reg':'active', 'set':'active'}
 		return render(request, 'accounts/reg_form.html', args)
 def profile(request):
 	hcolor=HeaderColor.objects.all()[:1].get()
@@ -556,6 +562,9 @@ def brdetails(request):
 		'blist': blist
 	} 
 	return render(request,"viewsforall/index.html", context)
+
+
+#Home page
 def isearch(request):
 	slist = StuInsert.objects.all()
 	blist = BooksInsert.objects.all()  

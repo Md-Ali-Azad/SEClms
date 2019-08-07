@@ -48,7 +48,7 @@
             z-index: 1;
             text-align: center;
             background: white;
-            v-moz-box-shadow: 0 3px 4px #999999; 
+            -v-moz-box-shadow: 0 3px 4px #999999; 
             -moz-box-shadow: 0 3px 4px #999999; 
             -webkit-box-shadow: 0 3px 4px #999999; 
             box-shadow: 0 1px 2px #999999;
@@ -235,6 +235,9 @@ var currentScrollPos = window.pageYOffset;
             <li class="nav-item ">
               <a class="nav-link" onclick="openSearchrt()" style="cursor: pointer;"><i class='fas fa-download'></i> Books Returns</a>
             </li>
+            <li class="nav-item {{news}}">
+              <a class="nav-link"  href="/news/news"><i class='fas fa-newspaper'></i> News</a>
+            </li>
             <li class="nav-item dropdown {{b}}">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class='fas fa-book-reader'></i> Books
@@ -289,13 +292,11 @@ var currentScrollPos = window.pageYOffset;
                 <a class="dropdown-item {{setlog}}" href="/setting/activitylog">Activity Log
                 <button type="button" class="btn btn-{{hcolor}} btn-circle">{{logCount}}</button>
                 </a>
+                <a class="dropdown-item {{reg}}" href="/accounts/reg_form"><i class='fas fa-user'></i> Make Admin</a>
                 <a class="dropdown-item" href="/accounts/logout"><i class='fas fa-power-off'></i> Logout</a>
                 <a class="dropdown-item {{setpro}}" href="/accounts/profile"><i class='fas fa-user'></i> {{user}}(You)</a>                
               </div>
 
-            </li>
-            <li class="nav-item {{reg}}">
-              <a class="nav-link" href="/accounts/reg_form"><i class='fas fa-user'></i> Make Admin</a>
             </li>
             {% else %}
             <li class="nav-item {{log}}">
