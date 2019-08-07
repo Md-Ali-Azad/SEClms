@@ -5,7 +5,16 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 import datetime
 from main_lms.models import *
+from ckeditor.fields import RichTextField
+from ckeditor.widgets import CKEditorWidget
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
+
+class NewsForm(forms.ModelForm):
+    ndetails= forms.CharField(widget=CKEditorUploadingWidget())
+    class Meta:  
+        model = News  
+        fields = "__all__"
 
 class BookInsertForm(forms.ModelForm):
     bid=  forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','id':'inlineFormInputGroup', 'placeholder':'book id'}),required=True,max_length=400)    

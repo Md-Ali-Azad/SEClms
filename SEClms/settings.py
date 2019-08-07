@@ -39,9 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main_lms',
     'crispy_forms',
-    'ckeditor'
+    'ckeditor',
+    'ckeditor_uploader'
 ]
-
+CKEDITOR_UPLOAD_PATH = "uploads/"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -135,6 +136,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'main_lms/static/')
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = '/media/'
+
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'seclms'
 EMAIL_HOST_PASSWORD = 'seclms1234..'

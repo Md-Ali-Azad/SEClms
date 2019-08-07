@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.shortcuts import redirect
+from django.shortcuts import HttpResponse, Http404, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse
@@ -29,10 +30,40 @@ from django.db.models import Sum
 #newspanel
 @login_required(login_url="/accounts/login/")
 def news(request):
-	args={'news': 'active'}
+	if request.method == "POST":  
+		form = NewsForm(request.POST)  
+		if form.is_valid():  
+			try:
+				form.save()
+				return redirect('/news/news')
+			except:
+				pass
+			messages.success(request, 'New Post is Added successfully')
+	else:
+		form = NewsForm()
+
+	nlist = News.objects.order_by('ncreated_at').reverse()   
+	args={'news': 'active', 'form': form, 'nlist':nlist}
 	return render(request, "news/news.html", args)
 
-# adminpanel(CRUD)
+@login_required(login_url="/accounts/login/")
+def ndelete(request, id):  
+	nlist = News.objects.get(id=id)  
+	nlist.delete()  
+	messages.warning(request, 'Post is deleted successfully')
+	return redirect("/news/news")
+@login_required(login_url="/accounts/login/")
+def nedit(request, id):  
+	post = get_object_or_404(News, id=id)
+	form = NewsForm(request.POST or None, request.FILES or None, instance=post)
+	if form.is_valid():
+		instance = form.save(commit=False)
+		instance.save()
+		messages.success(request, 'Post is updated successfully')
+		return redirect('/news/news')
+	return render(request, 'news/newsedit.html', {"form": form,'news': 'active'})
+
+	# adminpanel(CRUD)
 def viewslogin(request):
 	args={'log': 'active', 'hello':'e'}
 	return render(request,"accounts/login.html", args)

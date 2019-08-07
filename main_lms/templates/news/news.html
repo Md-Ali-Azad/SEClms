@@ -1,6 +1,35 @@
 {% extends 'base.html' %}
 {% block body%}
 <div style="margin-top: 100px;">
+{% if messages %}
+    <div class="warning-msg">
+        {% for message in messages %}
+        <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+
 <h2>News Section</h2>
+<form method="POST" class="post-form" action="/news/news/" style="margin-top: 100px;">  
+    {% csrf_token %}  
+<h3>Enter Details</h3>  
+    {{ form.media }}
+    {{ form.as_p }}
+    <input type="submit"/>
+</form> 
+<div>
+    {% for nlist in nlist %} 
+        <p>{{nlist.ndetails|safe}}</p>
+        <p>{{nlist.ncreated_at}}</p>
+        <td>  
+                <a href="/news/nedit/{{ nlist.id }}/" class="btn btn-primary"><i class='fas fa-pencil-alt'></i> Edit</a>  
+            </td>
+                <td>
+                <a href="/news/ndelete/{{ nlist.id }}/"class="btn btn-danger"><i class='fas fa-trash-alt'></i> Delete</a>  
+            </td>
+    {% endfor %}
+
+</div>
+
 </div>
 {% endblock%} 

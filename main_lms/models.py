@@ -1,5 +1,16 @@
 from django.db import models
 import datetime
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
+
+class News(models.Model):
+    ndetails = RichTextUploadingField()
+    ncreated_at= models.DateTimeField(auto_now_add=True)
+    class Meta:  
+        db_table = "news"  
+    def __str__(self):
+        return self.ndetails
+
 
 
 class BooksInsert(models.Model):  
