@@ -26,6 +26,7 @@ from django.db import connection
 from django.db.models import F
 from django.db import transaction
 from django.db.models import Sum
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 #newspanel
 @login_required(login_url="/accounts/login/")
@@ -41,9 +42,12 @@ def news(request):
 			messages.success(request, 'New Post is Added successfully')
 	else:
 		form = NewsForm()
-
+		
 	nlist = News.objects.order_by('ncreated_at').reverse()   
-	args={'news': 'active', 'form': form, 'nlist':nlist}
+	paginator = Paginator(nlist, 3) 
+	page = request.GET.get('page')
+	nlist_show = paginator.get_page(page)
+	args={'news': 'active', 'form': form, 'nlist':nlist, 'nlist_show': nlist_show}
 	return render(request, "news/news.html", args)
 
 @login_required(login_url="/accounts/login/")
@@ -62,6 +66,11 @@ def nedit(request, id):
 		messages.success(request, 'Post is updated successfully')
 		return redirect('/news/news')
 	return render(request, 'news/newsedit.html', {"form": form,'news': 'active'})
+def newscomments(request, id):
+	nlist = News.objects.get(id=id)
+	return render(request,'news/newscomments.html', {'nlist':nlist, 'news': 'active'})
+
+
 
 	# adminpanel(CRUD)
 def viewslogin(request):
@@ -522,6 +531,14 @@ def cbsdelete(request, id):
 
 
 # viewsforall (CRUD)
+def viewsnews(request):
+	nlist = News.objects.order_by('ncreated_at').reverse()   
+	paginator = Paginator(nlist, 3) 
+	page = request.GET.get('page')
+	nlist_show = paginator.get_page(page)
+	args={'news': 'active','nlist':nlist, 'nlist_show': nlist_show}
+	return render(request,"viewsforall/news.html", args)
+
 def viewshome(request):
 	today = BorrowInsert.objects.filter(brreturn=datetime.date.today())
 	flist = BorrowInsert.objects.filter(brreturn__lt=datetime.date.today()).order_by('brreturn')

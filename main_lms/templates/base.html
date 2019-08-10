@@ -183,7 +183,22 @@ var currentScrollPos = window.pageYOffset;
   }
   prevScrollpos = currentScrollPos;
 }
-        </script>   
+
+
+//making of sidebar
+
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("open").style.display = "none";
+
+}
+
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("open").style.display = "block";
+
+}
+</script>   
       </head> 
 <body onload="onload()">
   <div id="navbar">
@@ -231,6 +246,7 @@ var currentScrollPos = window.pageYOffset;
                         <i class='fas fa-reply-all'></i> Return list(Today, Delay, Upcoming)</a>
                   </div>
                 </li>
+              
             {% if user.is_authenticated %}
             <li class="nav-item ">
               <a class="nav-link" onclick="openSearchrt()" style="cursor: pointer;"><i class='fas fa-download'></i> Books Returns</a>
@@ -299,13 +315,14 @@ var currentScrollPos = window.pageYOffset;
 
             </li>
             {% else %}
+            <li class="nav-item {{news}}">
+              <a class="nav-link"  href="/viewsforall/viewsnews"><i class='fas fa-newspaper'></i> News</a>
+            </li>
             <li class="nav-item {{log}}">
               <a class="nav-link" href="/accounts/login"><i class='fas fa-key'></i> Login</a>
             </li>
             {% endif %}
-            <li class="nav-item ">
-              <a class="nav-link" onclick="opendis()" style="cursor: pointer;"><i class='fas fa-comments'></i> Discussion</a>
-            </li>
+
 
           </ul>
           <button type="button" class="btn btn-{{hcolor}} btn-circle" id="flip"><i class="fas fa-search"></i>
@@ -375,13 +392,13 @@ var currentScrollPos = window.pageYOffset;
           </ul>
         </div>
       </nav>
-
+      
 </div>
 
 
 
 
-<div id="myOverlaydis" class="overlayc">
+<!--<div id="myOverlaydis" class="overlayc">
   <span class="closebtn" onclick="closedis()" title="Close Overlay" style="z-index: 1;">x</span>
   <div class="overlayc-content">
     <div id="disqus_thread"></div>
@@ -405,7 +422,7 @@ var currentScrollPos = window.pageYOffset;
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
                          
-  </div>  
+  </div>  -->
 </div> 
 
 <!--Books -->
@@ -583,7 +600,7 @@ var currentScrollPos = window.pageYOffset;
       <!--<div class="sar">search</div>
       <div style="margin-bottom:50px;"></div>-->
       {% block body%}
-
+        
       {% endblock%}
 
       <!-- Footer -->

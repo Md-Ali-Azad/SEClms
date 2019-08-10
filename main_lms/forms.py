@@ -11,6 +11,7 @@ from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
 class NewsForm(forms.ModelForm):
+    ntitle = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':' News Title'}),required=True,max_length=500)
     ndetails= forms.CharField(widget=CKEditorUploadingWidget())
     class Meta:  
         model = News  
