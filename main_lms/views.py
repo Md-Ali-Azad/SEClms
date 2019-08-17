@@ -218,12 +218,17 @@ def ballsearch(request):
 
 #borrow
 @login_required(login_url="/accounts/login/")
-def brinsert(request):  
+def brinsert(request):
+	blist = BooksInsert.objects.all()
 	if request.method == "POST":  
 		form = BorrowInsertForm(request.POST)  
 		if form.is_valid():  
 			try:
 				form.save()
+				answer = form.cleaned_data['brbname']
+				idd = BooksInsert.objects.get(bname=answer)
+				#print(answer)
+				BooksInsert.objects.filter(id=idd.id).update(bquantity=F('bquantity') - 1)
 				return redirect('/borrow/brlist')
 			except:
 				pass  
