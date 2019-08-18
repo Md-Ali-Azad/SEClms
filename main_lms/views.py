@@ -36,10 +36,11 @@ def news(request):
 		if form.is_valid():  
 			try:
 				form.save()
+				messages.success(request, 'New Post is Added successfully')
 				return redirect('/news/news')
 			except:
 				pass
-			messages.success(request, 'New Post is Added successfully')
+				
 	else:
 		form = NewsForm()
 		
@@ -122,6 +123,7 @@ def binsert(request):
 		if form.is_valid():  
 			try:
 				form.save()
+				messages.success(request, 'List is Added successfully')
 				return redirect('/books/blist')
 			except:
 				pass  
@@ -165,14 +167,16 @@ def bupdate(request, id):
 		'b':'active'
 	}
 	if form.is_valid():  
-		form.save()  
+		form.save()
+		messages.success(request, 'List is updated successfully')  
 		return redirect("/books/blist")  
 	return render(request, 'books/booksedit.html',context)
 
 @login_required(login_url="/accounts/login/")
 def bdelete(request, id):  
 	blist = BooksInsert.objects.get(id=id)  
-	blist.delete()  
+	blist.delete()
+	messages.warning(request, 'List is deleted successfully')  
 	return redirect("/books/blist")
 
 def bsearch(request):
@@ -229,6 +233,7 @@ def brinsert(request):
 				idd = BooksInsert.objects.get(bname=answer)
 				#print(answer)
 				BooksInsert.objects.filter(id=idd.id).update(bquantity=F('bquantity') - 1)
+				messages.success(request, 'List is Added successfully')
 				return redirect('/borrow/brlist')
 			except:
 				pass  
@@ -270,13 +275,16 @@ def brupdate(request, id):
 		'brlist':brlist,
 	}
 	if form.is_valid():  
-		form.save()  
+		form.save()
+		messages.success(request, 'List is updated successfully')  
 		return redirect("/borrow/brlist")  
 	return render(request, 'borrow/borrowedit.html',context)
 
 @login_required(login_url="/accounts/login/")
-def brdelete(request, id):  
-	brlist = BorrowInsert.objects.get(id=id)  
+def brdelete(request, id):
+	brlist = BorrowInsert.objects.get(id=id)
+	BooksInsert.objects.filter(bname=brlist.brbname).update(bquantity=F('bquantity') + 1)
+	messages.warning(request, 'List is deleted successfully')  
 	brlist.delete()  
 	return redirect("/borrow/brlist")
 def brnsearch(request):
@@ -328,6 +336,7 @@ def sinsert(request):
 		if form.is_valid():  
 			try:
 				form.save()
+				messages.success(request, 'List is Added successfully')
 				return redirect('/students/slist')
 			except:
 				pass  
@@ -356,7 +365,8 @@ def supdate(request, id):
 		'slist':slist,
 	}
 	if form.is_valid():  
-		form.save()  
+		form.save() 
+		messages.success(request, 'List is updated successfully') 
 		return redirect("/students/slist")  
 	return render(request, 'students/stuedit.html',context)
 
@@ -373,7 +383,8 @@ def slist(request):
 @login_required(login_url="/accounts/login/")
 def sdelete(request, id):  
 	slist = StuInsert.objects.get(id=id)  
-	slist.delete()  
+	slist.delete()
+	messages.warning(request, 'List is deleted successfully')  
 	return redirect("/students/slist")
 
 def snsearch(request):
@@ -424,6 +435,7 @@ def cdepttype(request):
 		if form.is_valid():  
 			try:
 				form.save()
+				messages.success(request, 'List is Added successfully')
 				return redirect('/cstudents/cdepttype')
 			except:
 				pass  
@@ -440,7 +452,8 @@ def cdepttype(request):
 @login_required(login_url="/accounts/login/")
 def cdeptdelete(request, id):  
 	cdeptlist = StuDept.objects.get(id=id)  
-	cdeptlist.delete()  
+	cdeptlist.delete()
+	messages.warning(request, 'List is deleted successfully')  
 	return redirect("/cstudents/cdepttype")
 
 
@@ -451,6 +464,7 @@ def csession(request):
 		if form.is_valid():  
 			try:
 				form.save()
+				messages.success(request, 'List is Added successfully')
 				return redirect('/cstudents/csession')
 			except:
 				pass  
@@ -467,7 +481,8 @@ def csession(request):
 @login_required(login_url="/accounts/login/")
 def csessiondelete(request, id):  
 	csession = StuSession.objects.get(id=id)  
-	csession.delete()  
+	csession.delete() 
+	messages.warning(request, 'List is deleted successfully') 
 	return redirect("/cstudents/csession")
 
 
@@ -482,6 +497,7 @@ def cbtype(request):
 		if form.is_valid():  
 			try:
 				form.save()
+				messages.success(request, 'List is Added successfully')
 				return redirect('/cbooks/cbtype')
 			except:
 				pass  
@@ -500,6 +516,7 @@ def cbtype(request):
 def cbdelete(request, id):  
 	cbtlist = BooksType.objects.get(id=id)  
 	cbtlist.delete()  
+	messages.warning(request, 'List is deleted successfully')
 	return redirect("/cbooks/cbtype")
 
 
@@ -511,6 +528,7 @@ def cbshelf(request):
 		if form.is_valid():  
 			try:
 				form.save()
+				messages.success(request, 'List is Added successfully')
 				return redirect('/cbooks/cbshelf')
 			except:
 				pass  
@@ -528,7 +546,8 @@ def cbshelf(request):
 @login_required(login_url="/accounts/login/")
 def cbsdelete(request, id):  
 	cbtlist = BooksShelf.objects.get(id=id)  
-	cbtlist.delete()  
+	cbtlist.delete()
+	messages.warning(request, 'List is deleted successfully')
 	return redirect("/cbooks/cbshelf")
 
 
