@@ -29,7 +29,9 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+#installed app's are added here 
+#1.crispy_forms
+#2.ckeditor
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -54,7 +56,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'SEClms.urls'
-
+#context_processors are added here
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
