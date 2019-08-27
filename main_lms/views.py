@@ -688,8 +688,26 @@ def chcolor(request):
 	hcolor=HeaderColor.objects.all()[:1].get()
 	hcolor.hcolor=request.POST['hcolor']
 	hcolor.save()
+	messages.success(request, 'Header Color is Changed successfully')
 	context={
 		'hcolor':hcolor,'setcolor':'active', 'set':'active'
 	}
 	return redirect('/setting/headercolor')
+	return render(request,context)
+def fine(request):
+	cfine=Fine.objects.all()[:1].get()
+	#print(cfine)
+	context={
+		'set':'active','fine':'active','cfine':cfine
+	}
+	return render(request,"setting/fine.html", context)
+def fineenter(request):
+	cfine=Fine.objects.all()[:1].get()
+	cfine.fine=request.POST['fine']
+	cfine.save()
+	messages.success(request, 'Fine Amount is Changed successfully')
+	context={
+		'set':'active','fine':'active'
+	}
+	return redirect('/setting/fine')
 	return render(request,context)

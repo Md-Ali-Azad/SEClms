@@ -85,7 +85,8 @@ class BorrowInsert(models.Model):
         return self.brsname
     @property
     def finecal(self):
-        return -(self.brreturn - datetime.date.today()).days*5
+        cfine=Fine.objects.all()[:1].get()
+        return -(self.brreturn - datetime.date.today()).days*cfine.fine
     #How to calculate number of days, when two DateFields are given? Django
     #that works for me
     #In template, write : {{datetest.date_diff}}
@@ -96,3 +97,9 @@ class HeaderColor(models.Model):
         db_table = "headercolor"  
     def __str__(self):
         return self.hcolor
+class Fine(models.Model):
+    fine = models.IntegerField()
+    class Meta:
+        db_table = "fine"
+    def __str__(self):
+        return str(self.fine)

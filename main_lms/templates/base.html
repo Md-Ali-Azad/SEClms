@@ -259,14 +259,14 @@ function w3_close() {
                 <i class='fas fa-book-reader'></i> Books
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item {{bin}}" href="/books/binsert">New Insertion</a>
-                <a class="dropdown-item {{bli}}" href="/books/blist">Books List 
+                <a class="dropdown-item {{bin}}" href="/books/binsert"><i class="fa fa-plus" aria-hidden="true"></i> New Insertion</a>
+                <a class="dropdown-item {{bli}}" href="/books/blist"><i class="fa fa-list" aria-hidden="true"></i> Books List 
                   <button type="button" class="btn btn-{{hcolor}} btn-circle">{{bcount}}</button></a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item">Manage Category(Books)</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item {{bt}}" href="/cbooks/cbtype">Books Type</a>
-                <a class="dropdown-item {{bs}}" href="/cbooks/cbshelf">Books Shelf</a>
+                <a class="dropdown-item {{bt}}" href="/cbooks/cbtype"><i class="fa fa-plus" aria-hidden="true"></i> Books Type</a>
+                <a class="dropdown-item {{bs}}" href="/cbooks/cbshelf"><i class="fa fa-plus" aria-hidden="true"></i> Books Shelf</a>
               </div>
             </li>
 
@@ -275,8 +275,8 @@ function w3_close() {
                   <i class='fas fa-share-square'></i> Books Borrowing
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item {{brin}}" href="/borrow/brinsert">New Insertion</a>
-                  <a class="dropdown-item {{brli}}" href="/borrow/brlist">Borrowing List
+                  <a class="dropdown-item {{brin}}" href="/borrow/brinsert"><i class="fa fa-plus" aria-hidden="true"></i> New Insertion</a>
+                  <a class="dropdown-item {{brli}}" href="/borrow/brlist"><i class="fa fa-list" aria-hidden="true"></i> Borrowing List
                   <button type="button" class="btn btn-{{hcolor}} btn-circle">{{brcount}}</button></a>
             
                 </div>
@@ -287,14 +287,14 @@ function w3_close() {
                 <i class='fas fa-male'></i> Students
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item {{sin}}" href="/students/sinsert">New Student</a>
-                <a class="dropdown-item {{sli}}" href="/students/slist">Student List 
+                <a class="dropdown-item {{sin}}" href="/students/sinsert"><i class="fa fa-plus" aria-hidden="true"></i> New Student</a>
+                <a class="dropdown-item {{sli}}" href="/students/slist"><i class="fa fa-list" aria-hidden="true"></i> Student List 
                   <button type="button" class="btn btn-{{hcolor}} btn-circle">{{scount}}</button></a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item">Manage Category(Books)</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item {{sd}}" href="/cstudents/cdepttype">New Dept.</a>
-                <a class="dropdown-item {{ss}}" href="/cstudents/csession">New Session</a>
+                <a class="dropdown-item {{sd}}" href="/cstudents/cdepttype"><i class="fa fa-plus" aria-hidden="true"></i> New Dept.</a>
+                <a class="dropdown-item {{ss}}" href="/cstudents/csession"><i class="fa fa-plus" aria-hidden="true"></i> New Session</a>
               </div>
             </li>
 
@@ -304,8 +304,11 @@ function w3_close() {
                 <i class='fas fa-gear'></i> Setting
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item {{setcolor}}" href="/setting/headercolor">Manage Color</a>
-                <a class="dropdown-item {{setlog}}" href="/setting/activitylog">Activity Log
+                <a class="dropdown-item {{setcolor}}" href="/setting/headercolor">
+                  <i class="fa fa-file-image-o" aria-hidden="true"></i> Manage Color</a>
+                  <a class="dropdown-item {{fine}}" href="/setting/fine">
+                    <i class="fa fa-usd" aria-hidden="true"></i> Fine</a>
+                <a class="dropdown-item {{setlog}}" href="/setting/activitylog"><i class="fa fa-history"></i> Activity Log
                 <button type="button" class="btn btn-{{hcolor}} btn-circle">{{logCount}}</button>
                 </a>
                 <a class="dropdown-item {{reg}}" href="/accounts/reg_form"><i class='fas fa-user'></i> Make Admin</a>

@@ -50,6 +50,8 @@ urlpatterns = [
     path('setting/headercolor/', views.headercolor, name="headercolor"),
     path('setting/chcolor/', views.chcolor, name="chcolor"),
     path('setting/activitylog/', views.activitylog, name="activitylog"),
+    path('setting/fine/', views.fine, name="fine"),
+    path('setting/fineenter/', views.fineenter, name="fineenter"),
 
     path('bsearch/', views.bsearch, name="bsearch"),
     path('btsearch/', views.btsearch, name="btsearch"),

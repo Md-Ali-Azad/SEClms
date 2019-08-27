@@ -2,6 +2,15 @@
 {% block body%} 
     <form method="POST" class="post-form" action="/setting/chcolor/" style="margin-top:100px;">  
             {% csrf_token %}  
+
+            {% if messages %}
+            <div class="messages" id="message">
+                {% for message in messages %}
+                <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
         <div class="container" id="form">  
     <br>  
         <div class="form-group col">    
