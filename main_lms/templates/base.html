@@ -12,6 +12,13 @@
     $(".sel4,.sel5, .sel6").select2();
     
 	});
+//table row animation
+ $(document).ready(function(){
+  $("table tr").hide();
+$("table tr").each(function(index){
+	$(this).delay(index*100).show(100);
+});
+ });
 </script> 
         {% load static from staticfiles %}
         <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -431,6 +438,7 @@ function w3_close() {
 <!--Books -->
     <!--Books By name-->
       <div id="myOverlay" class="overlay">
+      <p>Search In <b>Books List</b> By a <b>Book Name</b></p>
         <span class="closebtn" onclick="closeSearch()" title="Close Overlay" style="z-index: 1;">x</span>
         <div class="overlay-content">
             <form class="form-inline my-2 my-lg-0">
@@ -447,6 +455,7 @@ function w3_close() {
       </div> 
     <!--Books By type-->
     <div id="myOverlaybt" class="overlay">
+        <p>Search In <b>Books List</b> By <b>Books Type</b> (ex.: 'CSE' or 'CE' or 'EEE')</p>
         <span class="closebtn" onclick="closeSearchbt()" title="Close Overlay" style="z-index: 1;">x</span>
         <div class="overlay-content">
             <form class="form-inline my-2 my-lg-0">
@@ -463,6 +472,7 @@ function w3_close() {
       </div> 
  <!--Books By all-->
     <div id="myOverlayball" class="overlay">
+        <p>Search In <b>Books List</b> By <b>Any Input</b></p>
         <span class="closebtn" onclick="closeSearchball()" title="Close Overlay" style="z-index: 1;">x</span>
         <div class="overlay-content">
             <form class="form-inline my-2 my-lg-0">
@@ -480,6 +490,7 @@ function w3_close() {
 <!--Students--> 
   <!--By name and Reg. id Students-->
   <div id="myOverlaysn" class="overlay">
+      <p>Search In <b>Students List</b> By a <b>Student Name</b> or <b>Student Reg. ID</b></p>
       <span class="closebtn" onclick="closeSearchsn()" title="Close Overlay" style="z-index: 1;">x</span>
       <div class="overlay-content">
           <form class="form-inline my-2 my-lg-0">
@@ -489,13 +500,14 @@ function w3_close() {
               <input class="form-control" id="snsearch" name="snsrh" placeholder=" By Name or Reg. ID">
             </div>
             </form>
-        <div id="snsearch-results" >
+        <div id="snsearch-results">
 
         </div>
       </div>
     </div>
     <!--By Dept. Students-->
   <div id="myOverlaysd" class="overlay">
+      <p>Search In <b>Students List</b> By a <b>Dept. Name</b> </p>
       <span class="closebtn" onclick="closeSearchsd()" title="Close Overlay" style="z-index: 1;">x</span>
       <div class="overlay-content">
           <form class="form-inline my-2 my-lg-0">
@@ -512,6 +524,7 @@ function w3_close() {
     </div>  
    <!--By All Students-->
    <div id="myOverlaysall" class="overlay">
+      <p>Search In <b>Student List</b> By <b>Any Input</b></p>
     <span class="closebtn" onclick="closeSearchsall()" title="Close Overlay" style="z-index: 1;">x</span>
     <div class="overlay-content">
         <form class="form-inline my-2 my-lg-0">
@@ -530,6 +543,7 @@ function w3_close() {
 <!--Borrowing--> 
   <!--By name and Reg. id Borrowing-->
   <div id="myOverlaybrn" class="overlay">
+      <p>Search In <b>Borrowing List</b> By a <b>Student Name</b> or <b>Student Reg. ID</b></p>
     <span class="closebtn" onclick="closeSearchbrn()" title="Close Overlay" style="z-index: 1;">x</span>
     <div class="overlay-content">
         <form class="form-inline my-2 my-lg-0">
@@ -546,6 +560,7 @@ function w3_close() {
   </div>
   <!--By Book name and Date Borrowing-->
   <div id="myOverlaybrbd" class="overlay">
+      <p>Search In <b>Borrowing List</b> By a <b>Book Name</b> or <b>Borrowing Date</b>(format: (YYYY-MM-DD ex.:2019-05-15) )</p>
     <span class="closebtn" onclick="closeSearchbrbd()" title="Close Overlay" style="z-index: 1;">x</span>
     <div class="overlay-content">
         <form class="form-inline my-2 my-lg-0">
@@ -567,6 +582,8 @@ function w3_close() {
 
       <!--return list search-->
       <div id="myOverlayi" class="overlay">
+      <p>Search In <b>Return List</b> By a <b>Student Name</b> or <b>Student Reg. ID</b></p>
+        
           <span class="closebtn" onclick="closeSearchi()" title="Close Overlay" style="z-index: 1;">x</span>
           <div class="overlay-content">
               <form class="form-inline my-2 my-lg-0">
@@ -619,7 +636,7 @@ function w3_close() {
 <script  type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
 <script  type="text/javascript" src="{% static 'js/books_search_ajax.js' %}"></script>
 <script  type="text/javascript" src="{% static 'js/books_search_bt_ajax.js' %}"></script>
-<script  type="text/javascript" src="{% static 'js/books_search_ajax.js' %}"></script>
+<script  type="text/javascript" src="{% static 'js/books_search_all_ajax.js' %}"></script>
 <script  type="text/javascript" src="{% static 'js/books_return_ajax.js' %}"></script>
 
 <script  type="text/javascript" src="{% static 'js/br_search_brn_ajax.js' %}"></script>

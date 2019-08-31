@@ -678,12 +678,14 @@ def booksdetails(request, id):
 	return render(request,'viewsforall/booksdetails.html', context)
 
 #setting
+@login_required(login_url="/accounts/login/")
 def headercolor(request):
 	hcolor=HeaderColor.objects.all()[:1].get()
 	context={
 		'hcolor':hcolor,'setcolor':'active', 'set':'active'
 	}
 	return render(request,"setting/headercolor.html", context)
+@login_required(login_url="/accounts/login/")
 def chcolor(request):
 	hcolor=HeaderColor.objects.all()[:1].get()
 	hcolor.hcolor=request.POST['hcolor']
@@ -694,6 +696,7 @@ def chcolor(request):
 	}
 	return redirect('/setting/headercolor')
 	return render(request,context)
+@login_required(login_url="/accounts/login/")
 def fine(request):
 	cfine=Fine.objects.all()[:1].get()
 	#print(cfine)
@@ -701,6 +704,7 @@ def fine(request):
 		'set':'active','fine':'active','cfine':cfine
 	}
 	return render(request,"setting/fine.html", context)
+@login_required(login_url="/accounts/login/")
 def fineenter(request):
 	cfine=Fine.objects.all()[:1].get()
 	cfine.fine=request.POST['fine']
