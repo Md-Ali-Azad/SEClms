@@ -715,3 +715,13 @@ def fineenter(request):
 	}
 	return redirect('/setting/fine')
 	return render(request,context)
+
+
+
+#about
+def project(request):
+	context={'ab':'active', 'pro':'active'}
+	return render(request, "about/project.html",context)
+def developers(request):
+	context={'ab':'active', 'dev':'active'}
+	return render(request, "about/developers.html",context)

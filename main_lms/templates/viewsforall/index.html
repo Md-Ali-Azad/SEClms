@@ -1,33 +1,45 @@
-{% extends 'base.html' %}
-{% block body%} 
+{% extends 'base.html' %} {% block body%}
 <!-- Sidebar -->
-<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; margin-top: 0px;" id="mySidebar">
-        <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
-        <br>
-        <button  class="btn btn-{{hcolor}}"> Open Chat</button>
-        <a class="w3-bar-item w3-button" onclick="opendis()" style="cursor: pointer;"><i class='fas fa-comments'></i> Discussion</a>
-        <br>
-        <button  class="btn btn-{{hcolor}}"> Share On</button>
-        <a href="#" class="w3-bar-item w3-button"><i class="fab fa-facebook"></i> Facebook</a>
-        <a href="#" class="w3-bar-item w3-button"><i class="fab fa-twitter"></i> Twitter</a>
-        <a href="#" class="w3-bar-item w3-button"><i class="fab fa-instagram"></i> Instagram</a>
-        <a href="#" class="w3-bar-item w3-button"><i class="fab fa-pinterest"></i> Pinterest</a>
-        <a href="#" class="w3-bar-item w3-button"><i class="fab fa-linkedin"></i> LinkedIn</a>
+<script>
+    setInterval(function() {
+        document.getElementById("snackbar").style.display = "none";
+    }, 5000);
+</script>
+<div id="snackbar">
+    <button type="button" class="btn btn-{{hcolor}} btn-circle" id="flip"><i class="fas fa-search"></i>
+        </button> Click on Search icon for <br>Searching in Books, Students, Borrowing and Return list..
 
-      </div>
-      
-      <!-- Page Content -->
-      <div  style="margin-top:100px; width: 30px; height: 30px; left:0; position: fixed; z-index: 1;">
-        <button class="btn btn-{{hcolor}} btn-circle" id="open" onclick="w3_open()" style="width: 30px; height: 30px;"><i class="fas fa-greater-than"></i></button>
+</div>
+
+
+<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; margin-top: 0px;" id="mySidebar">
+    <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+    <br>
+    <button class="btn btn-{{hcolor}}"> Open Chat</button>
+    <a class="w3-bar-item w3-button" onclick="opendis()" style="cursor: pointer;"><i class='fas fa-comments'></i> Discussion</a>
+    <br>
+    <button class="btn btn-{{hcolor}}"> Share On</button>
+    <a href="#" class="w3-bar-item w3-button"><i class="fab fa-facebook"></i> Facebook</a>
+    <a href="#" class="w3-bar-item w3-button"><i class="fab fa-twitter"></i> Twitter</a>
+    <a href="#" class="w3-bar-item w3-button"><i class="fab fa-instagram"></i> Instagram</a>
+    <a href="#" class="w3-bar-item w3-button"><i class="fab fa-pinterest"></i> Pinterest</a>
+    <a href="#" class="w3-bar-item w3-button"><i class="fab fa-linkedin"></i> LinkedIn</a>
+
+</div>
+
+<!-- Page Content -->
+<div style="margin-top:100px; width: 30px; height: 30px; left:0; position: fixed; z-index: 1;">
+    <button class="btn btn-{{hcolor}} btn-circle" id="open" onclick="w3_open()" style="width: 30px; height: 30px;"><i class="fas fa-greater-than"></i></button>
 </div>
 
 
 <div id="myOverlaydis" class="overlayc" style="color: white; background:white;opacity: 0.9;">
-        <span class="closebtn" onclick="closedis()" title="Close Overlay" style="z-index: 1; color: black">x</span>
-        <div class="overlayc-content" style="color: white;">
-         <div class="just-comments" data-apikey="8c2ce840-5c21-4021-907d-3199c81ec05f" ></div><script async src="https://just-comments.com/w2.js"></script>       
-        </div>
-      </div> 
+    <span class="closebtn" onclick="closedis()" title="Close Overlay" style="z-index: 1; color: black">x</span>
+    <div class="overlayc-content" style="color: white;">
+        <div class="just-comments" data-apikey="8c2ce840-5c21-4021-907d-3199c81ec05f"></div>
+        <script async src="https://just-comments.com/w2.js"></script>
+    </div>
+</div>
 
 
 
@@ -36,142 +48,121 @@
 <div id="hcontainer">
 
     <div id="return" style="margin-top: 100px;">
-    <h2>Today Returns <button type="button" class="btn btn-{{hcolor}} btn-circle" 
-        style="width:40px; height:40px;font-size: 20px; line-height: 20px; border-radius: 50px;">{{tcount}}</button></h2>
-    {% if tcount > 0 %}
-    <table class="table table-hover table-bordered">  
-        <thead>  
-        <tr>  
-            <th scope="col">Student ID</th>  
-            <th scope="col">Student Name</th>  
-            <th scope="col">Book Name</th>  
-            <th scope="col">Borrow Date</th>
-            <th scope="col">Return date</th>
-        </tr>  
-        </thead>
-        <tbody>  
-    {% for t in today %} 
-    
-        <tr>  
-            <td>
-                {% for slist in slist %}
-                        {% if slist.sid in t.brsid %}
-                <a href="/viewsforall/studetails/{{ slist.id }}/">{{ t.brsid }}</a>
-                        {% endif %}
-                    {% endfor%}
-            </td>  
-            <td>{{ t.brsname }}</td>  
-            <td>
-                    {% for blist in blist %}
-                        {% if blist.bname in t.brbname %}
-                <a href="/viewsforall/booksdetails/{{ blist.id }}/">{{ t.brbname }}</a>
-                        {% endif %}
-                    {% endfor%}
-            </td>   
-            <td>{{ t.brdate }}</td>
-            <td>{{ t.brreturn }}</td> 
-            <!--<td>{{ employee.created_at|timesince|add:"2" }}</td>-->
-            <!--<td>{{ employee.created_at|timeuntil }}</td>--> 
-        </tr>  
-    {% endfor %}  
-        </tbody>  
-    </table>
-    {% else %}
-    <p>No result to show for Today ...</p>
-    {% endif %}
+        <h2>Today Returns <button type="button" class="btn btn-{{hcolor}} btn-circle" style="width:40px; height:40px;font-size: 20px; line-height: 20px; border-radius: 50px;">{{tcount}}</button></h2>
+        {% if tcount > 0 %}
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Student ID</th>
+                    <th scope="col">Student Name</th>
+                    <th scope="col">Book Name</th>
+                    <th scope="col">Borrow Date</th>
+                    <th scope="col">Return date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for t in today %}
+
+                <tr>
+                    <td>
+                        {% for slist in slist %} {% if slist.sid in t.brsid %}
+                        <a href="/viewsforall/studetails/{{ slist.id }}/">{{ t.brsid }}</a> {% endif %} {% endfor%}
+                    </td>
+                    <td>{{ t.brsname }}</td>
+                    <td>
+                        {% for blist in blist %} {% if blist.bname in t.brbname %}
+                        <a href="/viewsforall/booksdetails/{{ blist.id }}/">{{ t.brbname }}</a> {% endif %} {% endfor%}
+                    </td>
+                    <td>{{ t.brdate }}</td>
+                    <td>{{ t.brreturn }}</td>
+                    <!--<td>{{ employee.created_at|timesince|add:"2" }}</td>-->
+                    <!--<td>{{ employee.created_at|timeuntil }}</td>-->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No result to show for Today ...</p>
+        {% endif %}
     </div>
 
     <div id="delay">
-    <h2>Delay List <button type="button" class="btn btn-{{hcolor}} btn-circle" 
-        style="width:40px; height:40px;font-size: 20px; line-height: 20px; border-radius: 50px;">{{dcount}}</button> </h2>
-    {% if dcount > 0 %}
-    <table class="table table-hover table-bordered">  
-        <thead>  
-        <tr>  
-            <th scope="col">Student ID</th>  
-            <th scope="col">Student Name</th>  
-            <th scope="col">Book Name</th>  
-            <th scope="col">Borrow Date</th>
-            <th scope="col">Return date</th>
-            <th scope="col">Fine</th>
-        </tr>  
-        </thead>  
-        <tbody>  
-    {% for f in flist %} 
-    
-        <tr>  
-            <td>
-                {% for slist in slist %}
-                        {% if slist.sid in f.brsid %}
-                <a href="/viewsforall/studetails/{{ slist.id }}/">{{ f.brsid }}</a>
-                        {% endif %}
-                    {% endfor%}
-            </td>  
-            <td>{{ f.brsname }}</td>   
-            <td>
-                    {% for blist in blist %}
-                        {% if blist.bname in f.brbname %}
-                <a href="/viewsforall/booksdetails/{{ blist.id }}/">{{ f.brbname }}</a>
-                        {% endif %}
-                    {% endfor%}
-            </td>   
-            <td>{{ f.brdate }}</td>
-            <td>{{ f.brreturn }}</td>  
-            <td class="btn btn-danger">{{ f.finecal}} <a>tk</a></td>
-            <!--<td>{{ employee.created_at|timesince|add:"2" }}</td>-->
-            <!--<td>{{ employee.created_at|timeuntil }}</td>--> 
-        </tr>  
-    {% endfor %}  
-        </tbody>  
-    </table>
-    {% else %}
-    <p>No result to show for Delay</p>
-    {% endif %}
+        <h2>Delay List <button type="button" class="btn btn-{{hcolor}} btn-circle" style="width:40px; height:40px;font-size: 20px; line-height: 20px; border-radius: 50px;">{{dcount}}</button> </h2>
+        {% if dcount > 0 %}
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Student ID</th>
+                    <th scope="col">Student Name</th>
+                    <th scope="col">Book Name</th>
+                    <th scope="col">Borrow Date</th>
+                    <th scope="col">Return date</th>
+                    <th scope="col">Fine</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for f in flist %}
+
+                <tr>
+                    <td>
+                        {% for slist in slist %} {% if slist.sid in f.brsid %}
+                        <a href="/viewsforall/studetails/{{ slist.id }}/">{{ f.brsid }}</a> {% endif %} {% endfor%}
+                    </td>
+                    <td>{{ f.brsname }}</td>
+                    <td>
+                        {% for blist in blist %} {% if blist.bname in f.brbname %}
+                        <a href="/viewsforall/booksdetails/{{ blist.id }}/">{{ f.brbname }}</a> {% endif %} {% endfor%}
+                    </td>
+                    <td>{{ f.brdate }}</td>
+                    <td>{{ f.brreturn }}</td>
+                    <td class="btn btn-danger">{{ f.finecal}} <a>tk</a></td>
+                    <!--<td>{{ employee.created_at|timesince|add:"2" }}</td>-->
+                    <!--<td>{{ employee.created_at|timeuntil }}</td>-->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No result to show for Delay</p>
+        {% endif %}
     </div>
 
     <div id="upcoming">
-        <h2>Upcoming 7 days List <button type="button" class="btn btn-{{hcolor}} btn-circle" 
-            style="width:40px; height:40px;font-size: 20px; line-height: 20px; border-radius: 50px;">{{ucount}}</button></h2>
+        <h2>Upcoming 7 days List <button type="button" class="btn btn-{{hcolor}} btn-circle" style="width:40px; height:40px;font-size: 20px; line-height: 20px; border-radius: 50px;">{{ucount}}</button></h2>
         {% if ucount > 0 %}
-        <table class="table table-hover table-bordered">  
-            <thead>  
-            <tr>  
-                <th scope="col">Student ID</th>  
-                <th scope="col">Student Name</th>  
-                <th scope="col">Book Name</th>  
-                <th scope="col">Borrow Date</th>
-                <th scope="col">Return date</th>
-            </tr>  
-            </thead>  
-            <tbody>  
-        {% for u in upcoming %} 
-        
-            <tr>  
-                <td>
-                    {% for slist in slist %}
-                            {% if slist.sid in u.brsid %}
-                    <a href="/viewsforall/studetails/{{ slist.id }}/">{{ u.brsid }}</a>
-                            {% endif %}
-                        {% endfor%}
-                </td>  
-                <td>{{ u.brsname }}</td> 
-                <td>
-                        {% for blist in blist %}
-                            {% if blist.bname in u.brbname %}
-                    <a href="/viewsforall/booksdetails/{{ blist.id }}/">{{ u.brbname }}</a>
-                            {% endif %}
-                        {% endfor%}
-                </td>   
-                <td>{{ u.brdate }}</td>
-                <td>{{ u.brreturn }}</td>  
-            </tr>  
-        {% endfor %}  
-            </tbody>  
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Student ID</th>
+                    <th scope="col">Student Name</th>
+                    <th scope="col">Book Name</th>
+                    <th scope="col">Borrow Date</th>
+                    <th scope="col">Return date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in upcoming %}
+
+                <tr>
+                    <td>
+                        {% for slist in slist %} {% if slist.sid in u.brsid %}
+                        <a href="/viewsforall/studetails/{{ slist.id }}/">{{ u.brsid }}</a> {% endif %} {% endfor%}
+                    </td>
+                    <td>{{ u.brsname }}</td>
+                    <td>
+                        {% for blist in blist %} {% if blist.bname in u.brbname %}
+                        <a href="/viewsforall/booksdetails/{{ blist.id }}/">{{ u.brbname }}</a> {% endif %} {% endfor%}
+                    </td>
+                    <td>{{ u.brdate }}</td>
+                    <td>{{ u.brreturn }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
         {% else %}
-        <p>No result to show for Upcoming 7'days</p>
+        <p>No result to show for Upcoming 7 days</p>
         {% endif %}
-        </div>
+    </div>
 
-</div> 
-{% endblock%} 
+</div>
+{% endblock%}

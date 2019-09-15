@@ -67,6 +67,9 @@ urlpatterns = [
 
     path('rtbooks/', views.rtbooks, name="rtbooks"),
 
+    path('about/project/', views.project, name="projects"),
+    path('about/developers/', views.developers, name="developers"),
+
 
    # path('emp/', views.emp, name="emp"),  
 ]  

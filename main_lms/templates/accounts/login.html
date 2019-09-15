@@ -1,19 +1,16 @@
-{% extends 'base.html' %}
-{% load crispy_forms_tags %}
-{% block body%} 
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block body%}
 
 <div id="container" style="margin-top:100px; margin-bottom: 20px;">
-  <div class="card" style="margin-right: 25%; margin-left: 25%;">
-      <div class="card-header bg-primary text-white" style="font-size: 20px;"><b>Welcome to Login</b></div>  
-      <div class="card-text" style="margin-top: 8px;"><b>You can log in here</b></div>
+    <div class="card" style="margin-right: 25%; margin-left: 25%;">
+        <div class="card-header bg-primary text-white" style="font-size: 20px;"><b>Welcome to Login (For Librarian)</b></div>
+        <div class="card-text" style="margin-top: 8px;"><b>You can log in here</b></div>
     </div>
 </div>
 
 <div class="container">
-  <form method="post">
-      {% csrf_token %}
-      {{ form|crispy }}
-      <button type="submit" class="btn btn-primary">Login</button>
-  </form>
+    <form method="post">
+        {% csrf_token %} {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
 </div>
-{% endblock%} 
+{% endblock%}
