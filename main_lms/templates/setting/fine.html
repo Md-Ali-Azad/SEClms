@@ -1,41 +1,38 @@
-{% extends 'base.html' %}
-{% block body%} 
-    <form method="POST" class="post-form" action="/setting/fineenter/" style="margin-top:100px;">  
-            {% csrf_token %}  
+{% extends 'base.html' %} {% block title %}SEC LMS(Set Fine){% endblock %} {% block body%}
+<form method="POST" class="post-form" action="/setting/fineenter/" style="margin-top:100px;">
+    {% csrf_token %} {% if messages %}
+    <div class="messages" id="message">
+        {% for message in messages %}
+        <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
-            {% if messages %}
-            <div class="messages" id="message">
-                {% for message in messages %}
-                <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
-                {% endfor %}
+    <div class="container" id="form">
+        <br>
+        <div class="form-group col">
+            <div class="col-sm-4">
+                <h3>Enter a fine</h3>
+                <h5 style="font-size: 15px;">(Current Fine Amount is {{cfine}} tk per day)</h5>
             </div>
-        {% endif %}
+        </div>
 
-        <div class="container" id="form">  
-    <br>  
-        <div class="form-group col">    
-        <div class="col-sm-4">  
-        <h3>Enter a fine</h3>
-        <h5 style="font-size: 15px;">(Current Fine Amount is {{cfine}} tk per day)</h5>  
-        </div>  
-      </div>  
-      
-      <div class="form-row align-items-center">
-      <div class="col-auto">
-            <label class="sr-only" for="inlineFormInputGroup"></label>
-            <div class="input-group mb-2">
-              <div class="input-group-prepend">
-                <div class="input-group-text">Fine Amount</div>
-              </div>
-              <input type="number" class="form-control" name="fine" placeholder="{{cfine}}" value="{{cfine}}" id="dam">
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup"></label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Fine Amount</div>
+                    </div>
+                    <input type="number" class="form-control" name="fine" placeholder="{{cfine}}" value="{{cfine}}" id="dam">
+                </div>
             </div>
-          </div>
-      </div> 
-      <div class="form-group col">  
-        <label class="col-sm-1 col-form-label"></label>  
-        <div class="col-sm-4">  
-        <button type="submit" class="btn btn-primary">Change</button>  
-        </div>  
-      </div>
-    </form> 
-    {% endblock%} 
+        </div>
+        <div class="form-group col">
+            <label class="col-sm-1 col-form-label"></label>
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-primary">Change</button>
+            </div>
+        </div>
+</form>
+{% endblock%}

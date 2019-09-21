@@ -1,19 +1,14 @@
-{% extends 'base.html' %}
-{% block head %}
-<title>Profile</title>
-{% endblock %}
-
-{% block body %}
+{% extends 'base.html' %} {% block title %}SEC LMS(Librarian Profile){% endblock %} {% block body %}
 <div id="container" style="margin-top:100px;">
-        <div class="card" style="margin-right: 25%; margin-left: 25%;">
-            <div class="card-header bg-success text-white" style="font-size: 20px;"><b>Successfully logged in</b></div> 
-            <div class="card-header bg-light text-black" style="font-size: 18px;"><b>Admin Profile</b></div>  
-            <div class="card-text" style="margin-top: 8px;"><i>Name: </i><b>{{user}}</b></div>
-            <div class="card-text" style="margin-top: 8px;"><i>Email: </i><b>{{user.email}}</b></div>
-            <div class="card-text" style="margin-top: 8px;"><i>Joined at: </i><b>{{user.date_joined}}</b></div>
-            <div class="card-text" style="margin-top: 8px;"><i>Last login at: </i><b>{{user.last_login}}</b></div>
-            <div class="card-text" style="margin-top: 8px;"><i>Super User: </i><b>{{user.is_superuser}}</b></div>
-          </div>
-      </div>
+    <div class="card" style="margin-right: 25%; margin-left: 25%;">
+        <div class="card-header bg-success text-white" style="font-size: 20px;"><b>Successfully logged in</b></div>
+        <div class="card-header bg-light text-black" style="font-size: 18px;"><b>Admin Profile</b></div>
+        <div class="card-text" style="margin-top: 8px;"><i>Name: </i><b>{{user}}</b></div>
+        <div class="card-text" style="margin-top: 8px;"><i>Email: </i><b>{{user.email}}</b></div>
+        <div class="card-text" style="margin-top: 8px;"><i>Joined at: </i><b>{{user.date_joined}}</b></div>
+        <div class="card-text" style="margin-top: 8px;"><i>Last login at: </i><b>{{user.last_login}}</b></div>
+        <div class="card-text" style="margin-top: 8px;"><i>Super User: </i><b>{{user.is_superuser}}</b></div>
+    </div>
+</div>
 
 {% endblock %}

@@ -1,128 +1,127 @@
-{% extends 'base.html' %}
-{% block body%} 
-    <form method="POST" class="post-form" action="/students/sinsert/" style="margin-top: 100px;">  
-            {% csrf_token %}  
-        <div class="container" id="form">   
-        <div class="form-group col">  
-        <label class="col-sm-1 col-form-label"></label>  
-        <div class="col-sm-4">  
-        <h3>Enter Details</h3>  
-        </div>  
-      </div>  
-      
-      <div class="form-row align-items-center">
-      <div class="col-auto">
-        <label class="sr-only" for="inlineFormInputGroup">Stu. Reg</label>
-        <div class="input-group mb-2">
-          <div class="input-group-prepend">
-            <div class="input-group-text">Student Reg.&nbsp;&nbsp;&nbsp;</div>
-          </div>
-          {{ form.sid }}
-        </div>
-      </div>
-      </div>
-      
-      <div class="form-row align-items-center">
-      <div class="col-auto">
-        <label class="sr-only" for="inlineFormInputGroup">Stu. Name</label>
-        <div class="input-group mb-2">
-          <div class="input-group-prepend">
-            <div class="input-group-text">Student Name&nbsp;</div>
-          </div>
-          {{ form.sname }}
-        </div>
-      </div>
-        </div>
-
-      <div class="form-row align-items-center">
-        <div class="col-auto">
-          <label class="sr-only" for="inlineFormInputGroup">Dept. </label>
-          <div class="input-group mb-2">
-
-            <div class="input-group-prepend">
-                <div style="float:left; margin-top: 09px;">
-              <div class="input-group-text" style="height: 50px;">Department&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+{% extends 'base.html' %} {% block title %}SEC LMS(New Student){% endblock %} {% block body%}
+<form method="POST" class="post-form" action="/students/sinsert/" style="margin-top: 100px;">
+    {% csrf_token %}
+    <div class="container" id="form">
+        <div class="form-group col">
+            <label class="col-sm-1 col-form-label"></label>
+            <div class="col-sm-4">
+                <h3>Enter Details</h3>
             </div>
-            {{ form.sdept }}
-          <label class="col-sm-0 col-form-label" style="margin-left:10px;"><a href="/cstudents/cdepttype"><p style="padding: 12px; margin-top:2px;z-index: -1; " class="btn btn-danger">+</p></a></label>  
-        </div>
-        
-        </div>
-        </div>
-      </div>
-
-      <div class="form-row align-items-center">
-        <div class="col-auto">
-          <label class="sr-only" for="inlineFormInputGroup">Stu. Session</label>
-          <div class="input-group mb-2">
-
-            <div class="input-group-prepend">
-                <div style="float:left; margin-top: 09px;">
-              <div class="input-group-text" style="height: 50px;">Session&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-            </div>
-            {{ form.ssession }}
-          <label class="col-sm-0 col-form-label" style="margin-left:10px;"><a href="/cstudents/csession"><p style="padding: 12px; margin-top:2px;z-index: -1; " class="btn btn-danger">+</p></a></label>  
-        </div>
-        
-        </div>
-        </div>
-      </div>
-
-      <div class="form-row align-items-center">
-        <div class="col-auto">
-          <label class="sr-only" for="inlineFormInputGroup">Address</label>
-          <div class="input-group mb-2">
-            <div class="input-group-prepend">
-              <div class="input-group-text">Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-            </div>
-            {{ form.saddress }}
-          </div>
-        </div>
         </div>
 
         <div class="form-row align-items-center">
             <div class="col-auto">
-              <label class="sr-only" for="inlineFormInputGroup">Contact</label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">Contact&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                <label class="sr-only" for="inlineFormInputGroup">Stu. Reg</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Student Reg.&nbsp;&nbsp;&nbsp;</div>
+                    </div>
+                    {{ form.sid }}
                 </div>
-                {{ form.scontact }}
-              </div>
             </div>
-            </div>
+        </div>
 
         <div class="form-row align-items-center">
-          <div class="col-auto">
-            <label class="sr-only" for="inlineFormInputGroup">Email</label>
-            <div class="input-group mb-2">
-              <div class="input-group-prepend">
-                <div class="input-group-text">Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-              </div>
-              {{ form.semail }}
-            </div>
-          </div>
-          </div>
-
-          <div class="form-row align-items-center">
             <div class="col-auto">
-              <label class="sr-only" for="inlineFormInputGroup">Gender</label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text" style="height: 50px;margin-top: 8px;">Gender&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                <label class="sr-only" for="inlineFormInputGroup">Stu. Name</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Student Name&nbsp;</div>
+                    </div>
+                    {{ form.sname }}
                 </div>
-                {{ form.sgender }}
-              </div>
             </div>
-            </div>
-          
+        </div>
 
-        <div class="form-group col">  
-        <label class="col-sm-1 col-form-label"></label>  
-        <div class="col-sm-4">  
-        <button type="submit" class="btn btn-primary">Submit</button>  
-        </div>  
-      </div>  
-        </div>  
-    </form>  
-    {% endblock%} 
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Dept. </label>
+                <div class="input-group mb-2">
+
+                    <div class="input-group-prepend">
+                        <div style="float:left; margin-top: 09px;">
+                            <div class="input-group-text" style="height: 50px;">Department&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        </div>
+                        {{ form.sdept }}
+                        <label class="col-sm-0 col-form-label" style="margin-left:10px;"><a href="/cstudents/cdepttype"><p style="padding: 12px; margin-top:2px;z-index: -1; " class="btn btn-danger">+</p></a></label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Stu. Session</label>
+                <div class="input-group mb-2">
+
+                    <div class="input-group-prepend">
+                        <div style="float:left; margin-top: 09px;">
+                            <div class="input-group-text" style="height: 50px;">Session&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        </div>
+                        {{ form.ssession }}
+                        <label class="col-sm-0 col-form-label" style="margin-left:10px;"><a href="/cstudents/csession"><p style="padding: 12px; margin-top:2px;z-index: -1; " class="btn btn-danger">+</p></a></label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Address</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    </div>
+                    {{ form.saddress }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Contact</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Contact&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    </div>
+                    {{ form.scontact }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Email</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    </div>
+                    {{ form.semail }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Gender</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text" style="height: 50px;margin-top: 8px;">Gender&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    </div>
+                    {{ form.sgender }}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group col">
+            <label class="col-sm-1 col-form-label"></label>
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock%}

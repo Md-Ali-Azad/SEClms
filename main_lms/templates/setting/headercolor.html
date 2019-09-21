@@ -1,67 +1,66 @@
-{% extends 'base.html' %}
-{% block body%} 
-    <form method="POST" class="post-form" action="/setting/chcolor/" style="margin-top:100px;">  
-            {% csrf_token %}  
+{% extends 'base.html' %} {% block title %}SEC LMS(Themes){% endblock %} {% block body%}
+<form method="POST" class="post-form" action="/setting/chcolor/" style="margin-top:100px;">
+    {% csrf_token %} {% if messages %}
+    <div class="messages" id="message">
+        {% for message in messages %}
+        <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
-            {% if messages %}
-            <div class="messages" id="message">
-                {% for message in messages %}
-                <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
-                {% endfor %}
+    <div class="container" id="form">
+        <br>
+        <div class="form-group col">
+            <div class="col-sm-4">
+                <h3>Choose a Header Theme</h3>
             </div>
-        {% endif %}
+        </div>
 
-        <div class="container" id="form">  
-    <br>  
-        <div class="form-group col">    
-        <div class="col-sm-4">  
-        <h3>Choose a Header Theme</h3>  
-        </div>  
-      </div>  
-      
-      <div class="form-row align-items-center">
-      <div class="col-auto">
-            <label class="sr-only" for="inlineFormInputGroup"></label>
-            <div class="input-group mb-2">
-              <div class="input-group-prepend">
-                <div class="input-group-text">Header Theme</div>
-              </div>
-              <input type="text" class="form-control" name="hcolor" placeholder="{{ hcolor.hcolor }}" value="{{ hcolor.hcolor }}" id="dam">
-              <!--<select class="browser-default custom-select">
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup"></label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Header Theme</div>
+                    </div>
+                    <input type="text" class="form-control" name="hcolor" placeholder="{{ hcolor.hcolor }}" value="{{ hcolor.hcolor }}" id="dam">
+                    <!--<select class="browser-default custom-select">
                 <option selected value="success" name="hcolor">success</option>
                 <option value="danger" name="hcolor">danger</option>
                 <option value="warning" name="hcolor">warning</option>
                 <option value="primary" name="hcolor">primary</option>
             </select>-->
+                </div>
             </div>
-          </div>
-      </div> 
-
-        <div class="form-group col">  
-        <label class="col-sm-1 col-form-label"></label>  
-        <div class="col-sm-4">  
-        <button type="submit" class="btn btn-primary">Change</button>  
-        </div>  
-      </div>
         </div>
-        <script type="text/javascript">
-          $(document).ready(function(){
-              $("#dam_return button").click(function(){
-                  var value = $(this).html();
-                  var input = $('#dam');
-                  input.val(value);
-              });
-          });
-          </script>
-          <div class="table table-bordered"> <div class="lead">Available Themes: </div></div>
-          <div id="dam_return" class="table table-bordered">
-            <button type="button" class="btn btn-primary">primary</button>
-            <button type="button" class="btn btn-success">success</button>
-            <button type="button" class="btn btn-info">info</button>
-            <button type="button" class="btn btn-warning">warning</button>
-            <button type="button" class="btn btn-danger">danger</button>
-            <button type="button" class="btn btn-secondary">secondary</button> 
-            <button type="button" class="btn btn-dark">dark</button>
-          </div>
-    </form> 
-    {% endblock%} 
+
+        <div class="form-group col">
+            <label class="col-sm-1 col-form-label"></label>
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-primary">Change</button>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#dam_return button").click(function() {
+                var value = $(this).html();
+                var input = $('#dam');
+                input.val(value);
+            });
+        });
+    </script>
+    <div class="table table-bordered">
+        <div class="lead">Available Themes: </div>
+    </div>
+    <div id="dam_return" class="table table-bordered">
+        <button type="button" class="btn btn-primary">primary</button>
+        <button type="button" class="btn btn-success">success</button>
+        <button type="button" class="btn btn-info">info</button>
+        <button type="button" class="btn btn-warning">warning</button>
+        <button type="button" class="btn btn-danger">danger</button>
+        <button type="button" class="btn btn-secondary">secondary</button>
+        <button type="button" class="btn btn-dark">dark</button>
+    </div>
+</form>
+{% endblock%}

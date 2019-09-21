@@ -1,83 +1,82 @@
-{% extends 'base.html' %}
-{% block body%} 
-    <form method="POST" class="post-form" action="/borrow/brupdate/{{brlist.id}}/" style="margin-top: 100px;">  
-            {% csrf_token %}  
-        <div class="container" id="form">   
-        <div class="form-group col">  
-        <label class="col-sm-1 col-form-label"></label>  
-        <div class="col-sm-4">  
-        <h3>Enter Details</h3>  
-        </div>  
-      </div>  
-      
-      <div class="form-row align-items-center">
-      <div class="col-auto">
-        <label class="sr-only" for="inlineFormInputGroup">Stu. Reg</label>
-        <div class="input-group mb-2">
-          <div class="input-group-prepend ">
-            <div class="input-group-text"style="height: 28px;">Student Reg.&nbsp;&nbsp;&nbsp;</div>
-          </div>
-          {{ form.brsid }}
-          <label class="col-sm-0 col-form-label" style="width: 130%;"><button type="button" class="btn btn-{{hcolor}} btn-circle"><i class="fa fa-redo-alt"></i>
-          </button><button type="button" class="btn btn-{{hcolor}}">{{ brlist.brsid }}</button> </label>
-        </div>
-      </div>
-      </div>
-      
-      <div class="form-row align-items-center">
-      <div class="col-auto">
-        <label class="sr-only" for="inlineFormInputGroup">Stu. Name</label>
-        <div class="input-group mb-2">
-          <div class="input-group-prepend">
-            <div class="input-group-text" style="height: 28px;">Student Name&nbsp;</div>
-          </div>
-          {{ form.brsname }}
-          <label class="col-sm-0 col-form-label" style="width: 130%;"><button type="button" class="btn btn-{{hcolor}} btn-circle"><i class="fa fa-redo-alt"></i>
-          </button><button type="button" class="btn btn-{{hcolor}}">{{ brlist.brsname }}</button> </label>
-        </div>
-      </div>
-        </div>
-
-      <div class="form-row align-items-center">
-        <div class="col-auto">
-          <label class="sr-only" for="inlineFormInputGroup">Book Name </label>
-          <div class="input-group mb-2">
-
-            <div class="input-group-prepend">
-                <div style="float:left; margin-top: 09px;">
-              <div class="input-group-text" style="height: 28px; margin-top: -8px;">Book Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+{% extends 'base.html' %} {% block title %}SEC LMS(Borrow Update){% endblock %} {% block body%}
+<form method="POST" class="post-form" action="/borrow/brupdate/{{brlist.id}}/" style="margin-top: 100px;">
+    {% csrf_token %}
+    <div class="container" id="form">
+        <div class="form-group col">
+            <label class="col-sm-1 col-form-label"></label>
+            <div class="col-sm-4">
+                <h3>Enter Details</h3>
             </div>
-            {{ form.brbname }}
-              <label class="col-sm-0 col-form-label" style="width: 30%;"><button type="button" class="btn btn-{{hcolor}} btn-circle"><i class="fa fa-redo-alt"></i>
+        </div>
+
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Stu. Reg</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend ">
+                        <div class="input-group-text" style="height: 28px;">Student Reg.&nbsp;&nbsp;&nbsp;</div>
+                    </div>
+                    {{ form.brsid }}
+                    <label class="col-sm-0 col-form-label" style="width: 130%;"><button type="button" class="btn btn-{{hcolor}} btn-circle"><i class="fa fa-redo-alt"></i>
+          </button><button type="button" class="btn btn-{{hcolor}}">{{ brlist.brsid }}</button> </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Stu. Name</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text" style="height: 28px;">Student Name&nbsp;</div>
+                    </div>
+                    {{ form.brsname }}
+                    <label class="col-sm-0 col-form-label" style="width: 130%;"><button type="button" class="btn btn-{{hcolor}} btn-circle"><i class="fa fa-redo-alt"></i>
+          </button><button type="button" class="btn btn-{{hcolor}}">{{ brlist.brsname }}</button> </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Book Name </label>
+                <div class="input-group mb-2">
+
+                    <div class="input-group-prepend">
+                        <div style="float:left; margin-top: 09px;">
+                            <div class="input-group-text" style="height: 28px; margin-top: -8px;">Book Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        </div>
+                        {{ form.brbname }}
+                        <label class="col-sm-0 col-form-label" style="width: 30%;"><button type="button" class="btn btn-{{hcolor}} btn-circle"><i class="fa fa-redo-alt"></i>
             </button><button type="button" class="btn btn-{{hcolor}}">{{ brlist.brbname }}</button> </label>
+                    </div>
+
+                </div>
+            </div>
         </div>
-        
-        </div>
-        </div>
-      </div>
 
 
 
         <div class="form-row align-items-center">
             <div class="col-auto">
-              <label class="sr-only" for="inlineFormInputGroup">Return Date</label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text"  style="height: 50px;">Return Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                </div>
-                {{ form.brreturn }}
-                <label class="col-sm-0 col-form-label" style="width: 130%;"><button type="button" class="btn btn-{{hcolor}} btn-circle"><i class="fa fa-redo-alt"></i>
+                <label class="sr-only" for="inlineFormInputGroup">Return Date</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text" style="height: 50px;">Return Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    </div>
+                    {{ form.brreturn }}
+                    <label class="col-sm-0 col-form-label" style="width: 130%;"><button type="button" class="btn btn-{{hcolor}} btn-circle"><i class="fa fa-redo-alt"></i>
                 </button><button type="button" class="btn btn-{{hcolor}}">{{ brlist.brreturn }}</button> </label>
-              </div>
+                </div>
             </div>
-            </div>
-          
+        </div>
 
-        <div class="form-group col">  
-        <label class="col-sm-1 col-form-label"></label>  
-        <div class="col-sm-4">  
-        <button type="submit" class="btn btn-primary">Submit</button>  
-        </div>  
-      </div>  
-        </div> 
-    {% endblock%} 
+
+        <div class="form-group col">
+            <label class="col-sm-1 col-form-label"></label>
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+    {% endblock%}

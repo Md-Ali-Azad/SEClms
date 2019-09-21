@@ -1,69 +1,68 @@
-{% extends 'base.html' %}
-{% block body%} 
-    <form method="POST" class="post-form" action="/cstudents/cdepttype/" style="margin-top: 100px;">  
-            {% csrf_token %}  
-        <div class="container" id="form">  
-    <br>  
-        <div class="form-group col">    
-        <div class="col-sm-4">  
-        <h3>Enter a Dept.</h3>  
-        </div>  
-      </div>  
-      
-      <div class="form-row align-items-center">
-      <div class="col-auto">
-            <label class="sr-only" for="inlineFormInputGroup">Department</label>
-            <div class="input-group mb-2">
-              <div class="input-group-prepend">
-                <div class="input-group-text">Department</div>
-              </div>
-              {{ form.cdept }}
+{% extends 'base.html' %} {% block title %}SEC LMS(Add New Dept.){% endblock %} {% block body%}
+<form method="POST" class="post-form" action="/cstudents/cdepttype/" style="margin-top: 100px;">
+    {% csrf_token %}
+    <div class="container" id="form">
+        <br>
+        <div class="form-group col">
+            <div class="col-sm-4">
+                <h3>Enter a Dept.</h3>
             </div>
-          </div>
-      </div> 
+        </div>
 
-        <div class="form-group col">  
-        <label class="col-sm-1 col-form-label"></label>  
-        <div class="col-sm-4">  
-        <button type="submit" class="btn btn-primary">Submit</button>  
-        </div>  
-      </div>  
-        </div>  
-    </form> 
-    
-    {% if messages %}
-    <div class="messages" id="message">
-        {% for message in messages %}
-        <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
-        {% endfor %}
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Department</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Department</div>
+                    </div>
+                    {{ form.cdept }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col">
+            <label class="col-sm-1 col-form-label"></label>
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
     </div>
+</form>
+
+{% if messages %}
+<div class="messages" id="message">
+    {% for message in messages %}
+    <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</div>
+    {% endfor %}
+</div>
 {% endif %}
-    <br>
-    <br>
-    <table class="table table-hover table-bordered">  
-        <thead>  
+<br>
+<br>
+<table class="table table-hover table-bordered">
+    <thead>
         <tr>
-            <th scope="col">No.</th>  
-            <th scope="col">Department</th>  
-            <!--<th scope="col">Edit</th>-->  
-            <th scope="col">Delete</th>  
+            <th scope="col">No.</th>
+            <th scope="col">Department</th>
+            <!--<th scope="col">Edit</th>-->
+            <th scope="col">Delete</th>
             <th scope="col">Created</th>
-        </tr>  
-        </thead>  
-        <tbody>
-    {% for list in cdeptlist %} 
+        </tr>
+    </thead>
+    <tbody>
+        {% for list in cdeptlist %}
         <tr>
-            <td>{{ forloop.counter }}</td>    
-            <td>{{ list.cdept }}</td>  
+            <td>{{ forloop.counter }}</td>
+            <td>{{ list.cdept }}</td>
             <!--<td>  
                 <a href="/books/bedit/{{ cbtlist.id }}/" class="btn btn-primary"><i class='fas fa-pencil-alt'></i> Edit</a>  
             </td>-->
-                <td>
-                <a href="/cstudents/cdeptdelete/{{ list.id }}/"class="btn btn-danger"><i class='fas fa-trash-alt'></i> Delete</a>  
+            <td>
+                <a href="/cstudents/cdeptdelete/{{ list.id }}/" class="btn btn-danger"><i class='fas fa-trash-alt'></i> Delete</a>
             </td>
-            <td style="font-size:8px;">{{ list.cscreated_at }} <br>( {{ list.cscreated_at|timesince }} ago )</td> 
-        </tr>  
-    {% endfor %}  
-        </tbody>  
-    </table> 
-    {% endblock%} 
+            <td style="font-size:8px;">{{ list.cscreated_at }} <br>( {{ list.cscreated_at|timesince }} ago )</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock%}

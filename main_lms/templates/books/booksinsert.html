@@ -1,103 +1,102 @@
-{% extends 'base.html' %}
-{% block body%} 
-    <form method="POST" class="post-form" action="/books/binsert/" style="margin-top: 100px;">  
-            {% csrf_token %}  
-        <div class="container" id="form">   
-        <div class="form-group col">  
-        <label class="col-sm-1 col-form-label"></label>  
-        <div class="col-sm-4">  
-        <h3>Enter Details</h3>  
-        </div>  
-      </div>  
-      
-      <div class="form-row align-items-center">
-      <div class="col-auto">
-        <label class="sr-only" for="inlineFormInputGroup">Book Id</label>
-        <div class="input-group mb-2">
-          <div class="input-group-prepend">
-            <div class="input-group-text">Book Id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-          </div>
-          {{ form.bid }}
-        </div>
-      </div>
-      </div>
-      
-      <div class="form-row align-items-center">
-      <div class="col-auto">
-        <label class="sr-only" for="inlineFormInputGroup">Book Name</label>
-        <div class="input-group mb-2">
-          <div class="input-group-prepend">
-            <div class="input-group-text">Book Name&nbsp;&nbsp;&nbsp;&nbsp;</div>
-          </div>
-          {{ form.bname }}
-        </div>
-      </div>
-        </div>
-
-      <div class="form-row align-items-center">
-        <div class="col-auto">
-          <label class="sr-only" for="inlineFormInputGroup">Book Type</label>
-          <div class="input-group mb-2">
-
-            <div class="input-group-prepend">
-                <div style="float:left; margin-top: 09px;">
-              <div class="input-group-text" style="height: 50px;">Book Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+{% extends 'base.html' %} {% block title %}SEC LMS(New Book Insert){% endblock %} {% block body%}
+<form method="POST" class="post-form" action="/books/binsert/" style="margin-top: 100px;">
+    {% csrf_token %}
+    <div class="container" id="form">
+        <div class="form-group col">
+            <label class="col-sm-1 col-form-label"></label>
+            <div class="col-sm-4">
+                <h3>Enter Details</h3>
             </div>
-            {{ form.btype }}
-          <label class="col-sm-0 col-form-label" style="margin-left:10px;"><a href="/cbooks/cbtype"><p style="padding: 12px; margin-top:2px;z-index: -1; " class="btn btn-danger">+</p></a></label>  
-        </div>
-        
-        </div>
-        </div>
-      </div>
-
-      <div class="form-row align-items-center">
-        <div class="col-auto">
-          <label class="sr-only" for="inlineFormInputGroup">Book Writer</label>
-          <div class="input-group mb-2">
-            <div class="input-group-prepend">
-              <div class="input-group-text">Book Writer&nbsp;&nbsp;&nbsp;&nbsp;</div>
-            </div>
-            {{ form.bwriter }}
-          </div>
-        </div>
         </div>
 
         <div class="form-row align-items-center">
-          <div class="col-auto">
-            <label class="sr-only" for="inlineFormInputGroup">Book Quantity</label>
-            <div class="input-group mb-2">
-              <div class="input-group-prepend">
-                <div class="input-group-text">Book Quantity</div>
-              </div>
-              {{ form.bquantity }}
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Book Id</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Book Id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    </div>
+                    {{ form.bid }}
+                </div>
             </div>
-          </div>
-          </div>
+        </div>
 
-          <div class="form-row align-items-center">
-              <div class="col-auto">
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Book Name</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Book Name&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    </div>
+                    {{ form.bname }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Book Type</label>
+                <div class="input-group mb-2">
+
+                    <div class="input-group-prepend">
+                        <div style="float:left; margin-top: 09px;">
+                            <div class="input-group-text" style="height: 50px;">Book Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        </div>
+                        {{ form.btype }}
+                        <label class="col-sm-0 col-form-label" style="margin-left:10px;"><a href="/cbooks/cbtype"><p style="padding: 12px; margin-top:2px;z-index: -1; " class="btn btn-danger">+</p></a></label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Book Writer</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Book Writer&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    </div>
+                    {{ form.bwriter }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Book Quantity</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Book Quantity</div>
+                    </div>
+                    {{ form.bquantity }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row align-items-center">
+            <div class="col-auto">
                 <label class="sr-only" for="inlineFormInputGroup">Book Shelf</label>
                 <div class="input-group mb-2">
-      
-                  <div class="input-group-prepend">
-                      <div style="float:left; margin-top: 09px;">
-                    <div class="input-group-text" style="height: 50px;">Book Shelf&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                  </div>
-                  {{ form.bshelf }}
-                <label class="col-sm-0 col-form-label" style="margin-left:10px;"><a href="/cbooks/cbshelf"><p style="padding: 12px; margin-top:2px; z-index: -1;" class="btn btn-danger">+</p></a></label>  
-              </div>
-              
-              </div>
-              </div>
-            </div>
 
-        <div class="form-group col">  
-        <label class="col-sm-1 col-form-label"></label>  
-        <div class="col-sm-4">  
-        <button type="submit" class="btn btn-primary">Submit</button>  
-        </div>  
-      </div>  
-        </div>  
-    </form>  
-    {% endblock%} 
+                    <div class="input-group-prepend">
+                        <div style="float:left; margin-top: 09px;">
+                            <div class="input-group-text" style="height: 50px;">Book Shelf&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        </div>
+                        {{ form.bshelf }}
+                        <label class="col-sm-0 col-form-label" style="margin-left:10px;"><a href="/cbooks/cbshelf"><p style="padding: 12px; margin-top:2px; z-index: -1;" class="btn btn-danger">+</p></a></label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col">
+            <label class="col-sm-1 col-form-label"></label>
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock%}

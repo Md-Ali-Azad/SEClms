@@ -1,38 +1,31 @@
-{% extends 'base.html' %}
-{% block body%}
-<div style="margin-top: 100px;"> 
-<ul class="">
-        <h3><span class="bold" >({{ logCount }})</span> Notifications </h3>
-        <a href="{% url 'index' %}"> View All </a>
-        {% if logs %}
-            <ul style="height: 250px;">
-                {% for log in logs %}
-                    <li>
-                        <a href="javascript:;">
-                            <span class="details">
+{% extends 'base.html' %} {% block title %}SEC LMS(Activity History){% endblock %} {% block body%}
+<div style="margin-top: 100px;">
+    <ul class="">
+        <h3><span class="bold">({{ logCount }})</span> Notifications </h3>
+        <a href="{% url 'index' %}"> View All </a> {% if logs %}
+        <ul style="height: 250px;">
+            {% for log in logs %}
+            <li>
+                <a href="javascript:;">
+                    <span class="details">
                                 {% if log.action_flag == 1 %}
                                     <span class="label label-sm label-icon label-success">
                                             <button type="button" class="btn btn-{{hcolor}} btn-circle"><i class="fa fa-plus"></i></button>
-                                    </span>
-                                {% elif log.action_flag == 2 %}
-                                    <span class="label label-sm label-icon label-info">
+                                    </span> {% elif log.action_flag == 2 %}
+                    <span class="label label-sm label-icon label-info">
                                             <button type="button" class="btn btn-{{hcolor}} btn-circle"><i class="fa fa-edit"></i></button>
-                                    </span>
-                                {% elif log.action_flag == 3 %}
-                                    <span class="label label-sm label-icon label-danger">
+                                    </span> {% elif log.action_flag == 3 %}
+                    <span class="label label-sm label-icon label-danger">
                                             <button type="button" class="btn btn-{{hcolor}} btn-circle"><i class="fas fa-trash-alt"></i></button>
-                                    </span>
-                                {% endif %}
-                                {{ log.content_type|capfirst }}: {{ log }}
-                            </span>
-                            <span class="time">{{ log.action_time|date:"m/d/Y - g:ia" }} </span>
-                        </a>
-                    </li>
-                 {% endfor %}
-            </ul>
-        {% else %}
-        {% endif %}
-</ul>
+                                    </span> {% endif %} {{ log.content_type|capfirst }}: {{ log }}
+                    </span>
+                    <span class="time">{{ log.action_time|date:"m/d/Y - g:ia" }} </span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %} {% endif %}
+    </ul>
 </div>
 
-{% endblock%} 
+{% endblock%}
