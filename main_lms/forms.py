@@ -18,8 +18,8 @@ class NewsForm(forms.ModelForm):
         fields = "__all__"
 
 class BookInsertForm(forms.ModelForm):
-    bid=  forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','id':'inlineFormInputGroup', 'placeholder':'book id'}),required=True,max_length=400)    
-    bname= forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'book name'}),required=True,max_length=400)
+    bid=  forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','id':'bid', 'placeholder':'book id'}),required=True,max_length=400)    
+    bname= forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'id':'bname', 'placeholder':'book name'}),required=True,max_length=400)
     btype = forms.ModelChoiceField(widget=forms.Select(attrs={'data-style':'btn-primary','class':'sel','id':'inlineFormInputGroup'}, choices=BooksType.objects.order_by('cbtype')),queryset=BooksType.objects.order_by('cbtype'))
     bwriter=  forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'writer name'}),required=True,max_length=400)
     bquantity=  forms.IntegerField(min_value=1,widget=forms.NumberInput(attrs={'class':'form-control', 'placeholder':'1'}),required=True)    

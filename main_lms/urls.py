@@ -52,8 +52,9 @@ urlpatterns = [
     path('setting/activitylog/', views.activitylog, name="activitylog"),
     path('setting/fine/', views.fine, name="fine"),
     path('setting/fineenter/', views.fineenter, name="fineenter"),
-
+    #search-section
     path('bsearch/', views.bsearch, name="bsearch"),
+    path('bsearch_m_info/', views.bsearch_m_info, name="bsearch_m_info"),
     path('btsearch/', views.btsearch, name="btsearch"),
     path('ballsearch/', views.ballsearch, name="ballsearch"),
 

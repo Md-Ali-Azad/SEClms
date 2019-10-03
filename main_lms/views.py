@@ -192,6 +192,19 @@ def bsearch(request):
 		else:
 			blist = []
 	return render_to_response(tem,{'blist' : blist})
+#booksmatchinginfo
+def bsearch_m_info(request):
+	if request.user.is_authenticated:
+		tem=['matching_info/booksearch_id_name.html']
+	if request.method == "GET":
+		search_textbm = request.GET['search_textbm']
+		if search_textbm is not None and search_textbm != u"":
+			search_textbm = request.GET['search_textbm']
+			blist = BooksInsert.objects.filter(Q(bname__icontains = search_textbm) | Q(bid__icontains = search_textbm))
+		else:
+			blist = []
+	return render_to_response(tem,{'blist' : blist})
+
 def btsearch(request):
 	if request.user.is_authenticated:
 		tem=['search/bookssearchbt.html']
