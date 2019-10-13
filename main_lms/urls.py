@@ -62,6 +62,7 @@ urlpatterns = [
     path('brbdsearch/', views.brbdsearch, name="brbdsearch"),
     
     path('snsearch/', views.snsearch, name="snsearch"),
+    path('ssearch_m_info/', views.ssearch_m_info, name="ssearch_m_info"),
     path('sdsearch/', views.sdsearch, name="sdsearch"),
     path('sallsearch/', views.sallsearch, name="sallsearch"),
     path('isearch/', views.isearch, name="isearch"),

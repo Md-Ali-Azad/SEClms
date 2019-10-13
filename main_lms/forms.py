@@ -37,8 +37,8 @@ class StuInsertForm(forms.ModelForm):
         ('F', 'Female',),
         ('T', 'Transgender',),
     )
-    sid=  forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','id':'inlineFormInputGroup', 'placeholder':'Reg. id'}),required=True,max_length=400)    
-    sname= forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Student name'}),required=True,max_length=400)
+    sid=  forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','id':'sid', 'placeholder':'Reg. id'}),required=True,max_length=400)    
+    sname= forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','id':'sname' ,'placeholder':'Student name'}),required=True,max_length=400)
     sdept = forms.ModelChoiceField(widget=forms.Select(attrs={'data-style':'btn-primary','class':'sel','id':'inlineFormInputGroup'}, choices=StuDept.objects.order_by('cdept')),queryset=StuDept.objects.order_by('cdept'))
     ssession = forms.ModelChoiceField(widget=forms.Select(attrs={'data-style':'btn-primary','class':'sel','id':'inlineFormInputGroup'}, choices=StuSession.objects.order_by('csession')),queryset=StuSession.objects.order_by('csession'))    
     saddress=  forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Address'}),required=True,max_length=400)
@@ -67,7 +67,13 @@ class BorrowInsertForm(forms.ModelForm):
         model = BorrowInsert  
         fields = "__all__"
 
-
+class SortForm(forms.Form):
+    sort = (
+        ('brdate', 'Borrow Date',),
+        ('brreturn', 'Return Date',),
+        ('brsid', 'Student ID',),
+    )
+    sort=  forms.CharField(widget=forms.Select(attrs={'class':'form-control'}, choices=sort))        
 
 class BooksTypeForm(forms.ModelForm):
     cbtype = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','id':'inlineFormInputGroup', 'placeholder':'book type'}),required=True,max_length=400)

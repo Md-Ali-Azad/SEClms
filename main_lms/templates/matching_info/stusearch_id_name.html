@@ -1,24 +1,24 @@
 <div id="result" style="overflow-y:scroll;height:100%;background-color:rgb(35, 38, 43);color:white;">
-    {% if blist.count > 0 %}
+    {% if slist.count > 0 %}
     <script>
-        var hh = document.querySelector('#matching_info');
+        var hh = document.querySelector('#matching_info_s');
         hh.style.height = '70%';
     </script>
     <h5>The Id or Name available<br>in your data base</h5>
-    <p>&nbsp;<i class="fa fa-search-plus"></i> Showing {{blist.count}} results....</p>
+    <p>&nbsp;<i class="fa fa-search-plus"></i> Showing {{slist.count}} results....</p>
     <table class="table table-hover table-bordered table-dark" style="margin: 0%;">
         <thead>
             <tr>
-                <th scope="col">Book ID</th>
-                <th scope="col">Book Name</th>
+                <th scope="col">Student ID</th>
+                <th scope="col">Student Name</th>
             </tr>
         </thead>
         <tbody>
-            {% for blist in blist %}
+            {% for slist in slist %}
 
             <tr>
-                <td>{{ blist.bid }}</td>
-                <td>{{ blist.bname }}</td>
+                <td>{{ slist.sid }}</td>
+                <td>{{ slist.sname }}</td>
             </tr>
             {% endfor %}
         </tbody>

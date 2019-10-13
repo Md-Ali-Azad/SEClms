@@ -400,6 +400,19 @@ def sdelete(request, id):
 	messages.warning(request, 'List is deleted successfully')  
 	return redirect("/students/slist")
 
+#booksmatchinginfo
+def ssearch_m_info(request):
+	if request.user.is_authenticated:
+		tem=['matching_info/stusearch_id_name.html']
+	if request.method == "GET":
+		search_textsm = request.GET['search_textsm']
+		if search_textsm is not None and search_textsm != u"":
+			search_textsm = request.GET['search_textsm']
+			slist = StuInsert.objects.filter(Q(sname__icontains = search_textsm) | Q(sid__icontains = search_textsm))
+		else:
+			slist = []
+	return render_to_response(tem,{'slist' : slist})
+
 def snsearch(request):
 	if request.user.is_authenticated:
 		tem=['search/studentssearchsn.html']
@@ -577,14 +590,38 @@ def viewsnews(request):
 	return render(request,"viewsforall/news.html", args)
 
 def viewshome(request):
-	today = BorrowInsert.objects.filter(brreturn=datetime.date.today())
+	form=SortForm()
+	today = BorrowInsert.objects.filter(brreturn=datetime.date.today()).order_by('brreturn')
 	flist = BorrowInsert.objects.filter(brreturn__lt=datetime.date.today()).order_by('brreturn')
 	upcoming = BorrowInsert.objects.filter(brreturn__range=(datetime.date.today()+timedelta(days=1) ,datetime.date.today()+timedelta(days=7))).order_by('brreturn') 
 	slist = StuInsert.objects.all()
 	blist = BooksInsert.objects.all()
+	if request.method == "POST":  
+		form = SortForm(request.POST)  
+		if form.is_valid():  
+			try:
+				answer = form.cleaned_data['sort']
+				today = BorrowInsert.objects.filter(brreturn=datetime.date.today()).order_by(answer)
+				flist = BorrowInsert.objects.filter(brreturn__lt=datetime.date.today()).order_by(answer)
+				upcoming = BorrowInsert.objects.filter(brreturn__range=(datetime.date.today()+timedelta(days=1) ,datetime.date.today()+timedelta(days=7))).order_by(answer) 
+				#print(answer)
+				msg=''
+				if answer=='brreturn':
+					msg='Retrun Date'
+				elif answer=='brdate':
+					msg='Borrow Date'
+				elif answer=='brsid':
+					msg='Student ID'
+				else:
+					pass
+				messages.success(request, 'Lists are Sorted by %s asc.' % msg)
+			except:
+				pass  
+	else:
+		form=SortForm()
 	context={
 		'today':today, 'flist':flist,'slist': slist,
-		'blist': blist, 'upcoming':upcoming, 'h':'active', 'hh':'active'
+		'blist': blist, 'upcoming':upcoming, 'h':'active', 'hh':'active', 'form':form
 	}
 	return render(request,"viewsforall/index.html", context)
 # Retrun a bookl ()

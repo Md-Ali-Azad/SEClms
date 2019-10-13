@@ -1,0 +1,41 @@
+/*#seclms {
+    background-color: blue;
+}*/
+
+path {
+    animation: kaboom 2s ease alternate infinite;
+    stroke-linejoin: round;
+}
+
+#seclms path:nth-child(1) {
+    animation-delay: 0.15s;
+}
+
+#seclms path:nth-child(2) {
+    animation-delay: 0.25s;
+}
+
+#seclms path:nth-child(3) {
+    animation-delay: 0.35s;
+}
+
+#seclms path:nth-child(4) {
+    animation-delay: 0.45s;
+}
+
+#seclms path:nth-child(5) {
+    animation-delay: 0.55s;
+}
+
+#seclms path:nth-child(6) {
+    animation-delay: 0.65s;
+}
+
+@keyframes kaboom {
+    90% {
+        transform: scale(1.0);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}

@@ -12,11 +12,31 @@
 </div>
 
 
+{% if messages %}
+<div class="messages" id="message">
+    {% for message in messages %}
+    <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
 <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; margin-top: 0px;" id="mySidebar">
     <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
     <br>
     <button class="btn btn-{{hcolor}}"> Open Chat</button>
     <a class="w3-bar-item w3-button" onclick="opendis()" style="cursor: pointer;"><i class='fas fa-comments'></i> Discussion</a>
+    <br>
+    <button class="btn btn-{{hcolor}}"> Sort Home List By </button>
+    <a class="w3-bar-item w3-button">
+        <div class="form-group">
+            <form name="filter" method="POST" action="/" onchange="document.filter.submit();">
+                <!--It's worked -->
+                {% csrf_token %} {{form.sort}}
+
+            </form>
+        </div>
+    </a>
+    <br>
     <br>
     <button class="btn btn-{{hcolor}}"> Share On</button>
     <a href="#" class="w3-bar-item w3-button"><i class="fab fa-facebook"></i> Facebook</a>
