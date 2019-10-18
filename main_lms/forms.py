@@ -4,6 +4,7 @@ from django.forms.widgets import *
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 import datetime
+from django.db import connection
 from main_lms.models import *
 from ckeditor.fields import RichTextField
 from ckeditor.widgets import CKEditorWidget
@@ -55,9 +56,22 @@ class BorrowInsertForm(forms.ModelForm):
             'class': "sel4",
             'id':'select'
         }
-    sid=StuInsert.objects.values_list('sid', flat=True)
-    locality_choices = [(e, e) for e in sid]
-    brsid = forms.ChoiceField(choices=[(e, e) for e in sid],widget=Select(attrs=attrs),)
+    cursor = connection.cursor()    
+    cursor.execute("select sid from StuInsert")
+    results = cursor.fetchall()
+    x = cursor.description
+    resultsList = []   
+    for r in results:
+        i = 0
+        d = {}
+        while i < len(x):
+            d[x[i][0]] = r[i]
+            i = i+1
+        resultsList.append(d)   
+    #sid=StuInsert.objects.values_list('sid', flat=True)
+    #locality_choices = [(e, e) for e in sid]
+    #brsid = forms.ChoiceField(choices=[(resultsList,str(resultsList)) for resultsList in resultsList],widget=Select(attrs=attrs))
+    brsid = forms.ChoiceField(choices=[(e.sid, str(e.sid)) for e in StuInsert.objects.all()],widget=Select(attrs=attrs))
     #brsid = forms.ChoiceField(widget=forms.Select(attrs={'data-style':'btn-primary','class':'sel2','id':'inlineFormInputGroup'}, choices=locality_choices))
     brsname=  forms.ModelChoiceField(widget=forms.Select(attrs={'class':'sel5'}, choices=StuInsert.objects.order_by('sname')),queryset=StuInsert.objects.order_by('sname'))
     brbname=  forms.ModelChoiceField(widget=forms.Select(attrs={'class':'sel6'}, choices=BooksInsert.objects.order_by('bname')),queryset=BooksInsert.objects.order_by('bname'))
@@ -69,8 +83,8 @@ class BorrowInsertForm(forms.ModelForm):
 
 class SortForm(forms.Form):
     sort = (
-        ('brdate', 'Borrow Date',),
         ('brreturn', 'Return Date',),
+        ('brdate', 'Borrow Date',),
         ('brsid', 'Student ID',),
     )
     sort=  forms.CharField(widget=forms.Select(attrs={'class':'form-control'}, choices=sort))        

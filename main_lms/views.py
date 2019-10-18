@@ -25,7 +25,7 @@ from django.contrib.auth.models import User
 from django.db import connection
 from django.db.models import F
 from django.db import transaction
-from django.db.models import Sum
+from django.db.models import Sum, Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 #newspanel
@@ -596,6 +596,10 @@ def viewshome(request):
 	upcoming = BorrowInsert.objects.filter(brreturn__range=(datetime.date.today()+timedelta(days=1) ,datetime.date.today()+timedelta(days=7))).order_by('brreturn') 
 	slist = StuInsert.objects.all()
 	blist = BooksInsert.objects.all()
+	fieldname='brbname'
+	fieldname2='brsname'
+	topb=BorrowInsert.objects.values(fieldname).annotate(count=Count(fieldname)).order_by('-count')[0:10]  #first 10 for last 10 [-:10]
+	tops=BorrowInsert.objects.values(fieldname2).annotate(count=Count(fieldname2)).order_by('-count')[0:10]
 	if request.method == "POST":  
 		form = SortForm(request.POST)  
 		if form.is_valid():  
@@ -621,16 +625,17 @@ def viewshome(request):
 		form=SortForm()
 	context={
 		'today':today, 'flist':flist,'slist': slist,
-		'blist': blist, 'upcoming':upcoming, 'h':'active', 'hh':'active', 'form':form
+		'blist': blist, 'upcoming':upcoming, 'h':'active', 'hh':'active', 'form':form,
+		'topb' : topb, 'tops' : tops
 	}
 	return render(request,"viewsforall/index.html", context)
-# Retrun a bookl ()
+# Retrun a book ()
 def rtbooks(request):
 	slist = StuInsert.objects.all()
 	blist = BooksInsert.objects.all()  
 	if request.method == "GET":
 		search_textrt = request.GET['search_textrt']
-		if search_textrt is not None and search_textrt != u"":
+		if search_textrt is not None and search_textrt != u"":  #u means unicode
 			search_textrt = request.GET['search_textrt']
 			today = BorrowInsert.objects.filter( Q(brsname__icontains = search_textrt) | Q(brsid__icontains = search_textrt), brreturn=datetime.date.today())
 			flist = BorrowInsert.objects.filter(Q(brsname__icontains = search_textrt) | Q(brsid__icontains = search_textrt) , brreturn__lt=datetime.date.today())

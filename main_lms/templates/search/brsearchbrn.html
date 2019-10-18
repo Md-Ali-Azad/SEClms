@@ -1,52 +1,46 @@
 {% if brlist.count > 0 %}
 <p>Showing {{brlist.count}} results....</p>
-<table class="table table-hover table-bordered table-dark" style="margin-top: 100px;">  
-    <thead>  
-    <tr>  
-        <th scope="col">Student ID</th>  
-        <th scope="col">Student Name</th>  
-        <th scope="col">Book Name</th>  
-        <th scope="col">Borrow Date</th>
-        <th scope="col">Return date</th>
-        <th scope="col">Edit</th>  
-        <th scope="col">Delete</th>  
-        <th scope="col">Remaining</th>
-    </tr>  
-    </thead>  
-    <tbody>  
-{% for brlist in brlist %} 
- 
-    <tr>  
-        <td>
-            {% for slist in slist %}
-                    {% if slist.sid in brlist.brsid %}
-            <a href="/viewsforall/studetails/{{ slist.id }}/">{{ brlist.brsid }}</a>
-                    {% endif %}
-                {% endfor%}
-        </td>  
-        <td>{{ brlist.brsname }}</td>  
-        <td>
-            {% for blist in blist %}
-                {% if blist.bname in brlist.brbname %}
-        <a href="/viewsforall/booksdetails/{{ blist.id }}/">{{ brlist.brbname }}</a>
-                {% endif %}
-            {% endfor%}
-    </td>   
-        <td>{{ brlist.brdate }}</td>
-        <td>{{ brlist.brreturn }}</td>  
-        <td>  
-            <a href="/borrow/bredit/{{ brlist.id }}/" class="btn btn-primary"><i class='fas fa-pencil-alt'></i> Edit</a>  
-        </td>
+<table class="table table-hover table-bordered table-dark" style="margin-top: 100px;">
+    <thead>
+        <tr>
+            <th scope="col">Student ID</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Book Name</th>
+            <th scope="col">Borrow Date</th>
+            <th scope="col">Return Date</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Remaining</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for brlist in brlist %}
+
+        <tr>
             <td>
-            <a href="/borrow/brdelete/{{ brlist.id }}/"class="btn btn-danger"><i class='fas fa-trash-alt'></i> Delete</a>  
-        </td>
-        <td style="font-size:8px;">{{ brlist.brreturn|timeuntil }} left </td>
-        <!--<td>{{ employee.created_at|timesince|add:"2" }}</td>-->
-        <!--<td>{{ employee.created_at|timeuntil }}</td>--> 
-    </tr>  
-{% endfor %}  
-    </tbody>  
-</table>  
+                {% for slist in slist %} {% if slist.sid in brlist.brsid %}
+                <a href="/viewsforall/studetails/{{ slist.id }}/">{{ brlist.brsid }}</a> {% endif %} {% endfor%}
+            </td>
+            <td>{{ brlist.brsname }}</td>
+            <td>
+                {% for blist in blist %} {% if blist.bname in brlist.brbname %}
+                <a href="/viewsforall/booksdetails/{{ blist.id }}/">{{ brlist.brbname }}</a> {% endif %} {% endfor%}
+            </td>
+            <td>{{ brlist.brdate }}</td>
+            <td>{{ brlist.brreturn }}</td>
+            <td>
+                <a href="/borrow/bredit/{{ brlist.id }}/" class="btn btn-primary"><i class='fas fa-pencil-alt'></i> Edit</a>
+            </td>
+            <td>
+                <a href="/borrow/brdelete/{{ brlist.id }}/" class="btn btn-danger"><i class='fas fa-trash-alt'></i> Delete</a>
+            </td>
+            <td style="font-size:8px;">{{ brlist.brreturn|timeuntil }} left </td>
+            <!--<td>{{ employee.created_at|timesince|add:"2" }}</td>-->
+            <!--<td>{{ employee.created_at|timeuntil }}</td>-->
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% else %}
 <p>Nothing to show!</p>
 {% endif %}
