@@ -1,5 +1,0 @@
-﻿#Django==2.2.4 #installation Mandatory for 'SEClms' project
-#django-bootstrap4==0.0.8
-#django-ckeditor==5.7.1  #installation Mandatory for 'SEClms' project
-#django-crispy-forms==1.7.2  #installation Mandatory for 'SEClms' project
-#xhtml2pdf==0.2.3
